@@ -9,16 +9,18 @@
 import Foundation
 import CoreData
 
-
-extension Article {
-
+extension Article
+{
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Article> {
         return NSFetchRequest<Article>(entityName: "Article")
     }
 
-
+    @NSManaged public var title: String?
+    @NSManaged public var content: String?
+    @NSManaged public var createDate: Date?
+    @NSManaged public var author: Author?
 }
 
-extension Article : Identifiable {
-
+extension Article : Identifiable
+{
 }

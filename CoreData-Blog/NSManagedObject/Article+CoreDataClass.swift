@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(Article)
-public class Article: NSManagedObject {
-
+public class Article: NSManagedObject
+{
 }

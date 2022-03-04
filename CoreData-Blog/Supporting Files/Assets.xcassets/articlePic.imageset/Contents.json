@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "Alcibades_being_taught_by_Socrates,_François-André_Vincent-1.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(Author)
-public class Author: NSManagedObject {
-
+public class Author: NSManagedObject
+{
 }
