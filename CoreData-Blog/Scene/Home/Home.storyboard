@@ -40,7 +40,9 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="cTw-dD-hfl" secondAttribute="bottom" id="ieS-K9-BR4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Articles" id="0YP-cu-g3U"/>
+                    <navigationItem key="navigationItem" title="Articles" id="0YP-cu-g3U">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="2cz-xy-ZRf"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cTw-dD-hfl" id="LI6-Wv-Jyo"/>
                     </connections>
@@ -69,6 +71,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

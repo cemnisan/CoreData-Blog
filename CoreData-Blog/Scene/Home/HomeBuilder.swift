@@ -14,7 +14,7 @@ final class HomeBuilder
         let storyboard = UIStoryboard(name: K.Storyboard.homeStoryboard,
                                       bundle: nil)
         let navigationController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.homeStoryboard) as! HomeViewController
-        navigationController.viewModel = HomeViewModel(coreDataStack: AppContainer.shared.coreDataStack)
+        navigationController.viewModel = HomeViewModel(coreDataService: AppContainer.shared.coreDataService)
         
         return navigationController
     }

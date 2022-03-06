@@ -17,7 +17,6 @@ extension Author
 
     @NSManaged public var userName: String?
     @NSManaged public var article: Article?
-
 }
 
 extension Author : Identifiable

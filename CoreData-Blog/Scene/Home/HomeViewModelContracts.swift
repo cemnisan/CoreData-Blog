@@ -11,8 +11,8 @@ import CoreData
 protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
-    func fetchArticles()
-    func importJSONSeedDataIfNeeded()
+    func load()
+    func importJSON()
 }
 
 protocol HomeViewModelDelegate: AnyObject
@@ -23,5 +23,6 @@ protocol HomeViewModelDelegate: AnyObject
 enum HomeViewModelOutput
 {
     case loading(Bool)
-    case showArticle([Article])
+    case showArticlesVia(NSFetchedResultsController<Article>)
+    case showError(NSError)
 }

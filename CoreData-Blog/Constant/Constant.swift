@@ -16,8 +16,13 @@ struct K
     
     struct TableView
     {
-        static let nibName  = "HomeTableViewCell"
-        static let homeCell = "HomeCell"
+        static let homeNibName = "HomeTableViewCell"
+        static let homeCell    = "HomeCell"
+    }
+    
+    struct Model
+    {
+        static let modelName = "Blog"
     }
     
     struct Entity

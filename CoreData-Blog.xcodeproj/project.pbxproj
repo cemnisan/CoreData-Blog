@@ -11,6 +11,10 @@
 		F80704D527D4D0F800755C82 /* UIImageView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80704D427D4D0F800755C82 /* UIImageView+Ex.swift */; };
 		F80704D727D4DBC800755C82 /* UITableView+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80704D627D4DBC700755C82 /* UITableView+Ex.swift */; };
 		F80704DA27D4DCA700755C82 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80704D927D4DCA700755C82 /* Constant.swift */; };
+		F80704DE27D4E2AA00755C82 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80704DD27D4E2AA00755C82 /* BaseViewController.swift */; };
+		F807054027D5029500755C82 /* ICoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807053F27D5029500755C82 /* ICoreDataService.swift */; };
+		F807054327D502A100755C82 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807054227D502A100755C82 /* CoreDataService.swift */; };
+		F807054927D50A2F00755C82 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807054827D50A2F00755C82 /* Result.swift */; };
 		F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970727D2BC9B0082B1CC /* AppDelegate.swift */; };
 		F882970A27D2BC9B0082B1CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970927D2BC9B0082B1CC /* SceneDelegate.swift */; };
 		F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970B27D2BC9B0082B1CC /* HomeViewController.swift */; };
@@ -37,6 +41,10 @@
 		F80704D427D4D0F800755C82 /* UIImageView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ex.swift"; sourceTree = "<group>"; };
 		F80704D627D4DBC700755C82 /* UITableView+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Ex.swift"; sourceTree = "<group>"; };
 		F80704D927D4DCA700755C82 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		F80704DD27D4E2AA00755C82 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F807053F27D5029500755C82 /* ICoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreDataService.swift; sourceTree = "<group>"; };
+		F807054227D502A100755C82 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		F807054827D50A2F00755C82 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		F882970427D2BC9B0082B1CC /* CoreData-Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData-Blog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F882970727D2BC9B0082B1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F882970927D2BC9B0082B1CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +96,52 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		F80704DB27D4E28D00755C82 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F882974D27D2C6350082B1CC /* Cell */,
+				F882970B27D2BC9B0082B1CC /* HomeViewController.swift */,
+				F882972527D2BDC50082B1CC /* Home.storyboard */,
+				F882972727D2BDE60082B1CC /* HomeBuilder.swift */,
+				F882972927D2BF6C0082B1CC /* HomeViewModel.swift */,
+				F882972B27D2BF7E0082B1CC /* HomeViewModelContracts.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F80704DC27D4E29800755C82 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F80704DD27D4E2AA00755C82 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		F807053D27D5028100755C82 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F807053E27D5028700755C82 /* CoreDataService */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F807053E27D5028700755C82 /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				F807053F27D5029500755C82 /* ICoreDataService.swift */,
+				F807054227D502A100755C82 /* CoreDataService.swift */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
+		F807054727D50A2800755C82 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F807054827D50A2F00755C82 /* Result.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		F88296FB27D2BC9B0082B1CC = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +161,8 @@
 		F882970627D2BC9B0082B1CC /* CoreData-Blog */ = {
 			isa = PBXGroup;
 			children = (
+				F807054727D50A2800755C82 /* Helpers */,
+				F807053D27D5028100755C82 /* Service */,
 				F882972027D2BCD20082B1CC /* App */,
 				F882971F27D2BCC70082B1CC /* Supporting Files */,
 				F80704D327D4D0DF00755C82 /* Extenstion */,
@@ -124,12 +180,8 @@
 		F882971B27D2BCA80082B1CC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				F882974D27D2C6350082B1CC /* Cell */,
-				F882970B27D2BC9B0082B1CC /* HomeViewController.swift */,
-				F882972527D2BDC50082B1CC /* Home.storyboard */,
-				F882972727D2BDE60082B1CC /* HomeBuilder.swift */,
-				F882972927D2BF6C0082B1CC /* HomeViewModel.swift */,
-				F882972B27D2BF7E0082B1CC /* HomeViewModelContracts.swift */,
+				F80704DC27D4E29800755C82 /* Base */,
+				F80704DB27D4E28D00755C82 /* Home */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -266,9 +318,13 @@
 				F882972827D2BDE60082B1CC /* HomeBuilder.swift in Sources */,
 				F882973427D2C2550082B1CC /* Blog.xcdatamodeld in Sources */,
 				F882972227D2BD780082B1CC /* AppRouter.swift in Sources */,
+				F80704DE27D4E2AA00755C82 /* BaseViewController.swift in Sources */,
 				F80704D527D4D0F800755C82 /* UIImageView+Ex.swift in Sources */,
+				F807054027D5029500755C82 /* ICoreDataService.swift in Sources */,
+				F807054327D502A100755C82 /* CoreDataService.swift in Sources */,
 				F882972A27D2BF6C0082B1CC /* HomeViewModel.swift in Sources */,
 				F882972E27D2BFC80082B1CC /* CoreDataStack.swift in Sources */,
+				F807054927D50A2F00755C82 /* Result.swift in Sources */,
 				F882975027D2C6640082B1CC /* HomeTableViewCell.swift in Sources */,
 				F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */,
 				F882972427D2BD820082B1CC /* AppContainer.swift in Sources */,
