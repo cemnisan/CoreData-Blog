@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import CoreData
 
 protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
-    func load()
+    func fetchArticles()
 }
 
 protocol HomeViewModelDelegate: AnyObject
@@ -20,5 +21,6 @@ protocol HomeViewModelDelegate: AnyObject
 
 enum HomeViewModelOutput
 {
-    case showArticle
+    case loading(Bool)
+    case showArticle([Article])
 }

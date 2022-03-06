@@ -23,13 +23,22 @@ final class HomeViewController: UIViewController
         }
     }
     
+    var articles: [Article] = []
+    
     // MARK: - Lifecycles
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         registerTableView()
-        viewModel.load()
+        viewModel.importJSONSeedDataIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        viewModel.fetchArticles()
     }
 }
 
@@ -49,7 +58,13 @@ extension HomeViewController: HomeViewModelDelegate
 {
     func handleOutput(_ output: HomeViewModelOutput)
     {
-        print(output)
+        switch output {
+        case .showArticle(let articles):
+            self.articles = articles
+            tableView.reloadData()
+        case .loading(let isLoading):
+            print(isLoading)
+        }
     }
 }
 
@@ -59,7 +74,7 @@ extension HomeViewController: UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int
     {
-        return 5
+        articles.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -67,6 +82,9 @@ extension HomeViewController: UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell",
                                                  for: indexPath) as! HomeTableViewCell
+        let article = articles[indexPath.row]
+        cell.configureCell(with: article)
+        
         return cell
     }
 }

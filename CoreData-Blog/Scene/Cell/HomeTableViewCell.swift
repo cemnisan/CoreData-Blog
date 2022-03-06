@@ -27,3 +27,12 @@ final class HomeTableViewCell: UITableViewCell
         super.setSelected(selected, animated: animated)
     }
 }
+
+extension HomeTableViewCell
+{
+    func configureCell(with article: Article)
+    {
+        userNameLabel.text = article.author?.userName
+        articleContentLabel.text = article.content
+    }
+}
