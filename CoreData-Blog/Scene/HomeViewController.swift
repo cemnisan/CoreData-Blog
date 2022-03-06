@@ -13,11 +13,13 @@ final class HomeViewController: UIViewController
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            tableView.register(nibName: K.TableView.nibName,
+                               cell: K.TableView.homeCell)
         }
     }
     
     // MARK: - Properties
-    var viewModel: HomeViewModel! {
+    var viewModel: HomeViewModelProtocol! {
         didSet {
             viewModel.delegate = self
         }
@@ -29,8 +31,7 @@ final class HomeViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        registerTableView()
+
         viewModel.importJSONSeedDataIfNeeded()
     }
     
@@ -39,17 +40,6 @@ final class HomeViewController: UIViewController
         super.viewWillAppear(animated)
         
         viewModel.fetchArticles()
-    }
-}
-
-// MARK: - Configure
-extension HomeViewController
-{
-    private func registerTableView()
-    {
-        tableView.register(
-            UINib(nibName: "HomeTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "HomeCell")
     }
 }
 
@@ -80,7 +70,7 @@ extension HomeViewController: UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell",
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.homeCell,
                                                  for: indexPath) as! HomeTableViewCell
         let article = articles[indexPath.row]
         cell.configureCell(with: article)

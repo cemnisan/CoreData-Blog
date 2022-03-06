@@ -12,5 +12,5 @@ final class AppContainer
     static let shared = AppContainer()
     
     let appRouter     = AppRouter()
-    let coreDataStack = CoreDataStack(modelName: "Blog")
+    let coreDataStack = CoreDataStack(modelName: K.Entity.article)
 }

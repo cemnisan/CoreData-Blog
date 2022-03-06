@@ -12,6 +12,7 @@ protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
     func fetchArticles()
+    func importJSONSeedDataIfNeeded()
 }
 
 protocol HomeViewModelDelegate: AnyObject

@@ -11,10 +11,9 @@ import CoreData
 final class HomeViewModel: HomeViewModelProtocol
 {
     weak var delegate: HomeViewModelDelegate?
-    var coreDataStack: CoreDataStack?
+    private let coreDataStack: CoreDataStack
     
     private var articles: [Article] = []
-    private var asyncFetch: NSAsynchronousFetchRequest<Article>?
     
     init(coreDataStack: CoreDataStack)
     {
@@ -22,26 +21,34 @@ final class HomeViewModel: HomeViewModelProtocol
     }
 }
 
-// MARK: - Delegate
+// MARK: - View Model Protocol
 extension HomeViewModel
 {
     func fetchArticles()
     {
-        notify(.loading(true))
         let articleFetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        let asyncFetch = NSAsynchronousFetchRequest<Article>(fetchRequest: articleFetchRequest,
-                                                         completionBlock: { [unowned self] (result: NSAsynchronousFetchResult) in
+        let asyncFetch = NSAsynchronousFetchRequest<Article>(
+            fetchRequest: articleFetchRequest)
+        { [unowned self] (result: NSAsynchronousFetchResult) in
             guard let articles = result.finalResult else { return }
-                                                            
+            
             self.articles = articles
+            self.notify(.loading(false))
             self.notify(.showArticle(articles))
-        })
+        }
+        executeContext(with: asyncFetch)
+    }
+    
+    func importJSONSeedDataIfNeeded()
+    {
+        let fetchRequest = NSFetchRequest<Article>(entityName: K.Entity.article)
         
         do {
-            try coreDataStack!.managedContext.execute(asyncFetch)
-            notify(.loading(false))
+            let articleCount = try coreDataStack.managedContext.count(for: fetchRequest)
+            guard articleCount == 0 else { return }
+            try importJSONSeedData()
         } catch let error as NSError {
-            print("Fetched error: \(error), \(error.userInfo)")
+            print("Error Fetching: \(error), \(error.userInfo)")
         }
     }
 }
@@ -49,20 +56,6 @@ extension HomeViewModel
 // MARK: - Helpers
 extension HomeViewModel
 {
-    func importJSONSeedDataIfNeeded()
-    {
-        let fetchRequest = NSFetchRequest<Article>(entityName: "Article")
-        
-        do {
-            let articleCount = try coreDataStack!.managedContext.count(for: fetchRequest)
-
-            guard articleCount == 0 else { return }
-            try importJSONSeedData()
-        } catch let error as NSError {
-            print("Error Fetching: \(error), \(error.userInfo)")
-        }
-    }
-    
     private func importJSONSeedData() throws
     {
         let jsonURL = Bundle.main.url(forResource: "seed", withExtension: "json")!
@@ -76,18 +69,29 @@ extension HomeViewModel
         {
             guard let authorDict = jsonDictionary["author"] as? [String: String] else { return }
             
-            let author = Author(context: coreDataStack!.managedContext)
+            let author = Author(context: coreDataStack.managedContext)
             author.userName = authorDict["userName"]
         
             let articleTitle = jsonDictionary["title"] as? String
             let articleContent = jsonDictionary["content"] as? String
             
-            let article = Article(context: coreDataStack!.managedContext)
+            let article = Article(context: coreDataStack.managedContext)
             article.title = articleTitle
             article.content = articleContent
             article.author = author
          }
-        coreDataStack!.saveContext()
+        coreDataStack.saveContext()
+    }
+    
+    private func executeContext(with asyncRequest: NSAsynchronousFetchRequest<Article>?)
+    {
+        do {
+            guard let asyncRequest = asyncRequest else { return }
+            try coreDataStack.managedContext.execute(asyncRequest)
+            notify(.loading(true))
+        } catch let error as NSError {
+            print("Fetch error: \(error), \(error.userInfo)")
+        }
     }
     
     private func notify(_ output: HomeViewModelOutput)

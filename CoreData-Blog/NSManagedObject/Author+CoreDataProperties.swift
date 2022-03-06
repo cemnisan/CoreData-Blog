@@ -12,7 +12,7 @@ import CoreData
 extension Author
 {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Author> {
-        return NSFetchRequest<Author>(entityName: "Author")
+        return NSFetchRequest<Author>(entityName: K.Entity.author)
     }
 
     @NSManaged public var userName: String?

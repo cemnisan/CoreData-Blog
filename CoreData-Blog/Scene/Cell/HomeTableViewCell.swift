@@ -19,6 +19,8 @@ final class HomeTableViewCell: UITableViewCell
     override func awakeFromNib()
     {
         super.awakeFromNib()
+        
+        userProfilePic.makeRounded()
     }
 
     override func setSelected(_ selected: Bool,
@@ -28,6 +30,7 @@ final class HomeTableViewCell: UITableViewCell
     }
 }
 
+// MARK: - Configure
 extension HomeTableViewCell
 {
     func configureCell(with article: Article)
