@@ -13,6 +13,7 @@ protocol HomeViewModelProtocol
     var delegate: HomeViewModelDelegate? { get set }
     func load()
     func selectAddButton()
+    func selectArticle(article: Article)
 }
 
 protocol HomeViewModelDelegate: AnyObject
@@ -24,6 +25,7 @@ protocol HomeViewModelDelegate: AnyObject
 enum HomeViewModelRouter
 {
     case add(AddArticleViewModelProtocol)
+    case detail(Article)
 }
 
 enum HomeViewModelOutput

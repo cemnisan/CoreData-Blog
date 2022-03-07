@@ -44,6 +44,11 @@ extension HomeViewModel
         let addViewModel = AddArticleViewModel(service: coreDataService)
         delegate?.navigate(to: .add(addViewModel))
     }
+    
+    func selectArticle(article: Article)
+    {
+        delegate?.navigate(to: .detail(article))
+    }
 }
 
 // MARK: - Helpers

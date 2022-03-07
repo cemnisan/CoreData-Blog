@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Initialize
 final class AddArticleViewModel
 {
     let service: ICoreDataService
@@ -17,6 +18,7 @@ final class AddArticleViewModel
     }
 }
 
+// MARK: - Protocol
 extension AddArticleViewModel: AddArticleViewModelProtocol
 {
     func addArticle(with title: String, content: String)

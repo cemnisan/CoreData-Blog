@@ -34,13 +34,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why Our Brain Love Physical Buttons?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlT-n8-JV3" userLabel="articleTitle">
-                        <rect key="frame" x="20" y="70" width="423" height="23"/>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                        <rect key="frame" x="20" y="70" width="423" height="27"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="articlePic" translatesAutoresizingMaskIntoConstraints="NO" id="Cyq-WR-58W">
-                        <rect key="frame" x="20" y="101" width="423" height="240"/>
+                        <rect key="frame" x="20" y="105" width="423" height="240"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="240" id="3rT-Qc-DcJ"/>
                         </constraints>
@@ -50,29 +50,29 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="222" id="ovZ-mb-uth"/>
                         </constraints>
-                        <mutableString key="text">Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.</mutableString>
+                        <string key="text">Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07 March, 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sl6-z4-3lu">
-                        <rect key="frame" x="334.5" y="44" width="108.5" height="18"/>
+                        <rect key="frame" x="334.5" y="30" width="108.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Ibw-N0-kSm" firstAttribute="top" secondItem="Cyq-WR-58W" secondAttribute="bottom" constant="4" id="2m4-Mx-4i1"/>
+                    <constraint firstItem="Ibw-N0-kSm" firstAttribute="top" secondItem="Cyq-WR-58W" secondAttribute="bottom" id="2m4-Mx-4i1"/>
                     <constraint firstItem="RlT-n8-JV3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="40z-ss-fb8"/>
                     <constraint firstItem="Ibw-N0-kSm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="4sW-h0-5e3"/>
-                    <constraint firstItem="sl6-z4-3lu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="44" id="5XS-IG-kuH"/>
+                    <constraint firstItem="sl6-z4-3lu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="5XS-IG-kuH"/>
                     <constraint firstAttribute="trailing" secondItem="RlT-n8-JV3" secondAttribute="trailing" constant="20" id="A1T-FD-2ie"/>
                     <constraint firstItem="J2d-zu-ayo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="Cvd-qa-OTC"/>
                     <constraint firstItem="t6D-7d-RTi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="ETn-LY-rkb"/>
                     <constraint firstItem="RlT-n8-JV3" firstAttribute="top" secondItem="t6D-7d-RTi" secondAttribute="bottom" constant="8" symbolic="YES" id="J2v-vH-VsQ"/>
                     <constraint firstItem="t6D-7d-RTi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="LFU-sL-z1u"/>
-                    <constraint firstItem="J2d-zu-ayo" firstAttribute="leading" secondItem="t6D-7d-RTi" secondAttribute="trailing" constant="8" symbolic="YES" id="bin-Cx-mRt"/>
+                    <constraint firstItem="J2d-zu-ayo" firstAttribute="leading" secondItem="t6D-7d-RTi" secondAttribute="trailing" constant="8" id="bin-Cx-mRt"/>
                     <constraint firstAttribute="trailing" secondItem="Ibw-N0-kSm" secondAttribute="trailing" constant="20" id="gaE-Iq-Eij"/>
                     <constraint firstAttribute="trailing" secondItem="sl6-z4-3lu" secondAttribute="trailing" constant="20" id="nzu-AG-2JR"/>
                     <constraint firstAttribute="trailing" secondItem="Cyq-WR-58W" secondAttribute="trailing" constant="20" id="ong-SA-wLw"/>

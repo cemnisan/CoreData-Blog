@@ -29,6 +29,7 @@ final class HomeViewController: BaseViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
+        
         viewModel.load()
     }
 }
@@ -38,11 +39,11 @@ extension HomeViewController
 {
     private func configureUI()
     {
+        tableView.delegate   = self
         tableView.dataSource = self
-        tableView.register(nibName: K.TableView.homeNibName,
-                           cell: K.TableView.homeCell)
+        tableView.register(nibName: K.TableView.homeNibName, cell: K.TableView.homeCell)
         
-        viewModel.delegate = self
+        viewModel.delegate   = self
     }
     
     private func configureIndicatorView(with isLoading: Bool)
@@ -73,6 +74,9 @@ extension HomeViewController: HomeViewModelDelegate
         switch route {
         case .add(let addViewModel):
             let viewController = AddArticleBuilder.make(viewModel: addViewModel)
+            show(viewController, sender: nil)
+        case .detail(let article):
+            let viewController = DetailBuilder.make(with: article)
             show(viewController, sender: nil)
         }
     }
@@ -110,5 +114,18 @@ extension HomeViewController: UITableViewDataSource
         cell.configureCell(with: article!)
         
         return cell
+    }
+}
+
+// MARK: - UITableView Delegate
+extension HomeViewController: UITableViewDelegate
+{
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath)
+    {
+        let selectedArticle = fetchedResultsController?.object(at: indexPath)
+        guard let article = selectedArticle else { return }
+        
+        viewModel.selectArticle(article: article)
     }
 }

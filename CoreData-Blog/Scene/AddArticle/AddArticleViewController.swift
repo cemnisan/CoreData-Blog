@@ -7,12 +7,15 @@
 
 import UIKit
 
+// MARK: - Initialize
 final class AddArticleViewController: BaseViewController
 {
+    // MARK: - IBOutlets
     @IBOutlet private weak var titleTextField: UITextField!
     @IBOutlet private weak var contentTextField: UITextField!
     @IBOutlet private weak var contentTextView: UITextView!
     
+    // MARK: - Properties
     var viewModel: AddArticleViewModelProtocol! { didSet { viewModel.delegate = self } }
     
     override func viewDidLoad()

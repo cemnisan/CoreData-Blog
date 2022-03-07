@@ -22,7 +22,8 @@ final class HomeTableViewCell: UITableViewCell
     {
         super.awakeFromNib()
         
-        userProfilePic.makeRounded()
+        userProfilePic.makeRoundedCircle()
+        articleContentPic.makeRounded()
     }
 }
 
@@ -31,9 +32,9 @@ extension HomeTableViewCell
 {
     func configureCell(with article: Article)
     {
-        userNameLabel.text = article.author?.userName
+        userNameLabel.text         = article.author?.userName
         articleTitleTextField.text = article.title
-        articleContentLabel.text = article.content
-        articleDateTextField.text = article.createdDate?.getFormattedDate(format: "MMM d, yyyy")
+        articleContentLabel.text   = article.content
+        articleDateTextField.text  = article.createdDate?.getFormattedDate(format: "MMM d, yyyy")
     }
 }
