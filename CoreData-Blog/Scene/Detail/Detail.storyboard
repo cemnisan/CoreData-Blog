@@ -71,6 +71,9 @@
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" backgroundImage="bookmark" catalog="system"/>
+                                                                <connections>
+                                                                    <action selector="saveButtonPressed:" destination="1Ij-iR-c9z" eventType="touchUpInside" id="dvP-Jn-qFR"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

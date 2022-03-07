@@ -70,7 +70,8 @@ extension HomeViewController
 // MARK: - View Model's Delegate
 extension HomeViewController: HomeViewModelDelegate
 {
-    func navigate(to route: HomeViewModelRouter) {
+    func navigate(to route: HomeViewModelRouter)
+    {
         switch route {
         case .add(let addViewModel):
             let viewController = AddArticleBuilder.make(viewModel: addViewModel)

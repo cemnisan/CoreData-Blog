@@ -22,6 +22,7 @@ final class DetailViewController: UIViewController
     
     // MARK: - Properties
     var article: Article?
+    private var isTouched: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,7 @@ final class DetailViewController: UIViewController
     }
 }
 
+// MARK: - Configure
 extension DetailViewController
 {
     private func configureUI()
@@ -41,5 +43,25 @@ extension DetailViewController
         articleDateLabel.text    = article?.createdDate?.getFormattedDate(format: "MMM d, yyyy")
         articleTitleLabel.text   = article?.title
         articleContentLabel.text = article?.content
+    }
+}
+
+// MARK: - IBActions
+@available(iOS 13.0, *)
+extension DetailViewController
+{
+    @IBAction private func saveButtonPressed(_ sender: UIButton)
+    {
+        isTouched = !isTouched
+        
+        isTouched ? selectBookMark(.bookMarkFill) : selectBookMark(.bookMark)
+    }
+    
+    private func selectBookMark(_ bookMark: SelectBookMark) {
+        if bookMark == .bookMarkFill {
+            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark), for: .normal)
+        } else {
+            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark), for: .normal)
+        }
     }
 }
