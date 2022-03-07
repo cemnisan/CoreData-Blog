@@ -30,7 +30,6 @@ final class HomeViewController: BaseViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        
         viewModel.load()
     }
 }
@@ -59,14 +58,32 @@ extension HomeViewController
     }
 }
 
+// MARK: - IBActions
+extension HomeViewController
+{
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem)
+    {
+        viewModel.selectAddButton()
+    }
+}
+
 // MARK: - View Model's Delegate
 extension HomeViewController: HomeViewModelDelegate
 {
+    func navigate(to route: HomeViewModelRouter) {
+        switch route {
+        case .add(let addViewModel):
+            let viewController = AddArticleBuilder.make(viewModel: addViewModel)
+            show(viewController, sender: nil)
+        }
+    }
+    
     func handleOutput(_ output: HomeViewModelOutput)
     {
         switch output {
         case .showArticlesVia(let fetchedResultsController):
             self.fetchedResultsController = fetchedResultsController
+            tableView.reloadData()
         case .loading(let isLoading):
             configureIndicatorView(with: isLoading)
         case .showError(let error):

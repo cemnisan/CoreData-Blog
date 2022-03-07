@@ -9,12 +9,12 @@ import UIKit
 
 class BaseViewController: UIViewController
 {
-    var indicatorView = UIActivityIndicatorView(style: .medium)
+    var indicatorView = UIActivityIndicatorView(style: .gray)
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         self.view.addSubview(indicatorView)
         indicatorView.center = self.view.center
     }

@@ -43,6 +43,21 @@ extension CoreDataService: ICoreDataService
             completion(.failure(error))
         }
     }
+    
+    func addArticle(with title: String,
+                    _ content: String) throws
+    {
+        let article = Article(context: coreDataStack.managedContext)
+        let author  = Author(context: coreDataStack.managedContext)
+        author.userName = "cemnisan" // todo.
+        
+        article.title = title
+        article.content = content
+        article.createDate = Date()
+        article.author = author
+        
+        coreDataStack.saveContext()
+    }
 }
 
 // MARK: - Import Seed Data

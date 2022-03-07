@@ -15,6 +15,14 @@
 		F807054027D5029500755C82 /* ICoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807053F27D5029500755C82 /* ICoreDataService.swift */; };
 		F807054327D502A100755C82 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807054227D502A100755C82 /* CoreDataService.swift */; };
 		F807054927D50A2F00755C82 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807054827D50A2F00755C82 /* Result.swift */; };
+		F807054C27D531BC00755C82 /* AddArticle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F807054B27D531BC00755C82 /* AddArticle.storyboard */; };
+		F807054E27D5320600755C82 /* AddArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807054D27D5320600755C82 /* AddArticleViewController.swift */; };
+		F807055027D53A2C00755C82 /* AddArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807054F27D53A2C00755C82 /* AddArticleViewModel.swift */; };
+		F807055227D53A3600755C82 /* AddArticleContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807055127D53A3600755C82 /* AddArticleContracts.swift */; };
+		F807055427D53A3E00755C82 /* AddArticleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807055327D53A3E00755C82 /* AddArticleBuilder.swift */; };
+		F84DF60927D63C9D00FAE031 /* ValidateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF60827D63C9D00FAE031 /* ValidateError.swift */; };
+		F84DF60B27D63D1700FAE031 /* ValidateError+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF60A27D63D1700FAE031 /* ValidateError+Ex.swift */; };
+		F84DF60D27D63F7800FAE031 /* DataFormatter+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF60C27D63F7800FAE031 /* DataFormatter+Ex.swift */; };
 		F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970727D2BC9B0082B1CC /* AppDelegate.swift */; };
 		F882970A27D2BC9B0082B1CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970927D2BC9B0082B1CC /* SceneDelegate.swift */; };
 		F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970B27D2BC9B0082B1CC /* HomeViewController.swift */; };
@@ -45,6 +53,14 @@
 		F807053F27D5029500755C82 /* ICoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICoreDataService.swift; sourceTree = "<group>"; };
 		F807054227D502A100755C82 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		F807054827D50A2F00755C82 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		F807054B27D531BC00755C82 /* AddArticle.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddArticle.storyboard; sourceTree = "<group>"; };
+		F807054D27D5320600755C82 /* AddArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleViewController.swift; sourceTree = "<group>"; };
+		F807054F27D53A2C00755C82 /* AddArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleViewModel.swift; sourceTree = "<group>"; };
+		F807055127D53A3600755C82 /* AddArticleContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleContracts.swift; sourceTree = "<group>"; };
+		F807055327D53A3E00755C82 /* AddArticleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddArticleBuilder.swift; sourceTree = "<group>"; };
+		F84DF60827D63C9D00FAE031 /* ValidateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateError.swift; sourceTree = "<group>"; };
+		F84DF60A27D63D1700FAE031 /* ValidateError+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ValidateError+Ex.swift"; sourceTree = "<group>"; };
+		F84DF60C27D63F7800FAE031 /* DataFormatter+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataFormatter+Ex.swift"; sourceTree = "<group>"; };
 		F882970427D2BC9B0082B1CC /* CoreData-Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData-Blog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F882970727D2BC9B0082B1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F882970927D2BC9B0082B1CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +100,8 @@
 			children = (
 				F80704D427D4D0F800755C82 /* UIImageView+Ex.swift */,
 				F80704D627D4DBC700755C82 /* UITableView+Ex.swift */,
+				F84DF60A27D63D1700FAE031 /* ValidateError+Ex.swift */,
+				F84DF60C27D63F7800FAE031 /* DataFormatter+Ex.swift */,
 			);
 			path = Extenstion;
 			sourceTree = "<group>";
@@ -117,14 +135,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		F807053D27D5028100755C82 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				F807053E27D5028700755C82 /* CoreDataService */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		F807053E27D5028700755C82 /* CoreDataService */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,8 +148,32 @@
 			isa = PBXGroup;
 			children = (
 				F807054827D50A2F00755C82 /* Result.swift */,
+				F84DF60827D63C9D00FAE031 /* ValidateError.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F807054A27D531AD00755C82 /* AddArticle */ = {
+			isa = PBXGroup;
+			children = (
+				F807054B27D531BC00755C82 /* AddArticle.storyboard */,
+				F807054D27D5320600755C82 /* AddArticleViewController.swift */,
+				F807054F27D53A2C00755C82 /* AddArticleViewModel.swift */,
+				F807055127D53A3600755C82 /* AddArticleContracts.swift */,
+				F807055327D53A3E00755C82 /* AddArticleBuilder.swift */,
+			);
+			path = AddArticle;
+			sourceTree = "<group>";
+		};
+		F84DF60E27D641C800FAE031 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F882971E27D2BCBB0082B1CC /* NSManagedObject */,
+				F882971D27D2BCB70082B1CC /* Model */,
+				F882971C27D2BCAC0082B1CC /* Stack */,
+				F807053E27D5028700755C82 /* CoreDataService */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		F88296FB27D2BC9B0082B1CC = {
@@ -161,15 +195,12 @@
 		F882970627D2BC9B0082B1CC /* CoreData-Blog */ = {
 			isa = PBXGroup;
 			children = (
-				F807054727D50A2800755C82 /* Helpers */,
-				F807053D27D5028100755C82 /* Service */,
 				F882972027D2BCD20082B1CC /* App */,
 				F882971F27D2BCC70082B1CC /* Supporting Files */,
 				F80704D327D4D0DF00755C82 /* Extenstion */,
 				F80704D827D4DC8A00755C82 /* Constant */,
-				F882971E27D2BCBB0082B1CC /* NSManagedObject */,
-				F882971C27D2BCAC0082B1CC /* Stack */,
-				F882971D27D2BCB70082B1CC /* Model */,
+				F807054727D50A2800755C82 /* Helpers */,
+				F84DF60E27D641C800FAE031 /* CoreData */,
 				F882971B27D2BCA80082B1CC /* Scene */,
 				F882971527D2BC9C0082B1CC /* Info.plist */,
 				F80704D127D4BF5900755C82 /* seed.json */,
@@ -182,6 +213,7 @@
 			children = (
 				F80704DC27D4E29800755C82 /* Base */,
 				F80704DB27D4E28D00755C82 /* Home */,
+				F807054A27D531AD00755C82 /* AddArticle */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -300,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F80704D227D4BF5900755C82 /* seed.json in Resources */,
+				F807054C27D531BC00755C82 /* AddArticle.storyboard in Resources */,
 				F882972627D2BDC50082B1CC /* Home.storyboard in Resources */,
 				F882971427D2BC9C0082B1CC /* LaunchScreen.storyboard in Resources */,
 				F882975127D2C6640082B1CC /* HomeTableViewCell.xib in Resources */,
@@ -319,6 +352,7 @@
 				F882973427D2C2550082B1CC /* Blog.xcdatamodeld in Sources */,
 				F882972227D2BD780082B1CC /* AppRouter.swift in Sources */,
 				F80704DE27D4E2AA00755C82 /* BaseViewController.swift in Sources */,
+				F84DF60927D63C9D00FAE031 /* ValidateError.swift in Sources */,
 				F80704D527D4D0F800755C82 /* UIImageView+Ex.swift in Sources */,
 				F807054027D5029500755C82 /* ICoreDataService.swift in Sources */,
 				F807054327D502A100755C82 /* CoreDataService.swift in Sources */,
@@ -326,7 +360,11 @@
 				F882972E27D2BFC80082B1CC /* CoreDataStack.swift in Sources */,
 				F807054927D50A2F00755C82 /* Result.swift in Sources */,
 				F882975027D2C6640082B1CC /* HomeTableViewCell.swift in Sources */,
+				F84DF60D27D63F7800FAE031 /* DataFormatter+Ex.swift in Sources */,
+				F807054E27D5320600755C82 /* AddArticleViewController.swift in Sources */,
+				F807055027D53A2C00755C82 /* AddArticleViewModel.swift in Sources */,
 				F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */,
+				F807055227D53A3600755C82 /* AddArticleContracts.swift in Sources */,
 				F882972427D2BD820082B1CC /* AppContainer.swift in Sources */,
 				F882974927D2C5430082B1CC /* Article+CoreDataClass.swift in Sources */,
 				F80704DA27D4DCA700755C82 /* Constant.swift in Sources */,
@@ -335,6 +373,8 @@
 				F882972C27D2BF7E0082B1CC /* HomeViewModelContracts.swift in Sources */,
 				F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */,
 				F882974B27D2C5430082B1CC /* Author+CoreDataClass.swift in Sources */,
+				F84DF60B27D63D1700FAE031 /* ValidateError+Ex.swift in Sources */,
+				F807055427D53A3E00755C82 /* AddArticleBuilder.swift in Sources */,
 				F882970A27D2BC9B0082B1CC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +517,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RJTF64F9S;
 				INFOPLIST_FILE = "CoreData-Blog/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -496,6 +537,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6RJTF64F9S;
 				INFOPLIST_FILE = "CoreData-Blog/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

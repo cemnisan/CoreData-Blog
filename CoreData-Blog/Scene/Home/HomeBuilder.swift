@@ -11,10 +11,10 @@ final class HomeBuilder
 {
     static func make() -> HomeViewController
     {
-        let storyboard = UIStoryboard(name: K.Storyboard.homeStoryboard,
+        let storyboard = UIStoryboard(name: K.Storyboard.home,
                                       bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.homeStoryboard) as! HomeViewController
-        navigationController.viewModel = HomeViewModel(coreDataService: AppContainer.shared.coreDataService)
+        let navigationController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.home) as! HomeViewController
+        navigationController.viewModel = HomeViewModel(coreDataService: app.service)
         
         return navigationController
     }

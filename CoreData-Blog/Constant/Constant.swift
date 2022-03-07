@@ -11,7 +11,8 @@ struct K
 {
     struct Storyboard
     {
-        static let homeStoryboard = "Home"
+        static let home = "Home"
+        static let add  = "AddArticle"
     }
     
     struct TableView

@@ -7,10 +7,11 @@
 
 import Foundation
 
+let app = AppContainer()
+
 final class AppContainer
-{
-    static let shared = AppContainer()
-    
-    let appRouter     = AppRouter()
-    let coreDataService = CoreDataService(coreDataStack: CoreDataStack(modelName: K.Model.modelName))
-}
+{    
+    let router  = AppRouter()
+    let service = CoreDataService(coreDataStack: CoreDataStack(modelName: K.Model.modelName))
+} 
+

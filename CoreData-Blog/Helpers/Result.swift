@@ -10,5 +10,5 @@ import Foundation
 enum Result<Value>
 {
     case success(Value)
-    case failure(NSError)
+    case failure(Error)
 }

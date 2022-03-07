@@ -43,6 +43,11 @@ extension HomeViewModel
     {
         coreDataService.importJSONSeedDataIfNeeded()
     }
+    
+    func selectAddButton() {
+        let addViewModel = AddArticleViewModel(service: coreDataService)
+        delegate?.navigate(to: .add(addViewModel))
+    }
 }
 
 // MARK: - Helpers

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -41,7 +42,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Articles" id="0YP-cu-g3U">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="2cz-xy-ZRf"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="2cz-xy-ZRf">
+                            <connections>
+                                <action selector="addButtonPressed:" destination="Y6W-OH-hqX" id="F4I-ea-mzW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="cTw-dD-hfl" id="LI6-Wv-Jyo"/>
@@ -55,6 +60,9 @@
         <scene sceneID="xvT-m2-T4r">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qCC-d6-A72" sceneMemberID="viewController">
+                    <string key="storyboardIdentifier" base64-UTF8="YES">
+A0hvbWU
+</string>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="XME-Hp-LLB">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
