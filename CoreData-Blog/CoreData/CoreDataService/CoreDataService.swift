@@ -13,17 +13,20 @@ final class CoreDataService
     private let coreDataStack: CoreDataStack
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Article> = {
+        
         let fetchedRequest: NSFetchRequest<Article> = Article.fetchRequest()
         
-        let nameSort = NSSortDescriptor(key: #keyPath(Article.title),
-                                        ascending: true)
-        fetchedRequest.sortDescriptors = [nameSort]
+        let dateSort = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
+        let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
+        
+        fetchedRequest.sortDescriptors = [reversedDate]
         
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchedRequest,
             managedObjectContext: coreDataStack.managedContext,
             sectionNameKeyPath: nil,
-            cacheName: "Articles")
+            cacheName: "Articles"
+        )
         return fetchedResultsController
     }()
     
@@ -44,8 +47,7 @@ extension CoreDataService: ICoreDataService
         }
     }
     
-    func addArticle(with title: String,
-                    _ content: String) throws
+    func addArticle(with title: String, _ content: String) throws
     {
         let article = Article(context: coreDataStack.managedContext)
         let author  = Author(context: coreDataStack.managedContext)
@@ -53,53 +55,9 @@ extension CoreDataService: ICoreDataService
         
         article.title = title
         article.content = content
-        article.createDate = Date()
+        article.createdDate = Date()
         article.author = author
         
-        coreDataStack.saveContext()
-    }
-}
-
-// MARK: - Import Seed Data
-extension CoreDataService
-{
-    func importJSONSeedDataIfNeeded() {
-        let fetchRequest = NSFetchRequest<Article>(entityName: K.Entity.article)
-        
-        do {
-            let articleCount = try coreDataStack.managedContext.count(for: fetchRequest)
-            
-            guard articleCount == 0 else { return }
-            try importJSONSeedData()
-        } catch let error as NSError {
-            print(error)
-        }
-    }
-    
-    private func importJSONSeedData() throws
-    {
-        let jsonURL = Bundle.main.url(forResource: "seed", withExtension: "json")!
-        let jsonData = try Data(contentsOf: jsonURL)
-        
-        guard let jsonDict = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed) as? [String: Any],
-              let responseDict = jsonDict["response"] as? [String: Any],
-              let jsonArray = responseDict["articles"] as? [[String: Any]] else { return }
-        
-        for jsonDictionary in jsonArray
-        {
-            guard let authorDict = jsonDictionary["author"] as? [String: String] else { return }
-            
-            let author = Author(context: coreDataStack.managedContext)
-            author.userName = authorDict["userName"]
-            
-            let articleTitle = jsonDictionary["title"] as? String
-            let articleContent = jsonDictionary["content"] as? String
-            
-            let article = Article(context: coreDataStack.managedContext)
-            article.title = articleTitle
-            article.content = articleContent
-            article.author = author
-        }
         coreDataStack.saveContext()
     }
 }

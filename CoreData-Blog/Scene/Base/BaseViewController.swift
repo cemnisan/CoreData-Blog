@@ -32,8 +32,7 @@ extension BaseViewController
         indicatorView.stopAnimating()
     }
     
-    func showError(title: String,
-                   message: String)
+    func showError(title: String, message: String)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)

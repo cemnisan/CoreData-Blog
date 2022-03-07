@@ -17,7 +17,7 @@ extension Article
 
     @NSManaged public var title: String?
     @NSManaged public var content: String?
-    @NSManaged public var createDate: Date?
+    @NSManaged public var createdDate: Date?
     @NSManaged public var author: Author?
 }
 

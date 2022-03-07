@@ -12,7 +12,7 @@ import CoreData
 final class HomeViewController: BaseViewController
 {
     // MARK: - IBOutlet
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var tableView: UITableView!
     
     // MARK: - Properties
     var viewModel: HomeViewModelProtocol!
@@ -24,7 +24,6 @@ final class HomeViewController: BaseViewController
         super.viewDidLoad()
         
         configureUI()
-        viewModel.importJSON()
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -61,7 +60,7 @@ extension HomeViewController
 // MARK: - IBActions
 extension HomeViewController
 {
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem)
+    @IBAction private func addButtonPressed(_ sender: UIBarButtonItem)
     {
         viewModel.selectAddButton()
     }

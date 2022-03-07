@@ -12,7 +12,6 @@ protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
     func load()
-    func importJSON()
     func selectAddButton()
 }
 

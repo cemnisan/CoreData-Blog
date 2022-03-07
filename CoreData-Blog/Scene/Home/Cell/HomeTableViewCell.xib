@@ -1,79 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeCell" rowHeight="671" id="KGk-i7-Jjw" customClass="HomeTableViewCell" customModule="CoreData_Blog" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="463" height="671"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeCell" rowHeight="579" id="KGk-i7-Jjw" customClass="HomeTableViewCell" customModule="CoreData_Blog" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="463" height="579"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="463" height="671"/>
+                <rect key="frame" x="0.0" y="0.0" width="463" height="579"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPic" translatesAutoresizingMaskIntoConstraints="NO" id="usL-1x-TBz">
-                        <rect key="frame" x="20" y="14" width="50" height="50"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userPic" translatesAutoresizingMaskIntoConstraints="NO" id="t6D-7d-RTi">
+                        <rect key="frame" x="20" y="12" width="50" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="8D6-d7-Kgq"/>
-                            <constraint firstAttribute="height" constant="50" id="ieN-jD-xTV"/>
+                            <constraint firstAttribute="height" constant="50" id="9Bt-Qr-d6d"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Dcf-Tt-OHZ"/>
+                            <constraint firstAttribute="width" constant="50" id="O0z-eQ-pte"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="cbO-Vo-VDk"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="articlePic" translatesAutoresizingMaskIntoConstraints="NO" id="I3h-55-gRq">
-                        <rect key="frame" x="20" y="72" width="423" height="300"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="300" id="gd9-aW-x4a"/>
-                        </constraints>
-                    </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktP-kj-hZs">
-                        <rect key="frame" x="20" y="380" width="423" height="287"/>
-                        <string key="text">Where does it come from?
-Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. sdfoısudofusdndoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. sdfoısudofusdndoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. sdfoısudofusd</string>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cemnisan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2d-zu-ayo">
+                        <rect key="frame" x="78" y="27" width="73" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cemnisan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JF9-9L-I37">
-                        <rect key="frame" x="78" y="29" width="159" height="21.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="159" id="Zkq-pT-dCu"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why Our Brain Love Physical Buttons?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlT-n8-JV3" userLabel="articleTitle">
+                        <rect key="frame" x="20" y="70" width="423" height="23"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="articlePic" translatesAutoresizingMaskIntoConstraints="NO" id="Cyq-WR-58W">
+                        <rect key="frame" x="20" y="101" width="423" height="240"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="240" id="3rT-Qc-DcJ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibw-N0-kSm" userLabel="articleContent">
+                        <rect key="frame" x="20" y="345" width="423" height="222"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="222" id="ovZ-mb-uth"/>
+                        </constraints>
+                        <mutableString key="text">Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a table view cell's content view. We're considering the collapse unintentional and using standard height instead.</mutableString>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07 March, 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sl6-z4-3lu">
+                        <rect key="frame" x="334.5" y="44" width="108.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="JF9-9L-I37" firstAttribute="leading" secondItem="usL-1x-TBz" secondAttribute="trailing" constant="8" symbolic="YES" id="44A-sk-jyV"/>
-                    <constraint firstItem="I3h-55-gRq" firstAttribute="top" secondItem="usL-1x-TBz" secondAttribute="bottom" constant="8" symbolic="YES" id="5cU-f5-4g4"/>
-                    <constraint firstItem="usL-1x-TBz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="D2l-TJ-7kS"/>
-                    <constraint firstItem="JF9-9L-I37" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="29" id="E5Y-yy-jwz"/>
-                    <constraint firstItem="ktP-kj-hZs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Jay-3w-zLK"/>
-                    <constraint firstItem="ktP-kj-hZs" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="NLG-rS-P1X"/>
-                    <constraint firstAttribute="bottom" secondItem="ktP-kj-hZs" secondAttribute="bottom" constant="4" id="Pyy-gY-CHx"/>
-                    <constraint firstItem="usL-1x-TBz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" symbolic="YES" id="hrC-Q0-RpE"/>
-                    <constraint firstItem="I3h-55-gRq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="iPh-Z8-qsq"/>
-                    <constraint firstItem="I3h-55-gRq" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="lrs-ud-ZJX"/>
-                    <constraint firstItem="ktP-kj-hZs" firstAttribute="top" secondItem="I3h-55-gRq" secondAttribute="bottom" constant="8" symbolic="YES" id="ura-5H-eJY"/>
+                    <constraint firstItem="Ibw-N0-kSm" firstAttribute="top" secondItem="Cyq-WR-58W" secondAttribute="bottom" constant="4" id="2m4-Mx-4i1"/>
+                    <constraint firstItem="RlT-n8-JV3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="40z-ss-fb8"/>
+                    <constraint firstItem="Ibw-N0-kSm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="4sW-h0-5e3"/>
+                    <constraint firstItem="sl6-z4-3lu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="44" id="5XS-IG-kuH"/>
+                    <constraint firstAttribute="trailing" secondItem="RlT-n8-JV3" secondAttribute="trailing" constant="20" id="A1T-FD-2ie"/>
+                    <constraint firstItem="J2d-zu-ayo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="Cvd-qa-OTC"/>
+                    <constraint firstItem="t6D-7d-RTi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="ETn-LY-rkb"/>
+                    <constraint firstItem="RlT-n8-JV3" firstAttribute="top" secondItem="t6D-7d-RTi" secondAttribute="bottom" constant="8" symbolic="YES" id="J2v-vH-VsQ"/>
+                    <constraint firstItem="t6D-7d-RTi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="LFU-sL-z1u"/>
+                    <constraint firstItem="J2d-zu-ayo" firstAttribute="leading" secondItem="t6D-7d-RTi" secondAttribute="trailing" constant="8" symbolic="YES" id="bin-Cx-mRt"/>
+                    <constraint firstAttribute="trailing" secondItem="Ibw-N0-kSm" secondAttribute="trailing" constant="20" id="gaE-Iq-Eij"/>
+                    <constraint firstAttribute="trailing" secondItem="sl6-z4-3lu" secondAttribute="trailing" constant="20" id="nzu-AG-2JR"/>
+                    <constraint firstAttribute="trailing" secondItem="Cyq-WR-58W" secondAttribute="trailing" constant="20" id="ong-SA-wLw"/>
+                    <constraint firstItem="Cyq-WR-58W" firstAttribute="top" secondItem="RlT-n8-JV3" secondAttribute="bottom" constant="8" id="owI-kT-J4h"/>
+                    <constraint firstItem="Cyq-WR-58W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xT6-Qg-Gex"/>
+                    <constraint firstAttribute="bottom" secondItem="Ibw-N0-kSm" secondAttribute="bottom" constant="12" id="xod-Qf-DLy"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="articleContentLabel" destination="ktP-kj-hZs" id="jTQ-Eb-p39"/>
-                <outlet property="articleContentPic" destination="I3h-55-gRq" id="8jL-AS-rSb"/>
-                <outlet property="userNameLabel" destination="JF9-9L-I37" id="sn9-9V-Gp6"/>
-                <outlet property="userProfilePic" destination="usL-1x-TBz" id="cR3-Jo-UDs"/>
+                <outlet property="articleContentLabel" destination="Ibw-N0-kSm" id="BGJ-Kd-kdc"/>
+                <outlet property="articleContentPic" destination="Cyq-WR-58W" id="jfU-et-OHu"/>
+                <outlet property="articleDateTextField" destination="sl6-z4-3lu" id="tHm-td-mlf"/>
+                <outlet property="articleTitleTextField" destination="RlT-n8-JV3" id="pSV-3r-kfb"/>
+                <outlet property="userNameLabel" destination="J2d-zu-ayo" id="dF2-kr-140"/>
+                <outlet property="userProfilePic" destination="t6D-7d-RTi" id="RvE-hW-ez6"/>
             </connections>
-            <point key="canvasLocation" x="113.768115942029" y="333.81696428571428"/>
+            <point key="canvasLocation" x="96.799999999999997" y="283.80809595202402"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="articlePic" width="1950" height="1480"/>
         <image name="userPic" width="200" height="200"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

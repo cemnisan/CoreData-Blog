@@ -10,10 +10,12 @@ import UIKit
 final class HomeTableViewCell: UITableViewCell
 {
     // MARK: - IBOutlet
-    @IBOutlet weak var userProfilePic: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var articleContentPic: UIImageView!
-    @IBOutlet weak var articleContentLabel: UILabel!
+    @IBOutlet private weak var userProfilePic: UIImageView!
+    @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var articleContentPic: UIImageView!
+    @IBOutlet private weak var articleContentLabel: UILabel!
+    @IBOutlet private weak var articleDateTextField: UILabel!
+    @IBOutlet private weak var articleTitleTextField: UILabel!
     
     // MARK: - Lifecycles
     override func awakeFromNib()
@@ -21,12 +23,6 @@ final class HomeTableViewCell: UITableViewCell
         super.awakeFromNib()
         
         userProfilePic.makeRounded()
-    }
-
-    override func setSelected(_ selected: Bool,
-                              animated: Bool)
-    {
-        super.setSelected(selected, animated: animated)
     }
 }
 
@@ -36,6 +32,8 @@ extension HomeTableViewCell
     func configureCell(with article: Article)
     {
         userNameLabel.text = article.author?.userName
+        articleTitleTextField.text = article.title
         articleContentLabel.text = article.content
+        articleDateTextField.text = article.createdDate?.getFormattedDate(format: "MMM d, yyyy")
     }
 }

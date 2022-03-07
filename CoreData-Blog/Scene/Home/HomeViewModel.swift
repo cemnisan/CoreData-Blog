@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 
+// MARK: - Initialize
 final class HomeViewModel: HomeViewModelProtocol
 {
     weak var delegate: HomeViewModelDelegate?
@@ -37,11 +38,6 @@ extension HomeViewModel
                 self.notify(.showError(error))
             }
         }
-    }
-    
-    func importJSON()
-    {
-        coreDataService.importJSONSeedDataIfNeeded()
     }
     
     func selectAddButton() {
