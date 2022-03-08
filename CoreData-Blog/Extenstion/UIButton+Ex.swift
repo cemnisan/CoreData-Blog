@@ -11,15 +11,8 @@ extension UIButton
 {
     func setBookMark(bookMark: SelectBookMark)
     {
-        switch bookMark {
-        case .bookMark:
-            self.setBackgroundImage(
-                UIImage(systemName: bookMark.selectedBookMark),
-                for: .normal)
-        case .bookMarkFill:
-            self.setBackgroundImage(
-                UIImage(systemName: bookMark.selectedBookMark),
-                for: .normal)
-        }
+        self.setBackgroundImage(
+            UIImage(systemName: bookMark.selectedBookMark),
+            for: .normal)
     }
 }
