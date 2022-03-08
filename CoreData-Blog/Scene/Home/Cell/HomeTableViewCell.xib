@@ -28,7 +28,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cemnisan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J2d-zu-ayo">
-                        <rect key="frame" x="78" y="27" width="73" height="21"/>
+                        <rect key="frame" x="78" y="11" width="73" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -56,29 +56,48 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="07 March, 2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sl6-z4-3lu">
-                        <rect key="frame" x="334.5" y="30" width="108.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <rect key="frame" x="78" y="46" width="102" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8 min read" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-6g-DNO">
+                        <rect key="frame" x="202" y="46" width="69" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="highlightedColor" systemColor="systemGrayColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5B-Kn-Xc9">
+                        <rect key="frame" x="417" y="27" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="1nT-D4-9Tx"/>
+                            <constraint firstAttribute="width" constant="30" id="gXM-XZ-4Yl"/>
+                        </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" backgroundImage="bookmark" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="sl6-z4-3lu" firstAttribute="top" secondItem="J2d-zu-ayo" secondAttribute="bottom" constant="14" id="1Ke-5G-mNn"/>
                     <constraint firstItem="Ibw-N0-kSm" firstAttribute="top" secondItem="Cyq-WR-58W" secondAttribute="bottom" id="2m4-Mx-4i1"/>
                     <constraint firstItem="RlT-n8-JV3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="40z-ss-fb8"/>
                     <constraint firstItem="Ibw-N0-kSm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="4sW-h0-5e3"/>
-                    <constraint firstItem="sl6-z4-3lu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="5XS-IG-kuH"/>
                     <constraint firstAttribute="trailing" secondItem="RlT-n8-JV3" secondAttribute="trailing" constant="20" id="A1T-FD-2ie"/>
-                    <constraint firstItem="J2d-zu-ayo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="Cvd-qa-OTC"/>
+                    <constraint firstItem="J2d-zu-ayo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Cvd-qa-OTC"/>
                     <constraint firstItem="t6D-7d-RTi" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="ETn-LY-rkb"/>
                     <constraint firstItem="RlT-n8-JV3" firstAttribute="top" secondItem="t6D-7d-RTi" secondAttribute="bottom" constant="8" symbolic="YES" id="J2v-vH-VsQ"/>
                     <constraint firstItem="t6D-7d-RTi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="LFU-sL-z1u"/>
+                    <constraint firstItem="I5B-Kn-Xc9" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="16" id="bVI-5z-nFY"/>
                     <constraint firstItem="J2d-zu-ayo" firstAttribute="leading" secondItem="t6D-7d-RTi" secondAttribute="trailing" constant="8" id="bin-Cx-mRt"/>
                     <constraint firstAttribute="trailing" secondItem="Ibw-N0-kSm" secondAttribute="trailing" constant="20" id="gaE-Iq-Eij"/>
-                    <constraint firstAttribute="trailing" secondItem="sl6-z4-3lu" secondAttribute="trailing" constant="20" id="nzu-AG-2JR"/>
+                    <constraint firstItem="KX4-6g-DNO" firstAttribute="leading" secondItem="sl6-z4-3lu" secondAttribute="trailing" constant="22" id="neG-oF-rdx"/>
                     <constraint firstAttribute="trailing" secondItem="Cyq-WR-58W" secondAttribute="trailing" constant="20" id="ong-SA-wLw"/>
                     <constraint firstItem="Cyq-WR-58W" firstAttribute="top" secondItem="RlT-n8-JV3" secondAttribute="bottom" constant="8" id="owI-kT-J4h"/>
+                    <constraint firstItem="I5B-Kn-Xc9" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="pgw-8n-1od"/>
                     <constraint firstItem="Cyq-WR-58W" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="xT6-Qg-Gex"/>
                     <constraint firstAttribute="bottom" secondItem="Ibw-N0-kSm" secondAttribute="bottom" constant="12" id="xod-Qf-DLy"/>
+                    <constraint firstItem="KX4-6g-DNO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="35" id="z1x-yT-xiI"/>
+                    <constraint firstItem="sl6-z4-3lu" firstAttribute="leading" secondItem="t6D-7d-RTi" secondAttribute="trailing" constant="8" symbolic="YES" id="zrO-54-W7m"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -87,14 +106,16 @@
                 <outlet property="articleContentPic" destination="Cyq-WR-58W" id="jfU-et-OHu"/>
                 <outlet property="articleDateTextField" destination="sl6-z4-3lu" id="tHm-td-mlf"/>
                 <outlet property="articleTitleTextField" destination="RlT-n8-JV3" id="pSV-3r-kfb"/>
+                <outlet property="bookMarkButton" destination="I5B-Kn-Xc9" id="djV-gq-1gQ"/>
                 <outlet property="userNameLabel" destination="J2d-zu-ayo" id="dF2-kr-140"/>
-                <outlet property="userProfilePic" destination="t6D-7d-RTi" id="RvE-hW-ez6"/>
+                <outlet property="userProfilePic" destination="t6D-7d-RTi" id="seF-rI-kLQ"/>
             </connections>
             <point key="canvasLocation" x="96.799999999999997" y="283.80809595202402"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="articlePic" width="1950" height="1480"/>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="userPic" width="200" height="200"/>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -16,6 +16,7 @@ final class HomeTableViewCell: UITableViewCell
     @IBOutlet private weak var articleContentLabel: UILabel!
     @IBOutlet private weak var articleDateTextField: UILabel!
     @IBOutlet private weak var articleTitleTextField: UILabel!
+    @IBOutlet private weak var bookMarkButton: UIButton!
     
     // MARK: - Lifecycles
     override func awakeFromNib()
@@ -36,5 +37,13 @@ extension HomeTableViewCell
         articleTitleTextField.text = article.title
         articleContentLabel.text   = article.content
         articleDateTextField.text  = article.createdDate?.getFormattedDate(format: "MMM d, yyyy")
+        bookMarkConfigure(isFavorited: article.isFavorite)
+    }
+    
+    private func bookMarkConfigure(isFavorited: Bool)
+    {
+        isFavorited ?
+            bookMarkButton.setBookMark(bookMark: .bookMarkFill) :
+            bookMarkButton.setBookMark(bookMark: .bookMark)
     }
 }

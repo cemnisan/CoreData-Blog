@@ -162,8 +162,8 @@
                         <outlet property="articleContentLabel" destination="jzY-c0-fuB" id="Dth-Qc-uKH"/>
                         <outlet property="articleContentPhoto" destination="vG9-qE-Iy4" id="FIn-oJ-7O7"/>
                         <outlet property="articleDateLabel" destination="fPr-kK-WrE" id="pr2-K6-jzT"/>
-                        <outlet property="articleSaveButton" destination="oqh-l1-Lln" id="bhX-TF-Yk0"/>
                         <outlet property="articleTitleLabel" destination="KHV-RT-jwt" id="23I-5Y-IHl"/>
+                        <outlet property="bookMarkButton" destination="oqh-l1-Lln" id="bhX-TF-Yk0"/>
                         <outlet property="userNameLabel" destination="3Ml-E7-qoM" id="e20-PH-CcJ"/>
                         <outlet property="userPhotoView" destination="i8O-hk-Vr7" id="YIh-t5-aVO"/>
                     </connections>

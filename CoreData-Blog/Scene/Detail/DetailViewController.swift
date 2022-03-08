@@ -8,7 +8,6 @@
 import UIKit
 import CoreData
 
-
 // MARK: - Initialize
 final class DetailViewController: UIViewController
 {
@@ -16,7 +15,7 @@ final class DetailViewController: UIViewController
     @IBOutlet private weak var userPhotoView: UIImageView!
     @IBOutlet private weak var userNameLabel: UILabel!
     @IBOutlet private weak var articleDateLabel: UILabel!
-    @IBOutlet private weak var articleSaveButton: UIButton!
+    @IBOutlet private weak var bookMarkButton: UIButton!
     @IBOutlet private weak var articleTitleLabel: UILabel!
     @IBOutlet private weak var articleContentPhoto: UIImageView!
     @IBOutlet private weak var articleContentLabel: UILabel!
@@ -52,9 +51,11 @@ extension DetailViewController
         configureBookMark(with: isFavorite)
     }
     
-    private func configureBookMark(with isSaved: Bool)
+    private func configureBookMark(with isFavorited: Bool)
     {
-        isSaved ? selectBookMark(.bookMarkFill) : selectBookMark(.bookMark)
+        isFavorited ?
+            bookMarkButton.setBookMark(bookMark: .bookMarkFill) :
+            bookMarkButton.setBookMark(bookMark: .bookMark)
     }
 }
 
@@ -66,21 +67,5 @@ extension DetailViewController
         isFavorite = !isFavorite
         configureBookMark(with: isFavorite)
         viewModel.addFavorites(isFavorite: isFavorite, article: article!)
-    }
-}
-
-// MARK: - Helpers
-extension DetailViewController
-{
-    private func selectBookMark(_ bookMark: SelectBookMark)
-    {
-        switch bookMark {
-        case .bookMark:
-            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark),
-                                                 for: .normal)
-        case .bookMarkFill:
-            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark),
-                                                 for: .normal)
-        }
     }
 }

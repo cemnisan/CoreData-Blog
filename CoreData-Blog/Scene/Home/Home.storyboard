@@ -43,6 +43,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Articles" id="0YP-cu-g3U">
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="2cz-xy-ZRf">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="Y6W-OH-hqX" id="F4I-ea-mzW"/>
                             </connections>

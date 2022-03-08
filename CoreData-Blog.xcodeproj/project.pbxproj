@@ -32,6 +32,7 @@
 		F84DF62127D77CA900FAE031 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF61D27D77CA900FAE031 /* Article+CoreDataProperties.swift */; };
 		F84DF62227D77CA900FAE031 /* Author+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF61E27D77CA900FAE031 /* Author+CoreDataClass.swift */; };
 		F84DF62327D77CA900FAE031 /* Author+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF61F27D77CA900FAE031 /* Author+CoreDataProperties.swift */; };
+		F84DF62527D7985000FAE031 /* UIButton+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF62427D7985000FAE031 /* UIButton+Ex.swift */; };
 		F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970727D2BC9B0082B1CC /* AppDelegate.swift */; };
 		F882970A27D2BC9B0082B1CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970927D2BC9B0082B1CC /* SceneDelegate.swift */; };
 		F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970B27D2BC9B0082B1CC /* HomeViewController.swift */; };
@@ -75,6 +76,7 @@
 		F84DF61D27D77CA900FAE031 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F84DF61E27D77CA900FAE031 /* Author+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F84DF61F27D77CA900FAE031 /* Author+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F84DF62427D7985000FAE031 /* UIButton+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ex.swift"; sourceTree = "<group>"; };
 		F882970427D2BC9B0082B1CC /* CoreData-Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData-Blog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F882970727D2BC9B0082B1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F882970927D2BC9B0082B1CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				F80704D627D4DBC700755C82 /* UITableView+Ex.swift */,
 				F84DF60A27D63D1700FAE031 /* ValidateError+Ex.swift */,
 				F84DF60C27D63F7800FAE031 /* DataFormatter+Ex.swift */,
+				F84DF62427D7985000FAE031 /* UIButton+Ex.swift */,
 			);
 			path = Extenstion;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				F84DF61527D67FD400FAE031 /* DetailViewModel.swift in Sources */,
 				F84DF60D27D63F7800FAE031 /* DataFormatter+Ex.swift in Sources */,
 				F84DF62227D77CA900FAE031 /* Author+CoreDataClass.swift in Sources */,
+				F84DF62527D7985000FAE031 /* UIButton+Ex.swift in Sources */,
 				F807054E27D5320600755C82 /* AddArticleViewController.swift in Sources */,
 				F807055027D53A2C00755C82 /* AddArticleViewModel.swift in Sources */,
 				F84DF62127D77CA900FAE031 /* Article+CoreDataProperties.swift in Sources */,
