@@ -51,12 +51,23 @@ extension CoreDataService: ICoreDataService
     {
         let article = Article(context: coreDataStack.managedContext)
         let author  = Author(context: coreDataStack.managedContext)
-        author.userName = "cemnisan" // todo.
         
-        article.title = title
-        article.content = content
+        author.userName     = "cemnisan" // todo.
+        
+        article.title       = title
+        article.content     = content
         article.createdDate = Date()
-        article.author = author
+        article.author      = author
+        article.isFavorite  = false
+        
+        coreDataStack.saveContext()
+    }
+    
+    func addFavorites(with isFavorite: Bool, _ article: Article) throws
+    {
+        let articleIndexPath    = fetchedResultsController.indexPath(forObject: article)
+        let foundArticle        = fetchedResultsController.object(at: articleIndexPath!)
+        foundArticle.isFavorite = isFavorite
         
         coreDataStack.saveContext()
     }

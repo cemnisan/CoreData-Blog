@@ -76,8 +76,8 @@ extension HomeViewController: HomeViewModelDelegate
         case .add(let addViewModel):
             let viewController = AddArticleBuilder.make(viewModel: addViewModel)
             show(viewController, sender: nil)
-        case .detail(let article):
-            let viewController = DetailBuilder.make(with: article)
+        case .detail(let article, let viewModel):
+            let viewController = DetailBuilder.make(with: article, viewModel)
             show(viewController, sender: nil)
         }
     }

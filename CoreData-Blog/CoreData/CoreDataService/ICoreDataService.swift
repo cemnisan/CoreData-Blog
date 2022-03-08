@@ -12,4 +12,5 @@ protocol ICoreDataService
 {
     func fetchArticles(completion: @escaping (Result<NSFetchedResultsController<Article>>) -> Void)
     func addArticle(with title: String, _ content: String) throws
+    func addFavorites(with isFavorite: Bool, _ article: Article) throws
 }

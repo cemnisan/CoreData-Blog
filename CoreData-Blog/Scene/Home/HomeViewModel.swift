@@ -47,7 +47,8 @@ extension HomeViewModel
     
     func selectArticle(article: Article)
     {
-        delegate?.navigate(to: .detail(article))
+        let detailViewModel = DetailViewModel(service: coreDataService)
+        delegate?.navigate(to: .detail(article, detailViewModel))
     }
 }
 

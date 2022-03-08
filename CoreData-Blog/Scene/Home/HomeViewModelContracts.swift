@@ -25,7 +25,7 @@ protocol HomeViewModelDelegate: AnyObject
 enum HomeViewModelRouter
 {
     case add(AddArticleViewModelProtocol)
-    case detail(Article)
+    case detail(Article, DetailViewModelProtocol)
 }
 
 enum HomeViewModelOutput

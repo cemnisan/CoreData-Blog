@@ -9,7 +9,7 @@ import UIKit
 
 class BaseViewController: UIViewController
 {
-    var indicatorView = UIActivityIndicatorView(style: .gray)
+    var indicatorView = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad()
     {

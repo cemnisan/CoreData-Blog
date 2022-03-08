@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 
+
 // MARK: - Initialize
 final class DetailViewController: UIViewController
 {
@@ -22,13 +23,13 @@ final class DetailViewController: UIViewController
     
     // MARK: - Properties
     var article: Article?
-    private var isTouched: Bool = false
+    var viewModel: DetailViewModelProtocol!
+    private var isFavorite: Bool = false
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
-        userPhotoView.makeRoundedCircle()
-        articleContentPhoto.makeRounded()
         configureUI()
     }
 }
@@ -38,30 +39,48 @@ extension DetailViewController
 {
     private func configureUI()
     {
+        userPhotoView.makeRoundedCircle()
+        articleContentPhoto.makeRounded()
+        
         title                    = article?.title
         userNameLabel.text       = article?.author?.userName
         articleDateLabel.text    = article?.createdDate?.getFormattedDate(format: "MMM d, yyyy")
         articleTitleLabel.text   = article?.title
         articleContentLabel.text = article?.content
+        isFavorite               = article?.isFavorite ?? false
+        
+        configureBookMark(with: isFavorite)
+    }
+    
+    private func configureBookMark(with isSaved: Bool)
+    {
+        isSaved ? selectBookMark(.bookMarkFill) : selectBookMark(.bookMark)
     }
 }
 
 // MARK: - IBActions
-@available(iOS 13.0, *)
 extension DetailViewController
 {
     @IBAction private func saveButtonPressed(_ sender: UIButton)
     {
-        isTouched = !isTouched
-        
-        isTouched ? selectBookMark(.bookMarkFill) : selectBookMark(.bookMark)
+        isFavorite = !isFavorite
+        configureBookMark(with: isFavorite)
+        viewModel.addFavorites(isFavorite: isFavorite, article: article!)
     }
-    
-    private func selectBookMark(_ bookMark: SelectBookMark) {
-        if bookMark == .bookMarkFill {
-            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark), for: .normal)
-        } else {
-            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark), for: .normal)
+}
+
+// MARK: - Helpers
+extension DetailViewController
+{
+    private func selectBookMark(_ bookMark: SelectBookMark)
+    {
+        switch bookMark {
+        case .bookMark:
+            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark),
+                                                 for: .normal)
+        case .bookMarkFill:
+            articleSaveButton.setBackgroundImage(UIImage(systemName: bookMark.selectedBookMark),
+                                                 for: .normal)
         }
     }
 }
