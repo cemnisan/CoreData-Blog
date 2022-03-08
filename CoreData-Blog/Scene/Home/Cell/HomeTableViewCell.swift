@@ -37,6 +37,7 @@ extension HomeTableViewCell
         articleTitleTextField.text = article.title
         articleContentLabel.text   = article.content
         articleDateTextField.text  = article.createdDate?.getFormattedDate(format: "MMM d, yyyy")
+        
         bookMarkConfigure(isFavorited: article.isFavorite)
     }
     

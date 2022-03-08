@@ -33,6 +33,16 @@
 		F84DF62227D77CA900FAE031 /* Author+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF61E27D77CA900FAE031 /* Author+CoreDataClass.swift */; };
 		F84DF62327D77CA900FAE031 /* Author+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF61F27D77CA900FAE031 /* Author+CoreDataProperties.swift */; };
 		F84DF62527D7985000FAE031 /* UIButton+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF62427D7985000FAE031 /* UIButton+Ex.swift */; };
+		F84DF62827D7A12200FAE031 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84DF62727D7A12200FAE031 /* Search.storyboard */; };
+		F84DF62A27D7A12D00FAE031 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF62927D7A12D00FAE031 /* SearchViewController.swift */; };
+		F84DF62C27D7A13600FAE031 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF62B27D7A13600FAE031 /* SearchViewModel.swift */; };
+		F84DF62E27D7A13F00FAE031 /* SearchViewModelContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF62D27D7A13F00FAE031 /* SearchViewModelContracts.swift */; };
+		F84DF63027D7A14500FAE031 /* SearchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF62F27D7A14500FAE031 /* SearchBuilder.swift */; };
+		F84DF63527D7A2BC00FAE031 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F84DF63427D7A2BC00FAE031 /* Profile.storyboard */; };
+		F84DF63727D7A2C300FAE031 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63627D7A2C300FAE031 /* ProfileViewController.swift */; };
+		F84DF63927D7A2E800FAE031 /* ProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63827D7A2E800FAE031 /* ProfileBuilder.swift */; };
+		F84DF63B27D7A2F000FAE031 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */; };
+		F84DF63D27D7A2F900FAE031 /* ProfileViewModelContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */; };
 		F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970727D2BC9B0082B1CC /* AppDelegate.swift */; };
 		F882970A27D2BC9B0082B1CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970927D2BC9B0082B1CC /* SceneDelegate.swift */; };
 		F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970B27D2BC9B0082B1CC /* HomeViewController.swift */; };
@@ -77,6 +87,16 @@
 		F84DF61E27D77CA900FAE031 /* Author+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F84DF61F27D77CA900FAE031 /* Author+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F84DF62427D7985000FAE031 /* UIButton+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Ex.swift"; sourceTree = "<group>"; };
+		F84DF62727D7A12200FAE031 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		F84DF62927D7A12D00FAE031 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		F84DF62B27D7A13600FAE031 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		F84DF62D27D7A13F00FAE031 /* SearchViewModelContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModelContracts.swift; sourceTree = "<group>"; };
+		F84DF62F27D7A14500FAE031 /* SearchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBuilder.swift; sourceTree = "<group>"; };
+		F84DF63427D7A2BC00FAE031 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		F84DF63627D7A2C300FAE031 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		F84DF63827D7A2E800FAE031 /* ProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBuilder.swift; sourceTree = "<group>"; };
+		F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelContracts.swift; sourceTree = "<group>"; };
 		F882970427D2BC9B0082B1CC /* CoreData-Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData-Blog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F882970727D2BC9B0082B1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F882970927D2BC9B0082B1CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -167,7 +187,7 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		F807054A27D531AD00755C82 /* AddArticle */ = {
+		F807054A27D531AD00755C82 /* Add */ = {
 			isa = PBXGroup;
 			children = (
 				F807054B27D531BC00755C82 /* AddArticle.storyboard */,
@@ -176,7 +196,7 @@
 				F807055127D53A3600755C82 /* AddArticleContracts.swift */,
 				F807055327D53A3E00755C82 /* AddArticleBuilder.swift */,
 			);
-			path = AddArticle;
+			path = Add;
 			sourceTree = "<group>";
 		};
 		F84DF60E27D641C800FAE031 /* CoreData */ = {
@@ -200,6 +220,30 @@
 				F84DF61827D67FE600FAE031 /* DetailBuilder.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		F84DF62627D7A10900FAE031 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F84DF62727D7A12200FAE031 /* Search.storyboard */,
+				F84DF62927D7A12D00FAE031 /* SearchViewController.swift */,
+				F84DF62B27D7A13600FAE031 /* SearchViewModel.swift */,
+				F84DF62D27D7A13F00FAE031 /* SearchViewModelContracts.swift */,
+				F84DF62F27D7A14500FAE031 /* SearchBuilder.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		F84DF63127D7A28400FAE031 /* Profil */ = {
+			isa = PBXGroup;
+			children = (
+				F84DF63427D7A2BC00FAE031 /* Profile.storyboard */,
+				F84DF63627D7A2C300FAE031 /* ProfileViewController.swift */,
+				F84DF63827D7A2E800FAE031 /* ProfileBuilder.swift */,
+				F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */,
+				F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */,
+			);
+			path = Profil;
 			sourceTree = "<group>";
 		};
 		F88296FB27D2BC9B0082B1CC = {
@@ -236,10 +280,12 @@
 		F882971B27D2BCA80082B1CC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				F84DF63127D7A28400FAE031 /* Profil */,
+				F84DF62627D7A10900FAE031 /* Search */,
 				F84DF60F27D67FB400FAE031 /* Detail */,
 				F80704DC27D4E29800755C82 /* Base */,
 				F80704DB27D4E28D00755C82 /* Home */,
-				F807054A27D531AD00755C82 /* AddArticle */,
+				F807054A27D531AD00755C82 /* Add */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -359,8 +405,10 @@
 			files = (
 				F807054C27D531BC00755C82 /* AddArticle.storyboard in Resources */,
 				F882972627D2BDC50082B1CC /* Home.storyboard in Resources */,
+				F84DF63527D7A2BC00FAE031 /* Profile.storyboard in Resources */,
 				F882971427D2BC9C0082B1CC /* LaunchScreen.storyboard in Resources */,
 				F882975127D2C6640082B1CC /* HomeTableViewCell.xib in Resources */,
+				F84DF62827D7A12200FAE031 /* Search.storyboard in Resources */,
 				F882971127D2BC9C0082B1CC /* Assets.xcassets in Resources */,
 				F84DF61127D67FC100FAE031 /* Detail.storyboard in Resources */,
 			);
@@ -377,13 +425,16 @@
 				F882973427D2C2550082B1CC /* Blog.xcdatamodeld in Sources */,
 				F882972227D2BD780082B1CC /* AppRouter.swift in Sources */,
 				F80704DE27D4E2AA00755C82 /* BaseViewController.swift in Sources */,
+				F84DF62C27D7A13600FAE031 /* SearchViewModel.swift in Sources */,
 				F84DF60927D63C9D00FAE031 /* ValidateError.swift in Sources */,
+				F84DF63B27D7A2F000FAE031 /* ProfileViewModel.swift in Sources */,
 				F80704D527D4D0F800755C82 /* UIImageView+Ex.swift in Sources */,
 				F84DF62027D77CA900FAE031 /* Article+CoreDataClass.swift in Sources */,
 				F807054027D5029500755C82 /* ICoreDataService.swift in Sources */,
 				F84DF62327D77CA900FAE031 /* Author+CoreDataProperties.swift in Sources */,
 				F807054327D502A100755C82 /* CoreDataService.swift in Sources */,
 				F84DF61727D67FDE00FAE031 /* DetailViewModelContracts.swift in Sources */,
+				F84DF63927D7A2E800FAE031 /* ProfileBuilder.swift in Sources */,
 				F882972A27D2BF6C0082B1CC /* HomeViewModel.swift in Sources */,
 				F84DF61927D67FE600FAE031 /* DetailBuilder.swift in Sources */,
 				F882972E27D2BFC80082B1CC /* CoreDataStack.swift in Sources */,
@@ -394,15 +445,20 @@
 				F84DF60D27D63F7800FAE031 /* DataFormatter+Ex.swift in Sources */,
 				F84DF62227D77CA900FAE031 /* Author+CoreDataClass.swift in Sources */,
 				F84DF62527D7985000FAE031 /* UIButton+Ex.swift in Sources */,
+				F84DF63727D7A2C300FAE031 /* ProfileViewController.swift in Sources */,
 				F807054E27D5320600755C82 /* AddArticleViewController.swift in Sources */,
 				F807055027D53A2C00755C82 /* AddArticleViewModel.swift in Sources */,
 				F84DF62127D77CA900FAE031 /* Article+CoreDataProperties.swift in Sources */,
 				F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */,
+				F84DF63027D7A14500FAE031 /* SearchBuilder.swift in Sources */,
+				F84DF63D27D7A2F900FAE031 /* ProfileViewModelContracts.swift in Sources */,
 				F807055227D53A3600755C82 /* AddArticleContracts.swift in Sources */,
 				F882972427D2BD820082B1CC /* AppContainer.swift in Sources */,
 				F80704DA27D4DCA700755C82 /* Constant.swift in Sources */,
 				F80704D727D4DBC800755C82 /* UITableView+Ex.swift in Sources */,
 				F882972C27D2BF7E0082B1CC /* HomeViewModelContracts.swift in Sources */,
+				F84DF62A27D7A12D00FAE031 /* SearchViewController.swift in Sources */,
+				F84DF62E27D7A13F00FAE031 /* SearchViewModelContracts.swift in Sources */,
 				F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */,
 				F84DF60B27D63D1700FAE031 /* ValidateError+Ex.swift in Sources */,
 				F84DF61327D67FCD00FAE031 /* DetailViewController.swift in Sources */,

@@ -11,11 +11,12 @@ final class HomeBuilder
 {
     static func make() -> HomeViewController
     {
-        let storyboard = UIStoryboard(name: K.Storyboard.home,
-                                      bundle: nil)
-        let navigationController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.home) as! HomeViewController
-        navigationController.viewModel = HomeViewModel(coreDataService: app.service)
+        let storyboard = UIStoryboard(name: K.Storyboard.home, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.home) as! HomeViewController
         
-        return navigationController
+        viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
+        viewController.viewModel = HomeViewModel(coreDataService: app.service)
+        
+        return viewController
     }
 }
