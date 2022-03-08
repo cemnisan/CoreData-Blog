@@ -234,7 +234,7 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		F84DF63127D7A28400FAE031 /* Profil */ = {
+		F84DF63127D7A28400FAE031 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				F84DF63427D7A2BC00FAE031 /* Profile.storyboard */,
@@ -243,7 +243,7 @@
 				F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */,
 				F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */,
 			);
-			path = Profil;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		F88296FB27D2BC9B0082B1CC = {
@@ -280,7 +280,7 @@
 		F882971B27D2BCA80082B1CC /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				F84DF63127D7A28400FAE031 /* Profil */,
+				F84DF63127D7A28400FAE031 /* Profile */,
 				F84DF62627D7A10900FAE031 /* Search */,
 				F84DF60F27D67FB400FAE031 /* Detail */,
 				F80704DC27D4E29800755C82 /* Base */,

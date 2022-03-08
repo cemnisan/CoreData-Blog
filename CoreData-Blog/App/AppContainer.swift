@@ -12,6 +12,6 @@ let app = AppContainer()
 final class AppContainer
 {    
     let router  = AppRouter()
-    let service = CoreDataService(coreDataStack: CoreDataStack(modelName: K.Model.modelName))
+    let stack = CoreDataStack(modelName: K.Model.modelName)
 } 
 

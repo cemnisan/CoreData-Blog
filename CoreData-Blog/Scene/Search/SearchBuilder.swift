@@ -9,13 +9,12 @@ import UIKit
 
 final class SearchBuilder
 {
-    static func make() -> SearchViewController
+    static func make() -> UINavigationController
     {
-        let storyboard = UIStoryboard(name: "Search", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "Search") as! SearchViewController
-        
+        let storyboard = UIStoryboard(name: K.Storyboard.search, bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.search) as! SearchViewController
         viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
         
-        return viewController
+        return UINavigationController(rootViewController: viewController)
     }
 }

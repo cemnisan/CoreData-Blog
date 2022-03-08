@@ -10,7 +10,7 @@ import CoreData
 
 final class CoreDataService
 {
-    private let coreDataStack: CoreDataStack
+    private let stack: CoreDataStack
     
     private lazy var fetchedResultsController: NSFetchedResultsController<Article> = {
         
@@ -23,16 +23,16 @@ final class CoreDataService
         
         let fetchedResultsController = NSFetchedResultsController(
             fetchRequest: fetchedRequest,
-            managedObjectContext: coreDataStack.managedContext,
+            managedObjectContext: stack.managedContext,
             sectionNameKeyPath: nil,
             cacheName: "Articles"
         )
         return fetchedResultsController
     }()
     
-    init(coreDataStack: CoreDataStack)
+    init(stack: CoreDataStack)
     {
-        self.coreDataStack = coreDataStack
+        self.stack = stack
     }
 }
 
@@ -49,8 +49,8 @@ extension CoreDataService: ICoreDataService
     
     func addArticle(with title: String, _ content: String) throws
     {
-        let article = Article(context: coreDataStack.managedContext)
-        let author  = Author(context: coreDataStack.managedContext)
+        let article = Article(context: stack.managedContext)
+        let author  = Author(context: stack.managedContext)
         
         author.userName     = "cemnisan" // todo.
         
@@ -60,7 +60,7 @@ extension CoreDataService: ICoreDataService
         article.author      = author
         article.isFavorite  = false
         
-        coreDataStack.saveContext()
+        stack.saveContext()
     }
     
     func addFavorites(with isFavorite: Bool, _ article: Article) throws
@@ -69,6 +69,6 @@ extension CoreDataService: ICoreDataService
         let foundArticle        = fetchedResultsController.object(at: articleIndexPath!)
         foundArticle.isFavorite = isFavorite
         
-        coreDataStack.saveContext()
+        stack.saveContext()
     }
 }

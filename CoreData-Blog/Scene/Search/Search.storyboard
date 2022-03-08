@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search View Controller-->
+        <!--Search-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="Search" id="Y6W-OH-hqX" customClass="SearchViewController" customModule="CoreData_Blog" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                             <constraint firstItem="hxY-Yy-zUh" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="yFI-ry-trw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="qeY-Qa-OAZ"/>
+                    <navigationItem key="navigationItem" title="Search" id="qeY-Qa-OAZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

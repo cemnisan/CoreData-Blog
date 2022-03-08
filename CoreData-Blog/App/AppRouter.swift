@@ -23,11 +23,10 @@ extension AppRouter
     // this func execute on sceneDelegate
     func start(with windowScene: UIWindowScene)
     {
-        let viewController        = HomeBuilder.make()
-        let navigationController  = UINavigationController(rootViewController: viewController)
+        let rootViewController    = createTabBar()
 
         window.windowScene        = windowScene
-        window.rootViewController = createTabBar(with: navigationController)
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
     }
     
@@ -35,17 +34,16 @@ extension AppRouter
     // this func execute on appDelegate.
     func start()
     {
-        let viewController        = HomeBuilder.make()
-        let navigationController  = UINavigationController(rootViewController: viewController)
+        let rootViewController    = createTabBar()
        
-        window.rootViewController = navigationController
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
     }
     
-    private func createTabBar(with rootViewController: UINavigationController) -> UITabBarController
+    private func createTabBar() -> UITabBarController
     {
         let tabBar             = UITabBarController()
-        tabBar.viewControllers = [rootViewController, SearchBuilder.make(), ProfileBuilder.make()]
+        tabBar.viewControllers = [HomeBuilder.make(), SearchBuilder.make(), ProfileBuilder.make()]
         
         return tabBar
     }

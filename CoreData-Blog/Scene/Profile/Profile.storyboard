@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="Profile" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="CoreData_Blog" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,10 +31,29 @@
                             <constraint firstItem="O07-A5-X2b" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="QWR-RA-btU"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Profile" id="gNX-VJ-kgI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-142" y="114"/>
+            <point key="canvasLocation" x="768.11594202898561" y="113.83928571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KAC-fl-sfy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zGp-ys-qTj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oOx-lB-t6Q">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Sn1-dE-CWk"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iea-lH-Ssb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-142.02898550724638" y="113.83928571428571"/>
         </scene>
     </scenes>
     <resources>

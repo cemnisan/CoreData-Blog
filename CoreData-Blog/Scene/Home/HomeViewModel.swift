@@ -12,11 +12,11 @@ import CoreData
 final class HomeViewModel: HomeViewModelProtocol
 {
     weak var delegate: HomeViewModelDelegate?
-    private let coreDataService: ICoreDataService
+    private let service: ICoreDataService
     
-    init(coreDataService: ICoreDataService)
+    init(service: ICoreDataService)
     {
-        self.coreDataService = coreDataService
+        self.service = service
     }
 }
 
@@ -27,7 +27,7 @@ extension HomeViewModel
     {
         notify(.loading(true))
         
-        coreDataService.fetchArticles { [weak self] result in
+        service.fetchArticles { [weak self] result in
             guard let self = self else { return }
             self.notify(.loading(false))
            
@@ -41,13 +41,13 @@ extension HomeViewModel
     }
     
     func selectAddButton() {
-        let addViewModel = AddArticleViewModel(service: coreDataService)
+        let addViewModel = AddArticleViewModel(service: service)
         delegate?.navigate(to: .add(addViewModel))
     }
     
     func selectArticle(article: Article)
     {
-        let detailViewModel = DetailViewModel(service: coreDataService)
+        let detailViewModel = DetailViewModel(service: service)
         delegate?.navigate(to: .detail(article, detailViewModel))
     }
 }

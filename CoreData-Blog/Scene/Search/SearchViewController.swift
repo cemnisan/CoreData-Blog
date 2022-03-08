@@ -9,6 +9,7 @@ import UIKit
 
 final class SearchViewController: UIViewController
 {
+    private var viewModel: AddArticleViewModelProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
