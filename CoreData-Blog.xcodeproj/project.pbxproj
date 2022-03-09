@@ -58,6 +58,8 @@
 		F882973427D2C2550082B1CC /* Blog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F882973227D2C2550082B1CC /* Blog.xcdatamodeld */; };
 		F882975027D2C6640082B1CC /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882974E27D2C6640082B1CC /* HomeTableViewCell.swift */; };
 		F882975127D2C6640082B1CC /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F882974F27D2C6640082B1CC /* HomeTableViewCell.xib */; };
+		F8DCAECE27D804AF008A51A8 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */; };
+		F8DCAECF27D804AF008A51A8 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,8 @@
 		F882973327D2C2550082B1CC /* Blog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blog.xcdatamodel; sourceTree = "<group>"; };
 		F882974E27D2C6640082B1CC /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		F882974F27D2C6640082B1CC /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +229,7 @@
 		F84DF62627D7A10900FAE031 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				F8DCAECB27D8049B008A51A8 /* Cell */,
 				F84DF62727D7A12200FAE031 /* Search.storyboard */,
 				F84DF62927D7A12D00FAE031 /* SearchViewController.swift */,
 				F84DF62B27D7A13600FAE031 /* SearchViewModel.swift */,
@@ -346,6 +351,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F8DCAECB27D8049B008A51A8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */,
+				F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -405,6 +419,7 @@
 			files = (
 				F807054C27D531BC00755C82 /* AddArticle.storyboard in Resources */,
 				F882972627D2BDC50082B1CC /* Home.storyboard in Resources */,
+				F8DCAECF27D804AF008A51A8 /* SearchTableViewCell.xib in Resources */,
 				F84DF63527D7A2BC00FAE031 /* Profile.storyboard in Resources */,
 				F882971427D2BC9C0082B1CC /* LaunchScreen.storyboard in Resources */,
 				F882975127D2C6640082B1CC /* HomeTableViewCell.xib in Resources */,
@@ -458,6 +473,7 @@
 				F80704D727D4DBC800755C82 /* UITableView+Ex.swift in Sources */,
 				F882972C27D2BF7E0082B1CC /* HomeViewModelContracts.swift in Sources */,
 				F84DF62A27D7A12D00FAE031 /* SearchViewController.swift in Sources */,
+				F8DCAECE27D804AF008A51A8 /* SearchTableViewCell.swift in Sources */,
 				F84DF62E27D7A13F00FAE031 /* SearchViewModelContracts.swift in Sources */,
 				F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */,
 				F84DF60B27D63D1700FAE031 /* ValidateError+Ex.swift in Sources */,

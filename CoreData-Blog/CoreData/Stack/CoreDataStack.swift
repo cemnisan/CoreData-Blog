@@ -11,7 +11,8 @@ final class CoreDataStack
 {
     private let modelName: String
     
-    init(modelName: String) {
+    init(modelName: String)
+    {
         self.modelName = modelName
     }
     

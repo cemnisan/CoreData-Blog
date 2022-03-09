@@ -12,7 +12,8 @@ enum SelectBookMark
     case bookMark
     case bookMarkFill
     
-    var selectedBookMark: String {
+    var selectedBookMark: String
+    {
         switch self {
         case .bookMark:
             return "bookmark"

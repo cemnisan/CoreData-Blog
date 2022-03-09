@@ -17,21 +17,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World, this is the Search page." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hxY-Yy-zUh">
-                                <rect key="frame" x="70" y="437.5" width="274.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="FHi-fY-zPe">
+                                <rect key="frame" x="8" y="140" width="398" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WzD-5h-O7c">
+                                <rect key="frame" x="0.0" y="191" width="414" height="671"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchCell" rowHeight="210" id="SrS-mO-XcK">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="210"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SrS-mO-XcK" id="FtB-Vd-8vr">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="210"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hxY-Yy-zUh" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="tif-qO-Mfw"/>
-                            <constraint firstItem="hxY-Yy-zUh" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="yFI-ry-trw"/>
+                            <constraint firstItem="FHi-fY-zPe" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="8" id="9ef-QB-SSR"/>
+                            <constraint firstItem="WzD-5h-O7c" firstAttribute="top" secondItem="FHi-fY-zPe" secondAttribute="bottom" id="OII-xB-3uG"/>
+                            <constraint firstItem="WzD-5h-O7c" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="bQ6-b8-HEd"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WzD-5h-O7c" secondAttribute="trailing" id="ffA-ah-dbo"/>
+                            <constraint firstItem="WzD-5h-O7c" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="r8b-tY-bEm"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FHi-fY-zPe" secondAttribute="trailing" constant="8" id="sQE-AR-Wey"/>
+                            <constraint firstItem="FHi-fY-zPe" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xjQ-aE-o81"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="qeY-Qa-OAZ"/>
+                    <connections>
+                        <outlet property="searchBar" destination="FHi-fY-zPe" id="1FT-2n-ok9"/>
+                        <outlet property="tableView" destination="WzD-5h-O7c" id="xRP-29-qJT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -42,8 +63,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Gd-4q-Kgn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rss-wO-wI2">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Rss-wO-wI2">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
