@@ -11,8 +11,8 @@ import UIKit
 final class SearchViewController: UIViewController
 {
     // MARK: - IBOutlets
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var searchBar: UISearchBar!
 
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
@@ -81,7 +81,6 @@ extension SearchViewController: UITableViewDataSource
         let cell    = tableView.dequeueReusableCell(withIdentifier: K.TableView.searchCell,
                                                     for: indexPath) as! SearchTableViewCell
         let article = foundArticles[indexPath.row]
-        
         cell.configureCell(with: article)
 
         return cell

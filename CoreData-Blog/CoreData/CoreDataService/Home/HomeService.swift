@@ -30,6 +30,7 @@ extension HomeService: IHomeService
     {
         do {
             let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            let dateSort: NSSortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
             let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
             
             fetchRequest.sortDescriptors = [reversedDate]
@@ -51,28 +52,37 @@ extension HomeService: IHomeService
         
         article.title       = title
         article.content     = content
+        article.isFavorite  = false
+        article.id          = UUID()
         article.createdDate = Date()
         article.author      = author
-        article.isFavorite  = false
         
         stack.saveContext()
     }
     
-    // Todo: use article.id instead of article.title
     func addFavorites(with isFavorite: Bool,
-                      _ article: Article) throws
+                      _ id: UUID,
+                      completion: @escaping (Result<Bool>) -> Void)
+
     {
+        let idPredicate = NSPredicate(
+            format: "%K = %@",
+            (\Article.id)._kvcKeyPathString!,
+            id as NSUUID)
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        let namePredicate: NSPredicate = NSPredicate(format: "%K = %@", #keyPath(Article.title), article.title!)
-        fetchRequest.predicate = namePredicate
+        
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = idPredicate
         
         do {
             let foundArticle = try stack.managedContext.fetch(fetchRequest)
-
-            foundArticle[0].isFavorite = !foundArticle[0].isFavorite
+            foundArticle[0].isFavorite = isFavorite
+      
             stack.saveContext()
+            
+            foundArticle[0].isFavorite ? completion(.success(true)) : completion(.success(false))
         } catch {
-            print(error)
+            completion(.failure(error))
         }
     }
 }

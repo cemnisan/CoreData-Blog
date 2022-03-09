@@ -38,6 +38,8 @@ extension DetailViewController
 {
     private func configureUI()
     {
+        viewModel.delegate       = self
+        
         userPhotoView.makeRoundedCircle()
         articleContentPhoto.makeRounded()
         
@@ -67,6 +69,22 @@ extension DetailViewController
         isFavorite = !isFavorite
         configureBookMark(with: isFavorite)
 
-        viewModel.addFavorites(isFavorite: isFavorite, article: article!)
+        if let id = article?.id
+        {
+            viewModel.addFavorites(isFavorite: isFavorite, id: id)
+        }        
+    }
+}
+
+extension DetailViewController: DetailViewModelDelegate
+{
+    func handleOutput(_ output: DetailViewModelOutput)
+    {
+        switch output {
+        case .isFavorited(.success(let isFavorited)):
+            print(isFavorited)
+        case .isFavorited(.failure(let error)):
+            print(error)
+        }
     }
 }

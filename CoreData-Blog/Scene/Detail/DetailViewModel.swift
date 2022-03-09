@@ -7,7 +7,8 @@
 
 import Foundation
 
-final class DetailViewModel: DetailViewModelProtocol
+// MARK: - Initialize
+final class DetailViewModel
 {
     weak var delegate: DetailViewModelDelegate?
     private var service: IHomeService
@@ -18,14 +19,31 @@ final class DetailViewModel: DetailViewModelProtocol
     }
 }
 
+// MARK: - View Model Protocol
+extension DetailViewModel: DetailViewModelProtocol
+{
+    func addFavorites(isFavorite: Bool,
+                      id: UUID)
+    {
+        service.addFavorites(with: isFavorite,
+                             id) { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let isFavorited):
+                self.notify(with: .isFavorited(.success(isFavorited)))
+            case .failure(let error):
+                self.notify(with: .isFavorited(.failure(error)))
+            }
+        }
+    }
+}
+
+// MARK: - Helpers
 extension DetailViewModel
 {
-    func addFavorites(isFavorite: Bool, article: Article)
+    private func notify(with output: DetailViewModelOutput)
     {
-        do {
-            try service.addFavorites(with: isFavorite, article)
-        } catch let error as NSError {
-            print(error)
-        }
+        delegate?.handleOutput(output)
     }
 }

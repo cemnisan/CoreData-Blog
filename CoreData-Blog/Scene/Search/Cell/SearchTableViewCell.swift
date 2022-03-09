@@ -11,10 +11,10 @@ import UIKit
 final class SearchTableViewCell: UITableViewCell
 {
     // MARK: - IBOutlets
-    @IBOutlet weak var userProfilePhoto: UIImageView!
-    @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var articleTitleLabel: UILabel!
-    @IBOutlet weak var bookMarkButton: UIButton!
+    @IBOutlet private weak var userProfilePhoto: UIImageView!
+    @IBOutlet private weak var userNameLabel: UILabel!
+    @IBOutlet private weak var articleTitleLabel: UILabel!
+    @IBOutlet private weak var bookMarkButton: UIButton!
     
     override func awakeFromNib()
     {
