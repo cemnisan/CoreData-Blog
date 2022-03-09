@@ -9,12 +9,17 @@ import Foundation
 
 protocol SearchViewModelProtocol
 {
+    var delegate: SearchViewModelDelegate? { get set }
+    func getArticles(with query: String)
 }
 
-protocol SearchViewModelDelegate
+protocol SearchViewModelDelegate: AnyObject
 {
+    func handleOutput(_ output: SearchViewModelOutput)
 }
 
 enum SearchViewModelOutput
 {
+    case foundArticles([Article])
+    case notFound(Error)
 }

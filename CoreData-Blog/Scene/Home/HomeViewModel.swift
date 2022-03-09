@@ -12,9 +12,9 @@ import CoreData
 final class HomeViewModel: HomeViewModelProtocol
 {
     weak var delegate: HomeViewModelDelegate?
-    private let service: ICoreDataService
+    private let service: IHomeService
     
-    init(service: ICoreDataService)
+    init(service: IHomeService)
     {
         self.service = service
     }

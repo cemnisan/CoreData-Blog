@@ -26,9 +26,9 @@ final class SearchTableViewCell: UITableViewCell
 // MARK: - Configure
 extension SearchTableViewCell
 {
-    func configureCell()
+    func configureCell(with article: Article)
     {
-        userNameLabel.text     = "Cem Nisan"
-        articleTitleLabel.text = "What It's to Slowly Lose Your Eyesight as a Designer"
+        userNameLabel.text     = article.author?.userName
+        articleTitleLabel.text = article.title
     }
 }

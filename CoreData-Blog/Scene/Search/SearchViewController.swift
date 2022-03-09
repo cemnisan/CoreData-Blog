@@ -14,6 +14,10 @@ final class SearchViewController: UIViewController
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
 
+    // MARK: - Properties
+    var viewModel: SearchViewModelProtocol!
+    var foundArticles: [Article] = []
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -27,41 +31,74 @@ extension SearchViewController
 {
     private func configureUI()
     {
-        searchBar.delegate    = self
-        searchBar.placeholder = "Search"
+        searchBar.delegate       = self
         
-        tableView.dataSource  = self
-        tableView.delegate    = self
-        tableView.register(nibName: K.TableView.searchNibName, cell: K.TableView.searchCell)
+        tableView.register(nibName: K.TableView.searchNibName,
+                           cell: K.TableView.searchCell)
+        tableView.dataSource     = self
+        tableView.delegate       = self
+        tableView.separatorStyle = .none
+        
+        viewModel.delegate       = self
     }
 }
 
+// MARK: - ViewModel Delegate
+extension SearchViewController: SearchViewModelDelegate
+{
+    func handleOutput(_ output: SearchViewModelOutput)
+    {
+        switch output {
+        case .foundArticles(let articles):
+            self.foundArticles = articles
+            tableView.reloadData()
+        case .notFound(let error):
+            print(error)
+        }
+    }
+}
+
+// MARK: - UITableView Data Source
 extension SearchViewController: UITableViewDataSource
 {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int
     {
-        return 4
+        return foundArticles.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.searchCell, for: indexPath) as! SearchTableViewCell
-        cell.configureCell()
+        let cell    = tableView.dequeueReusableCell(withIdentifier: K.TableView.searchCell,
+                                                    for: indexPath) as! SearchTableViewCell
+        let article = foundArticles[indexPath.row]
+        
+        cell.configureCell(with: article)
 
         return cell
     }
 }
 
+// UITableView Delegate
 extension SearchViewController: UITableViewDelegate
 {
 }
 
+// MARK: - UISearchBar Delegate
 extension SearchViewController: UISearchBarDelegate
 {
     // MARK: - Text Changes
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String)
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String)
     {
-        guard searchText != "" else { return }
+        guard searchText != "" else
+        {
+            foundArticles = []
+            tableView.reloadData()
+            return
+        }
+        viewModel.getArticles(with: searchText)
     }
     
     // MARK: - Search Button Pressed

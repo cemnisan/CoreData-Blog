@@ -13,7 +13,9 @@ final class SearchBuilder
     {
         let storyboard = UIStoryboard(name: K.Storyboard.search, bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.search) as! SearchViewController
+        
         viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 2)
+        viewController.viewModel = SearchViewModel(service: SearchService(stack: app.stack))
         
         return UINavigationController(rootViewController: viewController)
     }

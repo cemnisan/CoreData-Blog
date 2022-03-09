@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class CoreDataService
+final class HomeService
 {
     private let stack: CoreDataStack
     
@@ -36,7 +36,7 @@ final class CoreDataService
     }
 }
 
-extension CoreDataService: ICoreDataService
+extension HomeService: IHomeService
 {
     func fetchArticles(completion: @escaping (Result<NSFetchedResultsController<Article>>) -> Void) {
         do {

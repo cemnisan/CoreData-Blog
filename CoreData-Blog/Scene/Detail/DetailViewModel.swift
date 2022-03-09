@@ -10,9 +10,9 @@ import Foundation
 final class DetailViewModel: DetailViewModelProtocol
 {
     weak var delegate: DetailViewModelDelegate?
-    private var service: ICoreDataService
+    private var service: IHomeService
     
-    init(service: ICoreDataService)
+    init(service: IHomeService)
     {
         self.service = service
     }

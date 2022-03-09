@@ -15,7 +15,7 @@ final class HomeBuilder
         let viewController = storyboard.instantiateViewController(withIdentifier: K.Storyboard.home) as! HomeViewController
         
         viewController.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
-        viewController.viewModel = HomeViewModel(service: CoreDataService(stack: app.stack))
+        viewController.viewModel = HomeViewModel(service: HomeService(stack: app.stack))
         
         return UINavigationController(rootViewController: viewController)
     }
