@@ -16,7 +16,7 @@ final class HomeViewController: BaseViewController
     
     // MARK: - Properties
     var viewModel: HomeViewModelProtocol!
-    var fetchedResultsController: NSFetchedResultsController<Article>?
+    var articles: [Article] = []
     
     // MARK: - Lifecycles
     override func viewDidLoad()
@@ -85,8 +85,8 @@ extension HomeViewController: HomeViewModelDelegate
     func handleOutput(_ output: HomeViewModelOutput)
     {
         switch output {
-        case .showArticlesVia(let fetchedResultsController):
-            self.fetchedResultsController = fetchedResultsController
+        case .showArticlesVia(let articles):
+            self.articles = articles
             tableView.reloadData()
         case .loading(let isLoading):
             configureIndicatorView(with: isLoading)
@@ -102,8 +102,7 @@ extension HomeViewController: UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int
     {
-        guard let sectionInfo = fetchedResultsController?.sections?[section] else { return 0 }
-        return sectionInfo.numberOfObjects
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -111,8 +110,8 @@ extension HomeViewController: UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.homeCell,
                                                  for: indexPath) as! HomeTableViewCell
-        let article = fetchedResultsController?.object(at: indexPath)
-        cell.configureCell(with: article!)
+        let article = articles[indexPath.row]
+        cell.configureCell(with: article)
         
         return cell
     }
@@ -124,9 +123,8 @@ extension HomeViewController: UITableViewDelegate
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)
     {
-        let selectedArticle = fetchedResultsController?.object(at: indexPath)
-        guard let article = selectedArticle else { return }
+        let article = articles[indexPath.row]
         
-        viewModel.selectArticle(article: article)
+        viewModel.selectedArticle(article: article)
     }
 }

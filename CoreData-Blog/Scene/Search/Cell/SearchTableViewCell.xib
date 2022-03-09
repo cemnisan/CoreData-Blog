@@ -41,10 +41,21 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sWn-Ub-R5g">
+                        <rect key="frame" x="350" y="18" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Nzl-zQ-NrQ"/>
+                            <constraint firstAttribute="width" constant="30" id="sK5-Cl-AVZ"/>
+                        </constraints>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" backgroundImage="bookmark" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="P4D-jg-aLO" firstAttribute="top" secondItem="BI0-yt-94d" secondAttribute="bottom" constant="8" symbolic="YES" id="1WS-dA-aZL"/>
+                    <constraint firstAttribute="trailing" secondItem="sWn-Ub-R5g" secondAttribute="trailing" constant="20" symbolic="YES" id="6ZT-MR-JWe"/>
                     <constraint firstItem="JhA-lQ-8fr" firstAttribute="top" secondItem="P4D-jg-aLO" secondAttribute="bottom" constant="8" symbolic="YES" id="8WW-7g-g5w"/>
+                    <constraint firstItem="sWn-Ub-R5g" firstAttribute="top" secondItem="QaV-eh-stF" secondAttribute="top" constant="18" id="Ej4-UF-uaj"/>
                     <constraint firstItem="UbS-gk-DZa" firstAttribute="leading" secondItem="BI0-yt-94d" secondAttribute="trailing" constant="8" symbolic="YES" id="Tqe-L5-T0N"/>
                     <constraint firstItem="BI0-yt-94d" firstAttribute="top" secondItem="QaV-eh-stF" secondAttribute="top" constant="8" id="WAl-CZ-Na4"/>
                     <constraint firstItem="P4D-jg-aLO" firstAttribute="trailing" secondItem="QaV-eh-stF" secondAttribute="trailingMargin" id="cen-TD-v5w"/>
@@ -54,10 +65,12 @@
                     <constraint firstItem="BI0-yt-94d" firstAttribute="leading" secondItem="QaV-eh-stF" secondAttribute="leading" constant="20" symbolic="YES" id="ryd-4Q-iDT"/>
                     <constraint firstItem="JhA-lQ-8fr" firstAttribute="bottom" secondItem="QaV-eh-stF" secondAttribute="bottomMargin" id="vJz-oT-zeD"/>
                     <constraint firstItem="P4D-jg-aLO" firstAttribute="top" secondItem="UbS-gk-DZa" secondAttribute="bottom" constant="16" id="wvD-1c-eDm"/>
+                    <constraint firstItem="P4D-jg-aLO" firstAttribute="top" secondItem="sWn-Ub-R5g" secondAttribute="bottom" constant="8" symbolic="YES" id="xrE-Oj-ulL"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="articleTitleLabel" destination="P4D-jg-aLO" id="bZ7-Qk-dt4"/>
+                <outlet property="bookMarkButton" destination="sWn-Ub-R5g" id="4iU-Eb-PQU"/>
                 <outlet property="userNameLabel" destination="UbS-gk-DZa" id="ZWX-cF-JDm"/>
                 <outlet property="userProfilePhoto" destination="BI0-yt-94d" id="WPe-Qp-PDk"/>
             </connections>
@@ -65,6 +78,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="userPic" width="200" height="200"/>
     </resources>
 </document>

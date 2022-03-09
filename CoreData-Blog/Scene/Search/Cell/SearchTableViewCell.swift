@@ -14,6 +14,7 @@ final class SearchTableViewCell: UITableViewCell
     @IBOutlet weak var userProfilePhoto: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var articleTitleLabel: UILabel!
+    @IBOutlet weak var bookMarkButton: UIButton!
     
     override func awakeFromNib()
     {
@@ -30,5 +31,9 @@ extension SearchTableViewCell
     {
         userNameLabel.text     = article.author?.userName
         articleTitleLabel.text = article.title
+        
+        article.isFavorite ?
+            bookMarkButton.setBookMark(bookMark: .bookMarkFill) :
+            bookMarkButton.setBookMark(bookMark: .bookMark)
     }
 }

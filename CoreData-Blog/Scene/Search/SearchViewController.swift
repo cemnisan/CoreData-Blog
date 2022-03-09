@@ -16,7 +16,7 @@ final class SearchViewController: UIViewController
 
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
-    var foundArticles: [Article] = []
+    private var foundArticles: [Article] = []
     
     override func viewDidLoad()
     {
@@ -56,6 +56,14 @@ extension SearchViewController: SearchViewModelDelegate
             print(error)
         }
     }
+    
+    func navigate(to router: SearchViewModelRouter) {
+        switch router {
+        case .detail(let article, let viewModel):
+            let detailViewController = DetailBuilder.make(with: article, viewModel)
+            show(detailViewController, sender: nil)
+        }
+    }
 }
 
 // MARK: - UITableView Data Source
@@ -83,6 +91,12 @@ extension SearchViewController: UITableViewDataSource
 // UITableView Delegate
 extension SearchViewController: UITableViewDelegate
 {
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath)
+    {
+        let article = foundArticles[indexPath.row]
+        viewModel.selectedArticle(article: article)
+    }
 }
 
 // MARK: - UISearchBar Delegate

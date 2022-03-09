@@ -6,14 +6,13 @@
 //
 
 import Foundation
-import CoreData
 
 protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
     func load()
     func selectAddButton()
-    func selectArticle(article: Article)
+    func selectedArticle(article: Article)
 }
 
 protocol HomeViewModelDelegate: AnyObject
@@ -31,6 +30,6 @@ enum HomeViewModelRouter
 enum HomeViewModelOutput
 {
     case loading(Bool)
-    case showArticlesVia(NSFetchedResultsController<Article>)
+    case showArticlesVia([Article])
     case showError(Error)
 }

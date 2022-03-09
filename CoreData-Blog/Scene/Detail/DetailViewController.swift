@@ -66,6 +66,7 @@ extension DetailViewController
     {
         isFavorite = !isFavorite
         configureBookMark(with: isFavorite)
+
         viewModel.addFavorites(isFavorite: isFavorite, article: article!)
     }
 }

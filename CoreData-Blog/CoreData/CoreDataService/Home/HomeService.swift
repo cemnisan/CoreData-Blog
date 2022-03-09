@@ -12,24 +12,12 @@ final class HomeService
 {
     private let stack: CoreDataStack
     
-    private lazy var fetchedResultsController: NSFetchedResultsController<Article> = {
-        
-        let fetchedRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        
-        let dateSort = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
-        let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
-        
-        fetchedRequest.sortDescriptors = [reversedDate]
-        
-        let fetchedResultsController = NSFetchedResultsController(
-            fetchRequest: fetchedRequest,
-            managedObjectContext: stack.managedContext,
-            sectionNameKeyPath: nil,
-            cacheName: "Articles"
-        )
-        return fetchedResultsController
+    private lazy var dateSort: NSSortDescriptor = {
+        return NSSortDescriptor(
+            key: #keyPath(Article.createdDate),
+            ascending: true)
     }()
-    
+
     init(stack: CoreDataStack)
     {
         self.stack = stack
@@ -38,16 +26,23 @@ final class HomeService
 
 extension HomeService: IHomeService
 {
-    func fetchArticles(completion: @escaping (Result<NSFetchedResultsController<Article>>) -> Void) {
+    func fetchArticles(completion: @escaping (Result<[Article]>) -> Void)
+    {
         do {
-            try fetchedResultsController.performFetch()
-            completion(.success(fetchedResultsController))
+            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+            let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
+            
+            fetchRequest.sortDescriptors = [reversedDate]
+            
+            let articles = try stack.managedContext.fetch(fetchRequest)
+            completion(.success(articles))
         } catch let error as NSError {
             completion(.failure(error))
         }
     }
     
-    func addArticle(with title: String, _ content: String) throws
+    func addArticle(with title: String,
+                    _ content: String) throws
     {
         let article = Article(context: stack.managedContext)
         let author  = Author(context: stack.managedContext)
@@ -63,12 +58,21 @@ extension HomeService: IHomeService
         stack.saveContext()
     }
     
-    func addFavorites(with isFavorite: Bool, _ article: Article) throws
+    // Todo: use article.id instead of article.title
+    func addFavorites(with isFavorite: Bool,
+                      _ article: Article) throws
     {
-        let articleIndexPath    = fetchedResultsController.indexPath(forObject: article)
-        let foundArticle        = fetchedResultsController.object(at: articleIndexPath!)
-        foundArticle.isFavorite = isFavorite
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let namePredicate: NSPredicate = NSPredicate(format: "%K = %@", #keyPath(Article.title), article.title!)
+        fetchRequest.predicate = namePredicate
         
-        stack.saveContext()
+        do {
+            let foundArticle = try stack.managedContext.fetch(fetchRequest)
+
+            foundArticle[0].isFavorite = !foundArticle[0].isFavorite
+            stack.saveContext()
+        } catch {
+            print(error)
+        }
     }
 }

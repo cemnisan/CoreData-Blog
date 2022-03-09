@@ -32,8 +32,8 @@ extension HomeViewModel
             self.notify(.loading(false))
            
             switch result {
-            case .success(let fetchController):
-                self.notify(.showArticlesVia(fetchController))
+            case .success(let articles):
+                self.notify(.showArticlesVia(articles))
             case .failure(let error):
                 self.notify(.showError(error))
             }
@@ -45,7 +45,7 @@ extension HomeViewModel
         delegate?.navigate(to: .add(addViewModel))
     }
     
-    func selectArticle(article: Article)
+    func selectedArticle(article: Article)
     {
         let detailViewModel = DetailViewModel(service: service)
         delegate?.navigate(to: .detail(article, detailViewModel))

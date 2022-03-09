@@ -35,6 +35,11 @@ extension SearchViewModel: SearchViewModelProtocol
             }
         }
     }
+    
+    func selectedArticle(article: Article) {
+        let viewModel = DetailViewModel(service: HomeService(stack: app.stack))
+        delegate?.navigate(to: .detail(article, viewModel))
+    }
 }
 
 // MARK: - Helpers
