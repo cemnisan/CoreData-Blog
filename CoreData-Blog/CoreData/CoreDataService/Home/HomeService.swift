@@ -8,7 +8,12 @@
 import Foundation
 import CoreData
 
-final class HomeService: BaseService { }
+final class HomeService: BaseService
+{
+    override init(stack: CoreDataStack) {
+        super.init(stack: stack)
+    }
+}
 
 extension HomeService: IHomeService
 {

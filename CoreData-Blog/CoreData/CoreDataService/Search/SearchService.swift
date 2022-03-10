@@ -7,10 +7,30 @@
 
 import CoreData
 
-final class SearchService: BaseService { }
+final class SearchService: BaseService
+{
+    override init(stack: CoreDataStack) {
+        super.init(stack: stack)
+    }
+}
 
 extension SearchService: ISearchService
 {
+    func getArticles(with category: String,
+                     completion: @escaping (Result<[Article]>) -> Void)
+    {
+        let categoryPredicate = NSPredicate(format: "category = %@", category)
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        fetchRequest.predicate = categoryPredicate
+        
+        do {
+            let articles = try stack.managedContext.fetch(fetchRequest)
+            completion(.success(articles))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
     func getArticles(with query: String,
                      _ selectedCategory: String,
                      completion: @escaping (Result<[Article]>) -> Void)
@@ -30,21 +50,6 @@ extension SearchService: ISearchService
             let articles = try stack.managedContext.fetch(fetchRequest)
             completion(.success(articles))
         } catch let error {
-            completion(.failure(error))
-        }
-    }
-    
-    func getArticles(with category: String,
-                     completion: @escaping (Result<[Article]>) -> Void)
-    {
-        let categoryPredicate = NSPredicate(format: "category = %@", category)
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        fetchRequest.predicate = categoryPredicate
-        
-        do {
-            let articles = try stack.managedContext.fetch(fetchRequest)
-            completion(.success(articles))
-        } catch {
             completion(.failure(error))
         }
     }

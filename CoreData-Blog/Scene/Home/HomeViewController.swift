@@ -149,8 +149,7 @@ extension HomeViewController: UITableViewDelegate
 extension HomeViewController: IHomeTableViewCell
 {
     func bookMarkButtonWillPressed(on cell: HomeTableViewCell,
-                                   with isFavorite: Bool,
-                                   _ id: UUID)
+                                   with id: UUID)
     {
         viewModel.addFavorites(with: id)
     }

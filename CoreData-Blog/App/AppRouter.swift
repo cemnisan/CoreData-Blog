@@ -21,6 +21,7 @@ extension AppRouter
 {
     // If the system version of device is greater than 13.0*
     // this func execute on sceneDelegate
+    @available(iOS 13.0, *)
     func start(with windowScene: UIWindowScene)
     {
         let rootViewController    = createTabBar()

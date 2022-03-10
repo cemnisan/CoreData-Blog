@@ -39,6 +39,8 @@
 		F84DF63927D7A2E800FAE031 /* ProfileBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63827D7A2E800FAE031 /* ProfileBuilder.swift */; };
 		F84DF63B27D7A2F000FAE031 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */; };
 		F84DF63D27D7A2F900FAE031 /* ProfileViewModelContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */; };
+		F86B95BA27DA5E18000512B1 /* IProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B95B927DA5E18000512B1 /* IProfileService.swift */; };
+		F86B95BC27DA5E45000512B1 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86B95BB27DA5E45000512B1 /* ProfileService.swift */; };
 		F882970827D2BC9B0082B1CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970727D2BC9B0082B1CC /* AppDelegate.swift */; };
 		F882970A27D2BC9B0082B1CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970927D2BC9B0082B1CC /* SceneDelegate.swift */; };
 		F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882970B27D2BC9B0082B1CC /* HomeViewController.swift */; };
@@ -101,6 +103,8 @@
 		F84DF63827D7A2E800FAE031 /* ProfileBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBuilder.swift; sourceTree = "<group>"; };
 		F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelContracts.swift; sourceTree = "<group>"; };
+		F86B95B927DA5E18000512B1 /* IProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IProfileService.swift; sourceTree = "<group>"; };
+		F86B95BB27DA5E45000512B1 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		F882970427D2BC9B0082B1CC /* CoreData-Blog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CoreData-Blog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F882970727D2BC9B0082B1CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F882970927D2BC9B0082B1CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 		F807053E27D5028700755C82 /* CoreDataService */ = {
 			isa = PBXGroup;
 			children = (
+				F86B95B827DA5E0A000512B1 /* Profile */,
 				F8FB335727DA3F6E00528BEB /* Base */,
 				F8E05A1627D8D9B900E1E022 /* Search */,
 				F8E05A1227D8D99F00E1E022 /* Home */,
@@ -262,6 +267,15 @@
 				F84DF63827D7A2E800FAE031 /* ProfileBuilder.swift */,
 				F84DF63A27D7A2F000FAE031 /* ProfileViewModel.swift */,
 				F84DF63C27D7A2F900FAE031 /* ProfileViewModelContracts.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		F86B95B827DA5E0A000512B1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				F86B95B927DA5E18000512B1 /* IProfileService.swift */,
+				F86B95BB27DA5E45000512B1 /* ProfileService.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -483,6 +497,7 @@
 				F882972227D2BD780082B1CC /* AppRouter.swift in Sources */,
 				F80704DE27D4E2AA00755C82 /* BaseViewController.swift in Sources */,
 				F8FB335427DA372400528BEB /* BaseService.swift in Sources */,
+				F86B95BC27DA5E45000512B1 /* ProfileService.swift in Sources */,
 				F84DF62C27D7A13600FAE031 /* SearchViewModel.swift in Sources */,
 				F84DF60927D63C9D00FAE031 /* ValidateError.swift in Sources */,
 				F84DF63B27D7A2F000FAE031 /* ProfileViewModel.swift in Sources */,
@@ -498,6 +513,7 @@
 				F84DF61B27D6AB4200FAE031 /* SelectBookMark.swift in Sources */,
 				F807054927D50A2F00755C82 /* Result.swift in Sources */,
 				F882975027D2C6640082B1CC /* HomeTableViewCell.swift in Sources */,
+				F86B95BA27DA5E18000512B1 /* IProfileService.swift in Sources */,
 				F84DF61527D67FD400FAE031 /* DetailViewModel.swift in Sources */,
 				F8E05A1A27D8D9C900E1E022 /* SearchService.swift in Sources */,
 				F84DF60D27D63F7800FAE031 /* DataFormatter+Ex.swift in Sources */,

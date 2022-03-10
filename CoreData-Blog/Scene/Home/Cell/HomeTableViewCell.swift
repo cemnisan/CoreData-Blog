@@ -10,8 +10,7 @@ import UIKit
 protocol IHomeTableViewCell: AnyObject
 {
     func bookMarkButtonWillPressed(on cell: HomeTableViewCell,
-                                   with isFavorite: Bool,
-                                   _ id: UUID)
+                                   with id: UUID)
 }
 
 final class HomeTableViewCell: UITableViewCell
@@ -68,6 +67,6 @@ extension HomeTableViewCell
     {
         isFavorite = !isFavorite!
         configureBookMark(isFavorited: isFavorite!)
-        delegate?.bookMarkButtonWillPressed(on: self, with: isFavorite!, id!)
+        delegate?.bookMarkButtonWillPressed(on: self, with: id!)
     }
 }

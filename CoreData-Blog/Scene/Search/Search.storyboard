@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WzD-5h-O7c">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="128" width="414" height="734"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchCell" rowHeight="210" id="SrS-mO-XcK">
@@ -31,14 +31,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommend For You" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3Y-Pc-zXI">
+                                <rect key="frame" x="20" y="96" width="189.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="WzD-5h-O7c" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="1ua-g9-yG5"/>
+                            <constraint firstItem="J3Y-Pc-zXI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="2yA-0d-DUP"/>
                             <constraint firstItem="WzD-5h-O7c" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="WFs-tZ-iWK"/>
                             <constraint firstItem="WzD-5h-O7c" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="XOk-D3-pbC"/>
                             <constraint firstItem="WzD-5h-O7c" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="c0c-hD-med"/>
+                            <constraint firstItem="J3Y-Pc-zXI" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="qj7-q9-yk2"/>
+                            <constraint firstItem="WzD-5h-O7c" firstAttribute="top" secondItem="J3Y-Pc-zXI" secondAttribute="bottom" constant="8" symbolic="YES" id="rTa-iY-RiC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qeY-Qa-OAZ"/>

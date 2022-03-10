@@ -17,21 +17,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World, this is the Profile page." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O07-A5-X2b">
-                                <rect key="frame" x="72" y="437.5" width="270" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Favorite Articles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-ev-j1c">
+                                <rect key="frame" x="18" y="110" width="195" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3yj-S5-5DG">
+                                <rect key="frame" x="18" y="150" width="378" height="32"/>
+                                <segments>
+                                    <segment title="Software"/>
+                                    <segment title="Hardware"/>
+                                    <segment title="Swift"/>
+                                    <segment title="Kotlin"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentControlPressed:" destination="Y6W-OH-hqX" eventType="valueChanged" id="NhY-Y5-1df"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bro-1e-5e7">
+                                <rect key="frame" x="0.0" y="189" width="414" height="673"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeCell" id="sPn-ww-ds9">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sPn-ww-ds9" id="tuX-zN-v9S">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="O07-A5-X2b" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="7z0-Av-0Qo"/>
-                            <constraint firstItem="O07-A5-X2b" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="QWR-RA-btU"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3yj-S5-5DG" secondAttribute="trailing" constant="18" id="H49-Db-nwV"/>
+                            <constraint firstItem="2Tl-ev-j1c" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="22" id="NgW-0f-yZ7"/>
+                            <constraint firstItem="Bro-1e-5e7" firstAttribute="top" secondItem="3yj-S5-5DG" secondAttribute="bottom" constant="8" id="OrI-Hx-3rT"/>
+                            <constraint firstItem="Bro-1e-5e7" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="QeX-xP-M0J"/>
+                            <constraint firstItem="3yj-S5-5DG" firstAttribute="top" secondItem="2Tl-ev-j1c" secondAttribute="bottom" constant="16" id="T9p-0y-ETc"/>
+                            <constraint firstItem="Bro-1e-5e7" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="UXG-42-onD"/>
+                            <constraint firstItem="3yj-S5-5DG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="18" id="iKC-MK-guk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Bro-1e-5e7" secondAttribute="trailing" id="kzV-n9-w5E"/>
+                            <constraint firstItem="2Tl-ev-j1c" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="18" id="wrQ-QJ-2BJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="gNX-VJ-kgI"/>
+                    <connections>
+                        <outlet property="categorySegmentControl" destination="3yj-S5-5DG" id="yTZ-Dm-377"/>
+                        <outlet property="tableView" destination="Bro-1e-5e7" id="sBK-wn-tdD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
