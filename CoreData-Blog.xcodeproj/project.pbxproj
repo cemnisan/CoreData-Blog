@@ -63,6 +63,7 @@
 		F8E05A2527D9644200E1E022 /* Article+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A2327D9644200E1E022 /* Article+CoreDataClass.swift */; };
 		F8E05A2627D9644200E1E022 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A2427D9644200E1E022 /* Article+CoreDataProperties.swift */; };
 		F8E05A2827D9697400E1E022 /* SelectCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A2727D9697400E1E022 /* SelectCategory.swift */; };
+		F8FB335227DA2C2F00528BEB /* UISearchController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB335127DA2C2F00528BEB /* UISearchController+Ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +125,7 @@
 		F8E05A2327D9644200E1E022 /* Article+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F8E05A2427D9644200E1E022 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F8E05A2727D9697400E1E022 /* SelectCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategory.swift; sourceTree = "<group>"; };
+		F8FB335127DA2C2F00528BEB /* UISearchController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchController+Ex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				F84DF60A27D63D1700FAE031 /* ValidateError+Ex.swift */,
 				F84DF60C27D63F7800FAE031 /* DataFormatter+Ex.swift */,
 				F84DF62427D7985000FAE031 /* UIButton+Ex.swift */,
+				F8FB335127DA2C2F00528BEB /* UISearchController+Ex.swift */,
 			);
 			path = Extenstion;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				F84DF61527D67FD400FAE031 /* DetailViewModel.swift in Sources */,
 				F8E05A1A27D8D9C900E1E022 /* SearchService.swift in Sources */,
 				F84DF60D27D63F7800FAE031 /* DataFormatter+Ex.swift in Sources */,
+				F8FB335227DA2C2F00528BEB /* UISearchController+Ex.swift in Sources */,
 				F8E05A2227D9336D00E1E022 /* Author+CoreDataProperties.swift in Sources */,
 				F8E05A2827D9697400E1E022 /* SelectCategory.swift in Sources */,
 				F84DF62527D7985000FAE031 /* UIButton+Ex.swift in Sources */,

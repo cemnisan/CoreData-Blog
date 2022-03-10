@@ -12,15 +12,14 @@ final class SearchViewController: UIViewController
 {
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var searchBar: UISearchBar!
-    @IBOutlet private weak var segmentControl: UISegmentedControl!
     
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
+    private lazy var searchController = UISearchController(searchResultsController: nil)
     private var foundArticles: [Article] = []
     private var foundArticlesWithCategory: [Article] = []
     private var category = "Software"
-    
+
     // MARK: - Lifecycles
     override func viewDidLoad()
     {
@@ -32,8 +31,8 @@ final class SearchViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-        
-        fetchArticles(with: category)
+ 
+        viewModel.getArticles(category: category)
     }
     
     override func viewDidDisappear(_ animated: Bool)
@@ -44,42 +43,23 @@ final class SearchViewController: UIViewController
     }
 }
 
-// MARK: - IBActions
-extension SearchViewController
-{
-    @IBAction func segmentControlPressed(_ sender: UISegmentedControl)
-    {
-        guard let category = sender.titleForSegment(at: sender.selectedSegmentIndex) else { return }
-        self.category = category
-        
-        let selectCategory = SelectCategory.selectSegmentControl(with: category)
-        let selectedCategory = selectCategory.category
-        
-        fetchArticles(with: selectedCategory)
-    }
-    
-    private func fetchArticles(with selectedCategory: String)
-    {
-        viewModel.getArticles(category: selectedCategory)
-    }
-}
-
 // MARK: - Configure
 extension SearchViewController
 {
     private func configureUI()
     {
-        configureViewModel()
         configureTableView()
-        configureSearchBar()
+        configureViewModel()
+        configureSearchController()
     }
     
     private func configureTableView()
     {
         tableView.register(nibName: K.TableView.searchNibName, cell: K.TableView.searchCell)
-        tableView.dataSource     = self
-        tableView.delegate       = self
-        tableView.separatorStyle = .none
+        tableView.dataSource      = self
+        tableView.delegate        = self
+        tableView.separatorStyle  = .singleLine
+        tableView.tableFooterView = UIView()
     }
     
     private func configureViewModel()
@@ -87,28 +67,30 @@ extension SearchViewController
         viewModel.delegate = self
     }
     
-    private func configureSearchBar()
+    private func configureSearchController()
     {
-        searchBar.delegate = self
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+        
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate   = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.scopeButtonTitles = SelectCategory.allCases.map { $0.rawValue }
     }
     
     private func configureSearch()
     {
-        searchBar.text = ""
-        foundArticles  = []
-        tableView.reloadData()
+        searchController.searchBar.text = ""
+        foundArticles = []
     }
     
     private func configureResult()
     {
-        if searchBar.text!.isEmpty {
-            fetchArticles(with: category)
-            tableView.reloadData()
-        } else if foundArticles.count == 0 ||
-                  foundArticles.count > 0
-        {
+        if searchController.isSearching {
             foundArticlesWithCategory = []
             tableView.reloadData()
+        } else {
+            viewModel.getArticles(category: category)
         }
     }
 }
@@ -146,11 +128,9 @@ extension SearchViewController: UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int
     {
-        if foundArticles.count > 0 {
-            return foundArticles.count
-        } else {
-            return foundArticlesWithCategory.count
-        }
+        if searchController.isSearching { return foundArticles.count }
+        
+        return foundArticlesWithCategory.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -176,26 +156,24 @@ extension SearchViewController: UITableViewDelegate
     }
 }
 
-// MARK: - UISearchBar Delegate
-extension SearchViewController: UISearchBarDelegate
+// MARK: - SearchController Result Update
+extension SearchViewController: UISearchResultsUpdating
 {
-    // MARK: - Text Changes
-    func searchBar(_ searchBar: UISearchBar,
-                   textDidChange searchText: String)
+    func updateSearchResults(for searchController: UISearchController)
     {
-        viewModel.getArticles(with: searchText, category)
+        viewModel.getArticles(with: searchController.searchBar.text!, category)
         configureResult()
     }
-    
-    // MARK: - Search Button Pressed
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+}
+
+// MARK: - SearchController SearchBar Delegate
+extension SearchViewController: UISearchBarDelegate
+{
+    func searchBar(_ searchBar: UISearchBar,
+                   selectedScopeButtonIndexDidChange selectedScope: Int)
     {
-        guard let searchText = searchBar.text, searchText != "" else
-        {
-            searchBar.placeholder = "Look for something..."
-            return
-        }
-        searchBar.placeholder = "Search"
+        let selecetedCategory = SelectCategory(rawValue: searchBar.scopeButtonTitles![selectedScope])
+        category = selecetedCategory!.rawValue
     }
 }
 
@@ -204,7 +182,7 @@ extension SearchViewController
 {
     private func selectedArticle(at indexPath: IndexPath) -> Article
     {
-        var article: Article?
+        let article: Article
         
         if foundArticles.count > 0 {
             article = foundArticles[indexPath.row]
@@ -212,6 +190,6 @@ extension SearchViewController
             article = foundArticlesWithCategory[indexPath.row]
         }
         
-        return article!
+        return article
     }
 }

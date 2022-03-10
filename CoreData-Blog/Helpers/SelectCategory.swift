@@ -13,33 +13,31 @@ enum SelectCategory
     case hardware
     case swift
     case kotlin
+}
+
+extension SelectCategory: CaseIterable { }
+
+extension SelectCategory: RawRepresentable
+{
+    typealias RawValue = String
     
-    var category: String {
-        switch self {
-        case .software:
-            return "Software"
-        case .hardware:
-            return "Hardware"
-        case .swift:
-            return "Swift"
-        case .kotlin:
-            return "Kotlin"
+    init?(rawValue: RawValue)
+    {
+        switch rawValue {
+        case "Software": self = .software
+        case "Hardware": self = .hardware
+        case "Swift": self = .swift
+        case "Kotlin": self = .kotlin
+        default : return nil
         }
     }
     
-    static func selectSegmentControl(with category: String) -> SelectCategory
-    {
-        switch category {
-        case "Software":
-            return .software
-        case "Hardware":
-            return .hardware
-        case "Swift":
-            return .swift
-        case "Kotlin":
-            return .kotlin
-        default:
-            return .software
+    var rawValue: RawValue {
+        switch self {
+        case .hardware: return "Hardware"
+        case .software: return "Software"
+        case .swift: return "Swift"
+        case .kotlin: return "Kotlin"
         }
     }
 }
