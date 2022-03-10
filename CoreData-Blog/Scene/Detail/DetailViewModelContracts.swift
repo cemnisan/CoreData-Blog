@@ -10,7 +10,7 @@ import Foundation
 protocol DetailViewModelProtocol
 {
     var delegate: DetailViewModelDelegate? { get set }
-    func addFavorites(isFavorite: Bool, id: UUID)
+    func addFavorites(with id: UUID)
 }
 
 protocol DetailViewModelDelegate: AnyObject

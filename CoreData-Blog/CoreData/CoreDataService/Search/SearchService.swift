@@ -7,15 +7,7 @@
 
 import CoreData
 
-final class SearchService
-{
-    var stack: CoreDataStack
-    
-    init(stack: CoreDataStack)
-    {
-        self.stack = stack
-    }
-}
+final class SearchService: BaseService { }
 
 extension SearchService: ISearchService
 {

@@ -12,6 +12,7 @@ protocol HomeViewModelProtocol
     var delegate: HomeViewModelDelegate? { get set }
     func load()
     func selectAddButton()
+    func addFavorites(with id: UUID)
     func selectedArticle(article: Article)
 }
 
@@ -32,4 +33,5 @@ enum HomeViewModelOutput
     case loading(Bool)
     case showArticlesVia([Article])
     case showError(Error)
+    case isFavorited(Result<Bool>)
 }

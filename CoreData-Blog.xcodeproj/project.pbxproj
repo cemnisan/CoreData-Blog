@@ -64,6 +64,8 @@
 		F8E05A2627D9644200E1E022 /* Article+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A2427D9644200E1E022 /* Article+CoreDataProperties.swift */; };
 		F8E05A2827D9697400E1E022 /* SelectCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A2727D9697400E1E022 /* SelectCategory.swift */; };
 		F8FB335227DA2C2F00528BEB /* UISearchController+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB335127DA2C2F00528BEB /* UISearchController+Ex.swift */; };
+		F8FB335427DA372400528BEB /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB335327DA372400528BEB /* BaseService.swift */; };
+		F8FB335627DA376100528BEB /* IBaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FB335527DA376100528BEB /* IBaseService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +128,8 @@
 		F8E05A2427D9644200E1E022 /* Article+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Article+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F8E05A2727D9697400E1E022 /* SelectCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategory.swift; sourceTree = "<group>"; };
 		F8FB335127DA2C2F00528BEB /* UISearchController+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchController+Ex.swift"; sourceTree = "<group>"; };
+		F8FB335327DA372400528BEB /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		F8FB335527DA376100528BEB /* IBaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IBaseService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +188,7 @@
 		F807053E27D5028700755C82 /* CoreDataService */ = {
 			isa = PBXGroup;
 			children = (
+				F8FB335727DA3F6E00528BEB /* Base */,
 				F8E05A1627D8D9B900E1E022 /* Search */,
 				F8E05A1227D8D99F00E1E022 /* Home */,
 			);
@@ -388,6 +393,15 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		F8FB335727DA3F6E00528BEB /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F8FB335327DA372400528BEB /* BaseService.swift */,
+				F8FB335527DA376100528BEB /* IBaseService.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -468,6 +482,7 @@
 				F882973427D2C2550082B1CC /* Blog.xcdatamodeld in Sources */,
 				F882972227D2BD780082B1CC /* AppRouter.swift in Sources */,
 				F80704DE27D4E2AA00755C82 /* BaseViewController.swift in Sources */,
+				F8FB335427DA372400528BEB /* BaseService.swift in Sources */,
 				F84DF62C27D7A13600FAE031 /* SearchViewModel.swift in Sources */,
 				F84DF60927D63C9D00FAE031 /* ValidateError.swift in Sources */,
 				F84DF63B27D7A2F000FAE031 /* ProfileViewModel.swift in Sources */,
@@ -503,6 +518,7 @@
 				F80704D727D4DBC800755C82 /* UITableView+Ex.swift in Sources */,
 				F882972C27D2BF7E0082B1CC /* HomeViewModelContracts.swift in Sources */,
 				F84DF62A27D7A12D00FAE031 /* SearchViewController.swift in Sources */,
+				F8FB335627DA376100528BEB /* IBaseService.swift in Sources */,
 				F8DCAECE27D804AF008A51A8 /* SearchTableViewCell.swift in Sources */,
 				F8E05A1827D8D9C100E1E022 /* ISearchService.swift in Sources */,
 				F84DF62E27D7A13F00FAE031 /* SearchViewModelContracts.swift in Sources */,

@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="Search" id="Y6W-OH-hqX" customClass="SearchViewController" customModule="CoreData_Blog" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,7 +41,7 @@
                             <constraint firstItem="WzD-5h-O7c" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="c0c-hD-med"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="qeY-Qa-OAZ"/>
+                    <navigationItem key="navigationItem" id="qeY-Qa-OAZ"/>
                     <connections>
                         <outlet property="tableView" destination="WzD-5h-O7c" id="xRP-29-qJT"/>
                     </connections>
@@ -55,8 +55,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Gd-4q-Kgn" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Rss-wO-wI2">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Rss-wO-wI2">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

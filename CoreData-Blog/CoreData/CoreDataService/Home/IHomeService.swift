@@ -14,7 +14,6 @@ protocol IHomeService
     func addArticle(with title: String,
                     _ content: String,
                     _ category: String) throws
-    func addFavorites(with isFavorite: Bool,
-                      _ id: UUID,
+    func addFavorites(with id: UUID,
                       completion: @escaping (Result<Bool>) -> Void)
 }

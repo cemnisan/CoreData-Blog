@@ -77,11 +77,7 @@ extension DetailViewController
     {
         isFavorite = !isFavorite
         configureBookMark(with: isFavorite)
-
-        if let id = article?.id
-        {
-            viewModel.addFavorites(isFavorite: isFavorite, id: id)
-        }        
+        viewModel.addFavorites(with: article!.id!)
     }
 }
 

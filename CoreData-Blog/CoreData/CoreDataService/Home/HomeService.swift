@@ -8,15 +8,7 @@
 import Foundation
 import CoreData
 
-final class HomeService
-{
-    private let stack: CoreDataStack
-
-    init(stack: CoreDataStack)
-    {
-        self.stack = stack
-    }
-}
+final class HomeService: BaseService { }
 
 extension HomeService: IHomeService
 {
@@ -54,30 +46,5 @@ extension HomeService: IHomeService
         article.author      = author
         
         stack.saveContext()
-    }
-    
-    func addFavorites(with isFavorite: Bool,
-                      _ id: UUID,
-                      completion: @escaping (Result<Bool>) -> Void)
-    {
-        let idPredicate = NSPredicate(
-            format: "%K = %@",
-            (\Article.id)._kvcKeyPathString!,
-            id as NSUUID)
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        
-        fetchRequest.fetchLimit = 1
-        fetchRequest.predicate  = idPredicate
-        
-        do {
-            let foundArticle = try stack.managedContext.fetch(fetchRequest)
-            foundArticle[0].isFavorite = isFavorite
-      
-            stack.saveContext()
-            
-            foundArticle[0].isFavorite ? completion(.success(true)) : completion(.success(false))
-        } catch {
-            completion(.failure(error))
-        }
     }
 }

@@ -40,6 +40,19 @@ extension HomeViewModel
         }
     }
     
+    func addFavorites(with id: UUID) {
+        service.addFavorites(with: id) { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let isFavorited):
+                self.notify(.isFavorited(.success(isFavorited)))
+            case .failure(let error):
+                self.notify(.isFavorited(.failure(error)))
+            }
+        }
+    }
+    
     func selectAddButton() {
         let addViewModel = AddArticleViewModel(service: service)
         delegate?.navigate(to: .add(addViewModel))

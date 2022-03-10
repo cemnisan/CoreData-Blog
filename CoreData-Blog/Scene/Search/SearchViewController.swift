@@ -69,11 +69,13 @@ extension SearchViewController
     
     private func configureSearchController()
     {
+        title = "Explore"
         navigationItem.searchController = searchController
         definesPresentationContext = true
         
-        searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate   = self
+        searchController.searchBar.placeholder = "Search Article"
+        searchController.searchResultsUpdater  = self
+        searchController.searchBar.delegate    = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.scopeButtonTitles = SelectCategory.allCases.map { $0.rawValue }
     }
@@ -109,6 +111,10 @@ extension SearchViewController: SearchViewModelDelegate
             tableView.reloadData()
         case .notFound(let error):
             print(error)
+        case .isFavorited(.success(let isFavorite)):
+            print(isFavorite)
+        case .isFavorited(.failure(let error)):
+            print(error)
         }
     }
     
@@ -140,7 +146,10 @@ extension SearchViewController: UITableViewDataSource
                                                     for: indexPath) as! SearchTableViewCell
         let article = selectedArticle(at: indexPath)
         cell.configureCell(with: article)
-
+        cell.delegate = self
+        cell.id = article.id
+        cell.isFavorite = article.isFavorite
+        
         return cell
     }
 }
@@ -153,6 +162,16 @@ extension SearchViewController: UITableViewDelegate
     {
         let article = selectedArticle(at: indexPath)
         viewModel.selectedArticle(article: article)
+    }
+}
+
+// MARK: - TableViewCell Delegate
+extension SearchViewController: ISearchTableViewCell
+{
+    func bookMarkButtonWillPressed(on vc: SearchTableViewCell,
+                                   with id: UUID)
+    {
+        viewModel.addFavorites(with: id)
     }
 }
 

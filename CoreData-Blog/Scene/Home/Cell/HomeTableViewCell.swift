@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol IHomeTableViewCell: AnyObject
+{
+    func bookMarkButtonWillPressed(on cell: HomeTableViewCell,
+                                   with isFavorite: Bool,
+                                   _ id: UUID)
+}
+
 final class HomeTableViewCell: UITableViewCell
 {
     // MARK: - IBOutlet
@@ -17,6 +24,11 @@ final class HomeTableViewCell: UITableViewCell
     @IBOutlet private weak var articleDateTextField: UILabel!
     @IBOutlet private weak var articleTitleTextField: UILabel!
     @IBOutlet private weak var bookMarkButton: UIButton!
+    
+    // MARK: - Properties
+    weak var delegate: IHomeTableViewCell?
+    var isFavorite: Bool?
+    var id: UUID?
     
     // MARK: - Lifecycles
     override func awakeFromNib()
@@ -38,13 +50,24 @@ extension HomeTableViewCell
         articleContentLabel.text   = article.content
         articleDateTextField.text  = article.createdDate?.getFormattedDate(format: "MMM d, yyyy")
         
-        bookMarkConfigure(isFavorited: article.isFavorite)
+        configureBookMark(isFavorited: article.isFavorite)
     }
     
-    private func bookMarkConfigure(isFavorited: Bool)
+    private func configureBookMark(isFavorited: Bool)
     {
         isFavorited ?
             bookMarkButton.setBookMark(bookMark: .bookMarkFill) :
             bookMarkButton.setBookMark(bookMark: .bookMark)
+    }
+}
+
+// MARK: - IBActions
+extension HomeTableViewCell
+{
+    @IBAction func bookMarkButtonPressed(_ sender: UIButton)
+    {
+        isFavorite = !isFavorite!
+        configureBookMark(isFavorited: isFavorite!)
+        delegate?.bookMarkButtonWillPressed(on: self, with: isFavorite!, id!)
     }
 }

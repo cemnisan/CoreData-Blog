@@ -89,6 +89,10 @@ extension HomeViewController: HomeViewModelDelegate
             configureIndicatorView(with: isLoading)
         case .showError(let error):
             self.showError(title: "Error", message: error.localizedDescription)
+        case .isFavorited(.success(let isFavorited)):
+            print(isFavorited)
+        case .isFavorited(.failure(let error)):
+            print(error)
         }
     }
     
@@ -121,6 +125,9 @@ extension HomeViewController: UITableViewDataSource
                                                  for: indexPath) as! HomeTableViewCell
         let article = articles[indexPath.row]
         cell.configureCell(with: article)
+        cell.delegate = self
+        cell.id = article.id
+        cell.isFavorite = article.isFavorite
         
         return cell
     }
@@ -135,5 +142,16 @@ extension HomeViewController: UITableViewDelegate
         let article = articles[indexPath.row]
         
         viewModel.selectedArticle(article: article)
+    }
+}
+
+// MARK: - UITableViewCell Delegate
+extension HomeViewController: IHomeTableViewCell
+{
+    func bookMarkButtonWillPressed(on cell: HomeTableViewCell,
+                                   with isFavorite: Bool,
+                                   _ id: UUID)
+    {
+        viewModel.addFavorites(with: id)
     }
 }

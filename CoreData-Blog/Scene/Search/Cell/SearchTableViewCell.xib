@@ -49,6 +49,9 @@
                         </constraints>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" backgroundImage="bookmark" catalog="system"/>
+                        <connections>
+                            <action selector="bookMarkButtonPressed:" destination="Sao-qG-AKM" eventType="touchUpInside" id="fjA-mC-Ntd"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

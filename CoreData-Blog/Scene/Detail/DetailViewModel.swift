@@ -22,11 +22,8 @@ final class DetailViewModel
 // MARK: - View Model Protocol
 extension DetailViewModel: DetailViewModelProtocol
 {
-    func addFavorites(isFavorite: Bool,
-                      id: UUID)
-    {
-        service.addFavorites(with: isFavorite,
-                             id) { [weak self] (result) in
+    func addFavorites(with id: UUID) {
+        service.addFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {

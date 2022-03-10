@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol ISearchTableViewCell: AnyObject
+{
+    func bookMarkButtonWillPressed(on cell: SearchTableViewCell,
+                                   with id: UUID)
+}
+
 // MARK: - Initialize
 final class SearchTableViewCell: UITableViewCell
 {
@@ -15,6 +21,11 @@ final class SearchTableViewCell: UITableViewCell
     @IBOutlet private weak var userNameLabel: UILabel!
     @IBOutlet private weak var articleTitleLabel: UILabel!
     @IBOutlet private weak var bookMarkButton: UIButton!
+    
+    // MARK: - Properties
+    weak var delegate: ISearchTableViewCell?
+    var isFavorite: Bool?
+    var id: UUID?
     
     override func awakeFromNib()
     {
@@ -32,8 +43,24 @@ extension SearchTableViewCell
         userNameLabel.text     = article.author?.userName
         articleTitleLabel.text = article.title
         
-        article.isFavorite ?
+        configureBookMark(with: article.isFavorite)
+    }
+    
+    private func configureBookMark(with isFavorited: Bool)
+    {
+        isFavorited ?
             bookMarkButton.setBookMark(bookMark: .bookMarkFill) :
             bookMarkButton.setBookMark(bookMark: .bookMark)
+    }
+}
+
+// MARK: - IBActions
+extension SearchTableViewCell
+{
+    @IBAction func bookMarkButtonPressed(_ sender: Any)
+    {
+        isFavorite = !isFavorite!
+        configureBookMark(with: isFavorite!)
+        delegate?.bookMarkButtonWillPressed(on: self, with: id!)
     }
 }

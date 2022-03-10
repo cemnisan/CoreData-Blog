@@ -14,5 +14,6 @@ protocol ISearchService
                      completion: @escaping (Result<[Article]>) -> Void)
     func getArticles(with category: String,
                      completion: @escaping (Result<[Article]>) -> Void)
-    
+    func addFavorites(with id: UUID,
+                      completion: @escaping (Result<Bool>) -> Void)
 }
