@@ -9,5 +9,10 @@ import Foundation
 
 protocol ISearchService
 {
-    func getArticles(with query: String, completion: @escaping (Result<[Article]>) -> Void)
+    func getArticles(with query: String,
+                     _ selectedCategory: String,
+                     completion: @escaping (Result<[Article]>) -> Void)
+    func getArticles(with category: String,
+                     completion: @escaping (Result<[Article]>) -> Void)
+    
 }

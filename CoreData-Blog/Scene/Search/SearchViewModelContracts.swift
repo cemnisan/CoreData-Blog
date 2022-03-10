@@ -10,7 +10,8 @@ import Foundation
 protocol SearchViewModelProtocol
 {
     var delegate: SearchViewModelDelegate? { get set }
-    func getArticles(with query: String)
+    func getArticles(with query: String, _ category: String)
+    func getArticles(category: String)
     func selectedArticle(article: Article)
 }
 
@@ -28,5 +29,6 @@ enum SearchViewModelRouter
 enum SearchViewModelOutput
 {
     case foundArticles([Article])
+    case foundArticlesWithCategory([Article])
     case notFound(Error)
 }

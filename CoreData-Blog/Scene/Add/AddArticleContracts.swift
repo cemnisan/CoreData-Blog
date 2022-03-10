@@ -10,7 +10,9 @@ import Foundation
 protocol AddArticleViewModelProtocol
 {
     var delegate: AddArticleViewModelDelegate? { get set }
-    func addArticle(with title: String, content: String)
+    func addArticle(with title: String,
+                    content:  String,
+                    category: String)
 }
 
 protocol AddArticleViewModelDelegate: AnyObject {

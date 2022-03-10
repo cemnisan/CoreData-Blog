@@ -11,12 +11,6 @@ import CoreData
 final class HomeService
 {
     private let stack: CoreDataStack
-    
-    private lazy var dateSort: NSSortDescriptor = {
-        return NSSortDescriptor(
-            key: #keyPath(Article.createdDate),
-            ascending: true)
-    }()
 
     init(stack: CoreDataStack)
     {
@@ -28,13 +22,13 @@ extension HomeService: IHomeService
 {
     func fetchArticles(completion: @escaping (Result<[Article]>) -> Void)
     {
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let dateSort: NSSortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
+        let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
+        
+        fetchRequest.sortDescriptors = [reversedDate]
+        
         do {
-            let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-            let dateSort: NSSortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
-            let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
-            
-            fetchRequest.sortDescriptors = [reversedDate]
-            
             let articles = try stack.managedContext.fetch(fetchRequest)
             completion(.success(articles))
         } catch let error as NSError {
@@ -43,7 +37,8 @@ extension HomeService: IHomeService
     }
     
     func addArticle(with title: String,
-                    _ content: String) throws
+                    _ content:  String,
+                    _ category: String) throws
     {
         let article = Article(context: stack.managedContext)
         let author  = Author(context: stack.managedContext)
@@ -52,6 +47,7 @@ extension HomeService: IHomeService
         
         article.title       = title
         article.content     = content
+        article.category    = category
         article.isFavorite  = false
         article.id          = UUID()
         article.createdDate = Date()
@@ -63,7 +59,6 @@ extension HomeService: IHomeService
     func addFavorites(with isFavorite: Bool,
                       _ id: UUID,
                       completion: @escaping (Result<Bool>) -> Void)
-
     {
         let idPredicate = NSPredicate(
             format: "%K = %@",
@@ -72,7 +67,7 @@ extension HomeService: IHomeService
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
         
         fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = idPredicate
+        fetchRequest.predicate  = idPredicate
         
         do {
             let foundArticle = try stack.managedContext.fetch(fetchRequest)

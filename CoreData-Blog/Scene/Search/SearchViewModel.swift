@@ -22,9 +22,9 @@ final class SearchViewModel
 // MARK: - ViewModel Protocol
 extension SearchViewModel: SearchViewModelProtocol
 {
-    func getArticles(with query: String)
-    {
-        service.getArticles(with: query) { [weak self] (result) in
+    func getArticles(with query: String,
+                     _ category: String) {
+        service.getArticles(with: query, category) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
@@ -32,6 +32,19 @@ extension SearchViewModel: SearchViewModelProtocol
                 self.notify(.foundArticles(articles))
             case .failure(let error):
                 self.notify(.notFound(error))
+            }
+        }
+    }
+    
+    func getArticles(category: String) {
+        service.getArticles(with: category) { [weak self] (result) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let articles):
+                self.notify(.foundArticlesWithCategory(articles))
+            case .failure(let error):
+                print(error)
             }
         }
     }

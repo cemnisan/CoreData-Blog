@@ -39,11 +39,20 @@ extension HomeViewController
 {
     private func configureUI()
     {
+        configureTableView()
+        configureViewModel()
+    }
+    
+    private func configureTableView()
+    {
+        tableView.register(nibName: K.TableView.homeNibName, cell: K.TableView.homeCell)
         tableView.delegate   = self
         tableView.dataSource = self
-        tableView.register(nibName: K.TableView.homeNibName, cell: K.TableView.homeCell)
-        
-        viewModel.delegate   = self
+    }
+    
+    private func configureViewModel()
+    {
+        viewModel.delegate = self
     }
     
     private func configureIndicatorView(with isLoading: Bool)
@@ -70,18 +79,6 @@ extension HomeViewController
 // MARK: - View Model's Delegate
 extension HomeViewController: HomeViewModelDelegate
 {
-    func navigate(to route: HomeViewModelRouter)
-    {
-        switch route {
-        case .add(let addViewModel):
-            let viewController = AddArticleBuilder.make(viewModel: addViewModel)
-            show(viewController, sender: nil)
-        case .detail(let article, let viewModel):
-            let viewController = DetailBuilder.make(with: article, viewModel)
-            show(viewController, sender: nil)
-        }
-    }
-    
     func handleOutput(_ output: HomeViewModelOutput)
     {
         switch output {
@@ -92,6 +89,18 @@ extension HomeViewController: HomeViewModelDelegate
             configureIndicatorView(with: isLoading)
         case .showError(let error):
             self.showError(title: "Error", message: error.localizedDescription)
+        }
+    }
+    
+    func navigate(to route: HomeViewModelRouter)
+    {
+        switch route {
+        case .add(let addViewModel):
+            let viewController = AddArticleBuilder.make(viewModel: addViewModel)
+            show(viewController, sender: nil)
+        case .detail(let article, let viewModel):
+            let viewController = DetailBuilder.make(with: article, viewModel)
+            show(viewController, sender: nil)
         }
     }
 }

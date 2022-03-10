@@ -18,6 +18,7 @@ final class AddArticleViewController: BaseViewController
     // MARK: - Properties
     var viewModel: AddArticleViewModelProtocol! { didSet { viewModel.delegate = self } }
     
+    // MARK: - LifeCycles
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ extension AddArticleViewController
         let title   = titleTextField.text!
         let content = contentTextView.text!
         
-        viewModel.addArticle(with: title, content: content)
+        viewModel.addArticle(with: title, content: content, category: "Software")
     }
 }
 

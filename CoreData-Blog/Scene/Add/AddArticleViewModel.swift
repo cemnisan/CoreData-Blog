@@ -21,11 +21,13 @@ final class AddArticleViewModel
 // MARK: - Protocol
 extension AddArticleViewModel: AddArticleViewModelProtocol
 {
-    func addArticle(with title: String, content: String)
+    func addArticle(with title: String,
+                    content: String,
+                    category: String)
     {
         do {
             try validateArticle(title: title, content: content)
-            try service.addArticle(with: title, content)
+            try service.addArticle(with: title, content, category)
             notify(.isAdded(.success(true)))
         } catch {
             notify(.isAdded(.failure(error)))

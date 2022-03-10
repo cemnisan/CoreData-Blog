@@ -25,6 +25,7 @@ final class DetailViewController: UIViewController
     var viewModel: DetailViewModelProtocol!
     private var isFavorite: Bool = false
     
+    // MARK: - Lifecycles
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -38,8 +39,18 @@ extension DetailViewController
 {
     private func configureUI()
     {
-        viewModel.delegate       = self
-        
+        configureViewModel()
+        configureUIElement()
+        configureBookMark(with: isFavorite)
+    }
+    
+    private func configureViewModel()
+    {
+        viewModel.delegate = self
+    }
+    
+    private func configureUIElement()
+    {
         userPhotoView.makeRoundedCircle()
         articleContentPhoto.makeRounded()
         
@@ -49,8 +60,6 @@ extension DetailViewController
         articleTitleLabel.text   = article?.title
         articleContentLabel.text = article?.content
         isFavorite               = article?.isFavorite ?? false
-        
-        configureBookMark(with: isFavorite)
     }
     
     private func configureBookMark(with isFavorited: Bool)
@@ -76,6 +85,7 @@ extension DetailViewController
     }
 }
 
+// MARK: - ViewModel Delegate
 extension DetailViewController: DetailViewModelDelegate
 {
     func handleOutput(_ output: DetailViewModelOutput)

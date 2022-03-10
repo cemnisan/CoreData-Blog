@@ -13,16 +13,54 @@ final class SearchViewController: UIViewController
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var searchBar: UISearchBar!
-
+    @IBOutlet private weak var segmentControl: UISegmentedControl!
+    
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
     private var foundArticles: [Article] = []
+    private var foundArticlesWithCategory: [Article] = []
+    private var category = "Software"
     
+    // MARK: - Lifecycles
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        fetchArticles(with: category)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool)
+    {
+        super.viewDidDisappear(animated)
+        
+        configureSearch()
+    }
+}
+
+// MARK: - IBActions
+extension SearchViewController
+{
+    @IBAction func segmentControlPressed(_ sender: UISegmentedControl)
+    {
+        guard let category = sender.titleForSegment(at: sender.selectedSegmentIndex) else { return }
+        self.category = category
+        
+        let selectCategory = SelectCategory.selectSegmentControl(with: category)
+        let selectedCategory = selectCategory.category
+        
+        fetchArticles(with: selectedCategory)
+    }
+    
+    private func fetchArticles(with selectedCategory: String)
+    {
+        viewModel.getArticles(category: selectedCategory)
     }
 }
 
@@ -31,15 +69,47 @@ extension SearchViewController
 {
     private func configureUI()
     {
-        searchBar.delegate       = self
-        
-        tableView.register(nibName: K.TableView.searchNibName,
-                           cell: K.TableView.searchCell)
+        configureViewModel()
+        configureTableView()
+        configureSearchBar()
+    }
+    
+    private func configureTableView()
+    {
+        tableView.register(nibName: K.TableView.searchNibName, cell: K.TableView.searchCell)
         tableView.dataSource     = self
         tableView.delegate       = self
         tableView.separatorStyle = .none
-        
-        viewModel.delegate       = self
+    }
+    
+    private func configureViewModel()
+    {
+        viewModel.delegate = self
+    }
+    
+    private func configureSearchBar()
+    {
+        searchBar.delegate = self
+    }
+    
+    private func configureSearch()
+    {
+        searchBar.text = ""
+        foundArticles  = []
+        tableView.reloadData()
+    }
+    
+    private func configureResult()
+    {
+        if searchBar.text!.isEmpty {
+            fetchArticles(with: category)
+            tableView.reloadData()
+        } else if foundArticles.count == 0 ||
+                  foundArticles.count > 0
+        {
+            foundArticlesWithCategory = []
+            tableView.reloadData()
+        }
     }
 }
 
@@ -52,12 +122,16 @@ extension SearchViewController: SearchViewModelDelegate
         case .foundArticles(let articles):
             self.foundArticles = articles
             tableView.reloadData()
+        case .foundArticlesWithCategory(let articles):
+            self.foundArticlesWithCategory = articles
+            tableView.reloadData()
         case .notFound(let error):
             print(error)
         }
     }
     
-    func navigate(to router: SearchViewModelRouter) {
+    func navigate(to router: SearchViewModelRouter)
+    {
         switch router {
         case .detail(let article, let viewModel):
             let detailViewController = DetailBuilder.make(with: article, viewModel)
@@ -72,28 +146,32 @@ extension SearchViewController: UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int
     {
-        return foundArticles.count
+        if foundArticles.count > 0 {
+            return foundArticles.count
+        } else {
+            return foundArticlesWithCategory.count
+        }
     }
 
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell    = tableView.dequeueReusableCell(withIdentifier: K.TableView.searchCell,
+        let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.searchCell,
                                                     for: indexPath) as! SearchTableViewCell
-        let article = foundArticles[indexPath.row]
+        let article = selectedArticle(at: indexPath)
         cell.configureCell(with: article)
 
         return cell
     }
 }
 
-// UITableView Delegate
+// MARK: - UITableView Delegate
 extension SearchViewController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)
     {
-        let article = foundArticles[indexPath.row]
+        let article = selectedArticle(at: indexPath)
         viewModel.selectedArticle(article: article)
     }
 }
@@ -105,13 +183,8 @@ extension SearchViewController: UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String)
     {
-        guard searchText != "" else
-        {
-            foundArticles = []
-            tableView.reloadData()
-            return
-        }
-        viewModel.getArticles(with: searchText)
+        viewModel.getArticles(with: searchText, category)
+        configureResult()
     }
     
     // MARK: - Search Button Pressed
@@ -126,3 +199,19 @@ extension SearchViewController: UISearchBarDelegate
     }
 }
 
+// MARK: - Helpers
+extension SearchViewController
+{
+    private func selectedArticle(at indexPath: IndexPath) -> Article
+    {
+        var article: Article?
+        
+        if foundArticles.count > 0 {
+            article = foundArticles[indexPath.row]
+        } else {
+            article = foundArticlesWithCategory[indexPath.row]
+        }
+        
+        return article!
+    }
+}
