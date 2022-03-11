@@ -17,7 +17,8 @@ final class ProfileService: BaseService
 
 extension ProfileService: IProfileService
 {
-    func getFavoriteArticles(with category: String, completion: @escaping (Result<[Article]>) -> Void)
+    func getFavoriteArticles(with category: String,
+                             completion: @escaping (Result<[Article]>) -> Void)
     {
         let favoritePredicate = NSPredicate(format: "isFavorite == YES")
         let categoryPredicate = NSPredicate(format: "category = %@", category)

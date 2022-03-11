@@ -9,6 +9,6 @@ import Foundation
 
 protocol IBaseService
 {
-    func addFavorites(with id: UUID,
+    func removeOrAddFavorites(with id: UUID,
                       completion: @escaping (Result<Bool>) -> Void)
 }

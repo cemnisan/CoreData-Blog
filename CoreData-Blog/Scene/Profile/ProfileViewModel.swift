@@ -36,13 +36,15 @@ extension ProfileViewModel: ProfileViewModelProtocol
         }
     }
     
-    func addFavorites(with id: UUID)
+    func removeFavorites(with id: UUID,
+                            on category: String)
     {
-        service.addFavorites(with: id) { [weak self] (result) in
+        service.removeOrAddFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
             case .success(let isFavorite):
+                self.getFavoriteArticles(with: category)
                 self.notify(.isFavorited(.success(isFavorite)))
             case .failure(let error):
                 self.notify(.isFavorited(.failure(error)))
@@ -50,7 +52,8 @@ extension ProfileViewModel: ProfileViewModelProtocol
         }
     }
     
-    func selectedArticle(article: Article) {
+    func selectedArticle(article: Article)
+    {
         let viewModel = DetailViewModel(service: HomeService(stack: app.stack))
         delegate?.navigate(to: .detail(viewModel, article))
     }

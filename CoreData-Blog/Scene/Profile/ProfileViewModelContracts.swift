@@ -5,13 +5,13 @@
 //  Created by Cem Nisan on 8.03.2022.
 //
 
-import Foundation
+import CoreData
 
 protocol ProfileViewModelProtocol
 {
     var delegate: ProfileViewModelDelegate? { get set }
     func getFavoriteArticles(with category: String)
-    func addFavorites(with id: UUID)
+    func removeFavorites(with id: UUID, on category: String)
     func selectedArticle(article: Article)
 }
 

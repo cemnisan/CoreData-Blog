@@ -36,7 +36,7 @@ extension SearchViewModel: SearchViewModelProtocol
         }
     }
     
-    func getArticles(category: String) {
+    func getArticles(with category: String) {
         service.getArticles(with: category) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -51,7 +51,7 @@ extension SearchViewModel: SearchViewModelProtocol
     
     func addFavorites(with id: UUID)
     {
-        service.addFavorites(with: id) { [weak self] (result) in
+        service.removeOrAddFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {

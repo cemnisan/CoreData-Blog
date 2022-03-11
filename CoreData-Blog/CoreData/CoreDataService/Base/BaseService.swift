@@ -19,7 +19,7 @@ class BaseService
 
 extension BaseService: IBaseService
 {
-    func addFavorites(with id: UUID,
+    func removeOrAddFavorites(with id: UUID,
                       completion: @escaping (Result<Bool>) -> Void)
     {
         let idPredicate = NSPredicate(

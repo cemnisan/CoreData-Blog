@@ -6,13 +6,13 @@
 //
 
 import UIKit
-
+import CoreData
 // TODO: - Use Diffable Data Source
 
 // MARK: - Initialize
 final class ProfileViewController: UIViewController
 {
-    // MARK: - IBOuetlets
+    // MARK: - IBOutlets
     @IBOutlet private weak var categorySegmentControl: UISegmentedControl!
     @IBOutlet private weak var tableView: UITableView!
     
@@ -20,12 +20,13 @@ final class ProfileViewController: UIViewController
     var viewModel: ProfileViewModelProtocol!
     private var articles: [Article] = []
     private var category = "Software"
-    
+    private var dataSource: UITableViewDiffableDataSource<String, Article>!
+
     // MARK: - Lifecycles
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+       
         configureUI()
     }
     
@@ -42,14 +43,15 @@ extension ProfileViewController
 {
     private func configureUI()
     {
-        configureTableView()
         configureViewModel()
+        configureTableView()
     }
     
     private func configureTableView()
     {
-        tableView.register(nibName: K.TableView.homeNibName, cell: K.TableView.homeCell)
-        tableView.dataSource = self
+        tableView.register(nibName: K.TableView.homeNibName,
+                           cell: K.TableView.homeCell)
+        dataSource = setupDataSource()
         tableView.delegate = self
         tableView.tableFooterView = UIView()
     }
@@ -66,6 +68,7 @@ extension ProfileViewController
     @IBAction func segmentControlPressed(_ sender: UISegmentedControl)
     {
         guard let category = sender.titleForSegment(at: sender.selectedSegmentIndex) else { return }
+        
         viewModel.getFavoriteArticles(with: category)
     }
 }
@@ -78,7 +81,7 @@ extension ProfileViewController: ProfileViewModelDelegate
         switch output {
         case .favoriteArticles(let articles):
             self.articles = articles
-            tableView.reloadData()
+            updateDataSource()
         case .error(let error):
             print(error)
         case .isFavorited(.success(let isFavorited)):
@@ -98,27 +101,34 @@ extension ProfileViewController: ProfileViewModelDelegate
     }
 }
 
-// MARK: - UITableView Data-Source
-extension ProfileViewController: UITableViewDataSource
+// MARK: - UITableViewDiffableDataSoruce
+extension ProfileViewController
 {
-    func tableView(_ tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int
+    private func setupDataSource() -> UITableViewDiffableDataSource<String, Article>
     {
-        return articles.count
+        UITableViewDiffableDataSource(tableView: tableView) { [weak self] (tableView,
+                                                                           indexPath,
+                                                                           article) -> UITableViewCell in
+            guard let self = self else { return UITableViewCell() }
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.homeCell,
+                                                     for: indexPath) as! HomeTableViewCell
+            cell.configureCell(with: article)
+            cell.delegate = self
+            cell.isFavorite = article.isFavorite
+            cell.id = article.id
+            
+            return cell
+        }
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    private func updateDataSource()
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.homeCell,
-                                                 for: indexPath) as! HomeTableViewCell
-        let article = articles[indexPath.row]
-        cell.configureCell(with: article)
-        cell.delegate = self
-        cell.id = article.id
-        cell.isFavorite = article.isFavorite
-        
-        return cell
+        var snapshot = NSDiffableDataSourceSnapshot<String, Article>()
+        snapshot.appendSections(["favorite"])
+        snapshot.appendItems(articles)
+       
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -126,8 +136,10 @@ extension ProfileViewController: UITableViewDataSource
 extension ProfileViewController: UITableViewDelegate
 {
     func tableView(_ tableView: UITableView,
-                   didSelectRowAt indexPath: IndexPath) {
+                   didSelectRowAt indexPath: IndexPath)
+    {
         let article = articles[indexPath.row]
+        
         viewModel.selectedArticle(article: article)
     }
 }
@@ -138,6 +150,6 @@ extension ProfileViewController: IHomeTableViewCell
     func bookMarkButtonWillPressed(on cell: HomeTableViewCell,
                                    with id: UUID)
     {
-        viewModel.addFavorites(with: id)
+        viewModel.removeFavorites(with: id, on: category)
     }
 }

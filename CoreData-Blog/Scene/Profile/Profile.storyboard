@@ -14,17 +14,17 @@
             <objects>
                 <viewController storyboardIdentifier="Profile" id="Y6W-OH-hqX" customClass="ProfileViewController" customModule="CoreData_Blog" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Favorite Articles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tl-ev-j1c">
-                                <rect key="frame" x="18" y="110" width="195" height="24"/>
+                                <rect key="frame" x="18" y="22" width="195" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3yj-S5-5DG">
-                                <rect key="frame" x="18" y="150" width="378" height="32"/>
+                                <rect key="frame" x="18" y="62" width="378" height="32"/>
                                 <segments>
                                     <segment title="Software"/>
                                     <segment title="Hardware"/>
@@ -36,7 +36,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bro-1e-5e7">
-                                <rect key="frame" x="0.0" y="189" width="414" height="673"/>
+                                <rect key="frame" x="0.0" y="101" width="414" height="673"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HomeCell" id="sPn-ww-ds9">
@@ -79,7 +79,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zGp-ys-qTj" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oOx-lB-t6Q">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="oOx-lB-t6Q">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

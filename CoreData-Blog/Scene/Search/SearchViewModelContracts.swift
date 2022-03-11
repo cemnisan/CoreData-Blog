@@ -11,7 +11,7 @@ protocol SearchViewModelProtocol
 {
     var delegate: SearchViewModelDelegate? { get set }
     func getArticles(with query: String, _ category: String)
-    func getArticles(category: String)
+    func getArticles(with category: String)
     func addFavorites(with id: UUID)
     func selectedArticle(article: Article)
 }

@@ -32,7 +32,7 @@ final class SearchViewController: UIViewController
     {
         super.viewWillAppear(animated)
  
-        viewModel.getArticles(category: category)
+        viewModel.getArticles(with: category)
     }
     
     override func viewDidDisappear(_ animated: Bool)
@@ -70,8 +70,8 @@ extension SearchViewController
     private func configureSearchController()
     {
         title = "Explore"
-        navigationItem.searchController = searchController
         definesPresentationContext = true
+        navigationItem.searchController = searchController
         
         searchController.searchBar.placeholder = "Search Article"
         searchController.searchResultsUpdater  = self
@@ -92,7 +92,7 @@ extension SearchViewController
             foundArticlesWithCategory = []
             tableView.reloadData()
         } else {
-            viewModel.getArticles(category: category)
+            viewModel.getArticles(with: category)
         }
     }
 }

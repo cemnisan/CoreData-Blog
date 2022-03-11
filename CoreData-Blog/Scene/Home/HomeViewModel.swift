@@ -41,7 +41,7 @@ extension HomeViewModel
     }
     
     func addFavorites(with id: UUID) {
-        service.addFavorites(with: id) { [weak self] (result) in
+        service.removeOrAddFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
