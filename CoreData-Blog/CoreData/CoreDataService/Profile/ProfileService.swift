@@ -18,21 +18,27 @@ final class ProfileService: BaseService
 extension ProfileService: IProfileService
 {
     func getFavoriteArticles(with category: String,
-                             completion: @escaping (Result<[Article]>) -> Void)
+                             _ fetchOffset: Int,
+                             completion: @escaping (Result<([Article], Int)>) -> Void)
     {
+        var fetchedArticle = [Article]()
+        
         let favoritePredicate = NSPredicate(format: "isFavorite == YES")
         let categoryPredicate = NSPredicate(format: "category = %@", category)
         
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
-        let reversedSort = sortDescriptor.reversedSortDescriptor as! NSSortDescriptor
-        
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [favoritePredicate, categoryPredicate])
-        fetchRequest.sortDescriptors = [reversedSort]
-        
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
+        fetchRequest.fetchLimit = 5
+        fetchRequest.fetchOffset = fetchOffset
+
         do {
+            let currentArticlesCount = try stack.managedContext.count(for: NSFetchRequest(entityName: "Article"))
             let articles = try stack.managedContext.fetch(fetchRequest)
-            completion(.success(articles))
+            for i in 0..<articles.count {
+                let article: Article = articles[i]
+                fetchedArticle.append(article)
+            }
+            completion(.success((articles, currentArticlesCount)))
         } catch {
             completion(.failure(error))
         }

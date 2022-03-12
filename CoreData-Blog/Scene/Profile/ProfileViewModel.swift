@@ -12,7 +12,6 @@ final class ProfileViewModel
 {
     weak var delegate: ProfileViewModelDelegate?
     private var service: IProfileService
-    
     init(service: IProfileService)
     {
         self.service = service
@@ -22,14 +21,16 @@ final class ProfileViewModel
 // MARK: - ViewModel Protocol
 extension ProfileViewModel: ProfileViewModelProtocol
 {
-    func getFavoriteArticles(with category: String)
+    func getFavoriteArticles(with category: String,
+                             _ fetchOffset: Int)
     {
-        service.getFavoriteArticles(with: category) { [weak self] (result) in
+        service.getFavoriteArticles(with: category,
+                                    fetchOffset) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
-            case .success(let articles):
-                self.notify(.favoriteArticles(articles))
+            case .success((let articles, let currentArticlesCount)):
+                self.notify(.favoriteArticles(articles, currentArticlesCount))
             case .failure(let error):
                 self.notify(.error(error))
             }
@@ -37,14 +38,14 @@ extension ProfileViewModel: ProfileViewModelProtocol
     }
     
     func removeFavorites(with id: UUID,
-                            on category: String)
+                         on category: String)
     {
         service.removeOrAddFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
             case .success(let isFavorite):
-                self.getFavoriteArticles(with: category)
+//                self.getFavoriteArticles(with: category)
                 self.notify(.isFavorited(.success(isFavorite)))
             case .failure(let error):
                 self.notify(.isFavorited(.failure(error)))

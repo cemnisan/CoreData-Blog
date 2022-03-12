@@ -7,9 +7,12 @@
 
 import CoreData
 
+
 protocol IProfileService
 {
-    func getFavoriteArticles(with category: String, completion: @escaping (Result<[Article]>) -> Void)
+    func getFavoriteArticles(with category: String,
+                             _ fetchOffset: Int,
+                             completion: @escaping (Result<([Article], Int)>) -> Void)
     func removeOrAddFavorites(with id: UUID,
-                      completion: @escaping (Result<Bool>) -> Void)
+                              completion: @escaping (Result<Bool>) -> Void)
 }

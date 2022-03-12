@@ -21,7 +21,9 @@ final class ProfileViewController: UIViewController
     private var articles: [Article] = []
     private var category = "Software"
     private var dataSource: UITableViewDiffableDataSource<String, Article>!
-
+    private var fetchOffset = 0
+    private var currentArticleCount: Int?
+    
     // MARK: - Lifecycles
     override func viewDidLoad()
     {
@@ -34,7 +36,7 @@ final class ProfileViewController: UIViewController
     {
         super.viewWillAppear(animated)
         
-        viewModel.getFavoriteArticles(with: category)
+        viewModel.getFavoriteArticles(with: category, 0)
     }
 }
 
@@ -68,8 +70,8 @@ extension ProfileViewController
     @IBAction func segmentControlPressed(_ sender: UISegmentedControl)
     {
         guard let category = sender.titleForSegment(at: sender.selectedSegmentIndex) else { return }
-        
-        viewModel.getFavoriteArticles(with: category)
+        fetchOffset = 0
+        viewModel.getFavoriteArticles(with: category, fetchOffset)
     }
 }
 
@@ -79,8 +81,10 @@ extension ProfileViewController: ProfileViewModelDelegate
     func handleOutput(_ output: ProfileViewModelOutput)
     {
         switch output {
-        case .favoriteArticles(let articles):
+        case .favoriteArticles(let articles,
+                               let currentArticlesCount):
             self.articles = articles
+            self.currentArticleCount = currentArticlesCount
             updateDataSource()
         case .error(let error):
             print(error)
@@ -151,5 +155,23 @@ extension ProfileViewController: IHomeTableViewCell
                                    with id: UUID)
     {
         viewModel.removeFavorites(with: id, on: category)
+    }
+}
+
+// UIScrollView
+extension ProfileViewController
+{
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView,
+                                  willDecelerate decelerate: Bool)
+    {
+        let currentOffset: CGFloat = scrollView.contentOffset.y
+        let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+       
+        if maximumOffset - currentOffset <= 0 {
+            if (articles.count >= 5 && (articles.count + fetchOffset) != currentArticleCount) {
+                fetchOffset += 2
+                viewModel.getFavoriteArticles(with: category, fetchOffset)
+            }
+        }
     }
 }
