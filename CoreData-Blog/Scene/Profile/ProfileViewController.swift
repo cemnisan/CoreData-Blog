@@ -167,11 +167,13 @@ extension ProfileViewController
         let currentOffset: CGFloat = scrollView.contentOffset.y
         let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
        
-        if maximumOffset - currentOffset <= 0 {
+        if maximumOffset - currentOffset <= 50 {
             if (articles.count >= 5 && (articles.count + fetchOffset) != currentArticleCount) {
-                fetchOffset += 2
+                fetchOffset += 5
                 viewModel.getFavoriteArticles(with: category, fetchOffset)
             }
+        } else {
+            fetchOffset = 0
         }
     }
 }
