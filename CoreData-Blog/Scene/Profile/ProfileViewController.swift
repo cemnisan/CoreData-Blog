@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import CoreData
-// TODO: - Use Diffable Data Source
 
 // MARK: - Initialize
 final class ProfileViewController: UIViewController
@@ -29,7 +27,6 @@ final class ProfileViewController: UIViewController
     {
         super.viewDidLoad()
 
-        
         configureUI()
     }
 
@@ -38,6 +35,7 @@ final class ProfileViewController: UIViewController
         super.viewWillAppear(animated)
         
         categorySegmentControl.selectedSegmentIndex = 0
+        
         viewModel.removeStoreArticles()
         viewModel.getFavoriteArticles(with: category, 0)
     }
@@ -73,9 +71,11 @@ extension ProfileViewController
     @IBAction func segmentControlPressed(_ sender: UISegmentedControl)
     {
         guard let category = sender.titleForSegment(at: sender.selectedSegmentIndex) else { return }
+        
         self.category = category
+        self.fetchOffset = 0
+        
         viewModel.removeStoreArticles()
-        fetchOffset = 0
         viewModel.getFavoriteArticles(with: category, fetchOffset)
     }
 }
@@ -94,8 +94,10 @@ extension ProfileViewController: ProfileViewModelDelegate
             updateDataSource()
         case .error(let error):
             print(error)
-        case .isFavorited(.success(let isFavorited)):
-            print(isFavorited)
+        case .isFavorited(.success(_)):
+            articles = articles.filter { $0.isFavorite == true}
+            updateDataSource()
+            checkEmptyView()
         case .isFavorited(.failure(let error)):
             print(error)
         }
@@ -164,7 +166,7 @@ extension ProfileViewController: IHomeTableViewCell
     }
 }
 
-// UIScrollView
+// MARK: - UIScrollView
 extension ProfileViewController
 {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView,
@@ -173,11 +175,25 @@ extension ProfileViewController
         let currentOffset: CGFloat = scrollView.contentOffset.y
         let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
      
-        if maximumOffset - currentOffset <= 0 {
-            if (articles.count >= 10 && articles.count != currentArticleCount) {
-                fetchOffset += 10
+        if maximumOffset - currentOffset <= 50
+        {
+            if (articles.count >= 5 && articles.count != currentArticleCount)
+            {
+                fetchOffset += 5
                 viewModel.getFavoriteArticles(with: category, fetchOffset)
             }
+        }
+    }
+}
+
+// MARK: - Helpers
+extension ProfileViewController
+{
+    private func checkEmptyView()
+    {
+        if articles.count == 0
+        {
+            viewModel.getFavoriteArticles(with: category, fetchOffset)
         }
     }
 }

@@ -30,7 +30,8 @@ extension ProfileViewModel: ProfileViewModelProtocol
             guard let self = self else { return }
             
             switch result {
-            case .success((let articles, let currentArticlesCount)):
+            case .success((let articles,
+                           let currentArticlesCount)):
                 self.notify(.favoriteArticles(articles, currentArticlesCount))
             case .failure(let error):
                 self.notify(.error(error))

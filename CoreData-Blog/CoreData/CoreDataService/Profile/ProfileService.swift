@@ -9,12 +9,12 @@ import CoreData
 
 final class ProfileService: BaseService
 {
-    private var storeArticles: [Article]
+    private var storedArticles: [Article]
     
     init(stack: CoreDataStack,
-         storeArticles: [Article] = []
+         storedArticles: [Article] = []
     ) {
-        self.storeArticles = storeArticles
+        self.storedArticles = storedArticles
         super.init(stack: stack)
     }
 }
@@ -36,23 +36,22 @@ extension ProfileService: IProfileService
         let baseRequest: NSFetchRequest<Article> = Article.fetchRequest()
         baseRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
         baseRequest.sortDescriptors = [reversedSort]
-        baseRequest.fetchLimit = 10
+        baseRequest.fetchLimit = 5
         baseRequest.fetchOffset = fetchOffset
         
         do {
             var baseArticles = try stack.managedContext.fetch(baseRequest)
             
             if baseArticles.count > 0 &&
-               baseArticles.count != articlesCount,
-               baseArticles[0].category == category
+               baseArticles.count != articlesCount
             {
                 for i in 0..<baseArticles.count {
-                    storeArticles.append(baseArticles[i])
+                    storedArticles.append(baseArticles[i])
                 }
                 
-                baseArticles = storeArticles
+                baseArticles = storedArticles
             } else {
-                storeArticles = []
+                storedArticles = []
             }
             
             completion(.success((baseArticles, articlesCount)))
@@ -63,7 +62,7 @@ extension ProfileService: IProfileService
     
     func removeStoreArticles()
     {
-        storeArticles.removeAll()
+        storedArticles.removeAll()
     }
     
     private func currentFavoriteArticlesCount(category: String) -> Int
