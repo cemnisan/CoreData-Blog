@@ -28,14 +28,17 @@ final class ProfileViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-       
+
+        
         configureUI()
     }
-    
+
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
         
+        categorySegmentControl.selectedSegmentIndex = 0
+        viewModel.removeStoreArticles()
         viewModel.getFavoriteArticles(with: category, 0)
     }
 }
@@ -70,6 +73,8 @@ extension ProfileViewController
     @IBAction func segmentControlPressed(_ sender: UISegmentedControl)
     {
         guard let category = sender.titleForSegment(at: sender.selectedSegmentIndex) else { return }
+        self.category = category
+        viewModel.removeStoreArticles()
         fetchOffset = 0
         viewModel.getFavoriteArticles(with: category, fetchOffset)
     }
@@ -85,6 +90,7 @@ extension ProfileViewController: ProfileViewModelDelegate
                                let currentArticlesCount):
             self.articles = articles
             self.currentArticleCount = currentArticlesCount
+          
             updateDataSource()
         case .error(let error):
             print(error)
@@ -166,14 +172,12 @@ extension ProfileViewController
     {
         let currentOffset: CGFloat = scrollView.contentOffset.y
         let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
-       
-        if maximumOffset - currentOffset <= 50 {
-            if (articles.count >= 5 && (articles.count + fetchOffset) != currentArticleCount) {
-                fetchOffset += 5
+     
+        if maximumOffset - currentOffset <= 0 {
+            if (articles.count >= 10 && articles.count != currentArticleCount) {
+                fetchOffset += 10
                 viewModel.getFavoriteArticles(with: category, fetchOffset)
             }
-        } else {
-            fetchOffset = 0
         }
     }
 }

@@ -33,7 +33,7 @@ extension AddArticleViewController
         let title   = titleTextField.text!
         let content = contentTextView.text!
         
-        viewModel.addArticle(with: title, content: content, category: "Software")
+        viewModel.addArticle(with: title, content: content, category: "Hardware")
     }
 }
 

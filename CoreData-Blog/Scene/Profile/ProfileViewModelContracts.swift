@@ -14,6 +14,7 @@ protocol ProfileViewModelProtocol
                              _ fetchOffset: Int)
     func removeFavorites(with id: UUID, on category: String)
     func selectedArticle(article: Article)
+    func removeStoreArticles()
 }
 
 protocol ProfileViewModelDelegate: AnyObject

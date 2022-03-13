@@ -15,4 +15,5 @@ protocol IProfileService
                              completion: @escaping (Result<([Article], Int)>) -> Void)
     func removeOrAddFavorites(with id: UUID,
                               completion: @escaping (Result<Bool>) -> Void)
+    func removeStoreArticles()
 }

@@ -12,6 +12,7 @@ final class ProfileViewModel
 {
     weak var delegate: ProfileViewModelDelegate?
     private var service: IProfileService
+    
     init(service: IProfileService)
     {
         self.service = service
@@ -45,12 +46,16 @@ extension ProfileViewModel: ProfileViewModelProtocol
             
             switch result {
             case .success(let isFavorite):
-//                self.getFavoriteArticles(with: category)
                 self.notify(.isFavorited(.success(isFavorite)))
             case .failure(let error):
                 self.notify(.isFavorited(.failure(error)))
             }
         }
+    }
+    
+    func removeStoreArticles()
+    {
+        service.removeStoreArticles()
     }
     
     func selectedArticle(article: Article)
