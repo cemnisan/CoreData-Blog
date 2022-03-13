@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 // MARK: - Initialize HomeViewController
 final class HomeViewController: BaseViewController
@@ -54,17 +53,6 @@ extension HomeViewController
     {
         viewModel.delegate = self
     }
-    
-    private func configureIndicatorView(with isLoading: Bool)
-    {
-        if isLoading {
-            self.showLoadingView()
-            tableView.separatorStyle = .none
-        } else {
-            self.hideLoadingView()
-            tableView.separatorStyle = .singleLine
-        }
-    }
 }
 
 // MARK: - IBActions
@@ -85,14 +73,10 @@ extension HomeViewController: HomeViewModelDelegate
         case .showArticlesVia(let articles):
             self.articles = articles
             tableView.reloadData()
-        case .loading(let isLoading):
-            configureIndicatorView(with: isLoading)
         case .showError(let error):
             self.showError(title: "Error", message: error.localizedDescription)
-        case .isFavorited(.success(let isFavorited)):
+        case .isFavorited(let isFavorited):
             print(isFavorited)
-        case .isFavorited(.failure(let error)):
-            print(error)
         }
     }
     

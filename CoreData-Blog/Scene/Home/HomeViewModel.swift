@@ -13,6 +13,7 @@ final class HomeViewModel: HomeViewModelProtocol
 {
     weak var delegate: HomeViewModelDelegate?
     private let service: IHomeService
+    private var articles: [Article] = []
     
     init(service: IHomeService)
     {
@@ -25,15 +26,13 @@ extension HomeViewModel
 {
     func load()
     {
-        notify(.loading(true))
-        
         service.fetchArticles { [weak self] result in
             guard let self = self else { return }
-            self.notify(.loading(false))
            
             switch result {
             case .success(let articles):
-                self.notify(.showArticlesVia(articles))
+                self.articles = articles
+                self.notify(.showArticlesVia(self.articles))
             case .failure(let error):
                 self.notify(.showError(error))
             }
@@ -46,9 +45,9 @@ extension HomeViewModel
             
             switch result {
             case .success(let isFavorited):
-                self.notify(.isFavorited(.success(isFavorited)))
+                self.notify(.isFavorited(isFavorited))
             case .failure(let error):
-                self.notify(.isFavorited(.failure(error)))
+                self.notify(.showError(error))
             }
         }
     }

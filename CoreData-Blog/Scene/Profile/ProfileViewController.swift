@@ -37,7 +37,7 @@ final class ProfileViewController: UIViewController
         categorySegmentControl.selectedSegmentIndex = 0
         
         viewModel.removeStoreArticles()
-        viewModel.getFavoriteArticles(with: category, 0)
+        viewModel.getFavoriteArticles(with: category, fetchOffset)
     }
 }
 
@@ -90,16 +90,13 @@ extension ProfileViewController: ProfileViewModelDelegate
                                let currentArticlesCount):
             self.articles = articles
             self.currentArticleCount = currentArticlesCount
-          
             updateDataSource()
         case .error(let error):
             print(error)
-        case .isFavorited(.success(_)):
-            articles = articles.filter { $0.isFavorite == true}
+        case .removeFavorite(_):
+            articles = articles.filter { $0.isFavorite == true }
             updateDataSource()
             checkEmptyView()
-        case .isFavorited(.failure(let error)):
-            print(error)
         }
     }
     
@@ -191,7 +188,7 @@ extension ProfileViewController
 {
     private func checkEmptyView()
     {
-        if articles.count == 0
+        if articles.count == 1
         {
             viewModel.getFavoriteArticles(with: category, fetchOffset)
         }

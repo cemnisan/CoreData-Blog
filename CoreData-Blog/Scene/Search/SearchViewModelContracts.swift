@@ -30,7 +30,7 @@ enum SearchViewModelRouter
 enum SearchViewModelOutput
 {
     case foundArticles([Article])
-    case isFavorited(Result<Bool>)
+    case isFavorited(Bool)
     case foundArticlesWithCategory([Article])
-    case notFound(Error)
+    case showError(Error)
 }

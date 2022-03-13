@@ -12,7 +12,8 @@ protocol ProfileViewModelProtocol
     var delegate: ProfileViewModelDelegate? { get set }
     func getFavoriteArticles(with category: String,
                              _ fetchOffset: Int)
-    func removeFavorites(with id: UUID, on category: String)
+    func removeFavorites(with id: UUID,
+                         on category: String)
     func selectedArticle(article: Article)
     func removeStoreArticles()
 }
@@ -30,7 +31,7 @@ enum ProfileViewModelRouter
 
 enum ProfileViewModelOutput
 {
-    case isFavorited(Result<Bool>)
     case favoriteArticles([Article], Int)
+    case removeFavorite(Bool)
     case error(Error)
 }

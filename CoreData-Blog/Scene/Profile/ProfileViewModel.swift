@@ -12,6 +12,7 @@ final class ProfileViewModel
 {
     weak var delegate: ProfileViewModelDelegate?
     private var service: IProfileService
+    private var articles: [Article] = []
     
     init(service: IProfileService)
     {
@@ -32,7 +33,9 @@ extension ProfileViewModel: ProfileViewModelProtocol
             switch result {
             case .success((let articles,
                            let currentArticlesCount)):
-                self.notify(.favoriteArticles(articles, currentArticlesCount))
+                self.articles = articles
+                self.notify(.favoriteArticles(self.articles,
+                                              currentArticlesCount))
             case .failure(let error):
                 self.notify(.error(error))
             }
@@ -47,9 +50,9 @@ extension ProfileViewModel: ProfileViewModelProtocol
             
             switch result {
             case .success(let isFavorite):
-                self.notify(.isFavorited(.success(isFavorite)))
+                self.notify(.removeFavorite(isFavorite))
             case .failure(let error):
-                self.notify(.isFavorited(.failure(error)))
+                self.notify(.error(error))
             }
         }
     }

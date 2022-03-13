@@ -11,7 +11,9 @@ import Foundation
 final class SearchViewModel
 {
     weak var delegate: SearchViewModelDelegate?
-    var service: ISearchService
+    private var service: ISearchService
+    private var foundArticles: [Article] = []
+    private var foundArticlesWithCategory: [Article] = []
     
     init(service: ISearchService)
     {
@@ -29,9 +31,10 @@ extension SearchViewModel: SearchViewModelProtocol
             
             switch result {
             case .success(let articles):
-                self.notify(.foundArticles(articles))
+                self.foundArticles = articles
+                self.notify(.foundArticles(self.foundArticles))
             case .failure(let error):
-                self.notify(.notFound(error))
+                self.notify(.showError(error))
             }
         }
     }
@@ -42,7 +45,8 @@ extension SearchViewModel: SearchViewModelProtocol
             
             switch result {
             case .success(let articles):
-                self.notify(.foundArticlesWithCategory(articles))
+                self.foundArticlesWithCategory = articles
+                self.notify(.foundArticlesWithCategory(self.foundArticlesWithCategory))
             case .failure(let error):
                 print(error)
             }
@@ -56,9 +60,9 @@ extension SearchViewModel: SearchViewModelProtocol
             
             switch result {
             case .success(let isFavorited):
-                self.notify(.isFavorited(.success(isFavorited)))
+                self.notify(.isFavorited(isFavorited))
             case .failure(let error):
-                self.notify(.isFavorited(.failure(error)))
+                self.notify(.showError(error))
             }
         }
     }

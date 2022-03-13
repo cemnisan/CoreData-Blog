@@ -30,8 +30,7 @@ enum HomeViewModelRouter
 
 enum HomeViewModelOutput
 {
-    case loading(Bool)
     case showArticlesVia([Article])
     case showError(Error)
-    case isFavorited(Result<Bool>)
+    case isFavorited(Bool)
 }

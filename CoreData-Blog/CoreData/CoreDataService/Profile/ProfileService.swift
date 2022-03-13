@@ -76,5 +76,4 @@ extension ProfileService: IProfileService
         let count = try! stack.managedContext.count(for: articlesCount)
         return count
     }
-    
 }

@@ -109,12 +109,10 @@ extension SearchViewController: SearchViewModelDelegate
         case .foundArticlesWithCategory(let articles):
             self.foundArticlesWithCategory = articles
             tableView.reloadData()
-        case .notFound(let error):
+        case .showError(let error):
             print(error)
-        case .isFavorited(.success(let isFavorite)):
+        case .isFavorited(let isFavorite):
             print(isFavorite)
-        case .isFavorited(.failure(let error)):
-            print(error)
         }
     }
     
@@ -161,6 +159,7 @@ extension SearchViewController: UITableViewDelegate
                    didSelectRowAt indexPath: IndexPath)
     {
         let article = selectedArticle(at: indexPath)
+        
         viewModel.selectedArticle(article: article)
     }
 }
