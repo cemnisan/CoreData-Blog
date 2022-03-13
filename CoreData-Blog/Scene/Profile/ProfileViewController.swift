@@ -188,7 +188,7 @@ extension ProfileViewController
 {
     private func checkEmptyView()
     {
-        if articles.count == 1
+        if articles.count == 0
         {
             viewModel.getFavoriteArticles(with: category, fetchOffset)
         }

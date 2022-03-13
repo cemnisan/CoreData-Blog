@@ -14,4 +14,3 @@ final class AppContainer
     let router  = AppRouter()
     let stack = CoreDataStack(modelName: K.Model.modelName)
 } 
-

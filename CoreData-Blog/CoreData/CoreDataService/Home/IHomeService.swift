@@ -10,10 +10,11 @@ import CoreData
 
 protocol IHomeService
 {
-    func fetchArticles(completion: @escaping (Result<[Article]>) -> Void)
+    func fetchArticles(fetchOffet: Int,
+                       completion: @escaping (Result<([Article], Int)>) -> Void)
+    func removeOrAddFavorites(with id: UUID,
+                      completion: @escaping (Result<Bool>) -> Void)
     func addArticle(with title: String,
                     _ content: String,
                     _ category: String) throws
-    func removeOrAddFavorites(with id: UUID,
-                      completion: @escaping (Result<Bool>) -> Void)
 }

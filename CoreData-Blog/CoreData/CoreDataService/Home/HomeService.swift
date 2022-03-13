@@ -10,26 +10,40 @@ import CoreData
 
 final class HomeService: BaseService
 {
-    override init(stack: CoreDataStack) {
-        super.init(stack: stack)
+    override init(
+        stack: CoreDataStack,
+        storedArticles: [Article] = []
+    ) {
+        super.init(stack: stack, storedArticles: storedArticles)
     }
 }
 
 extension HomeService: IHomeService
 {
-    func fetchArticles(completion: @escaping (Result<[Article]>) -> Void)
+    func fetchArticles(fetchOffet: Int,
+                       completion: @escaping (Result<([Article], Int)>) -> Void)
     {
-        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let currentAllArticlesCount = self.currentAllArticlesCount()
+    
         let dateSort: NSSortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
         let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
         
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
         fetchRequest.sortDescriptors = [reversedDate]
+        fetchRequest.fetchLimit = 5
+        fetchRequest.fetchOffset = fetchOffet
         
-        do {
-            let articles = try stack.managedContext.fetch(fetchRequest)
-            completion(.success(articles))
-        } catch let error as NSError {
-            completion(.failure(error))
+        self.pagination(articlesCount: currentAllArticlesCount,
+                        fetch: fetchRequest) { [weak self] (result) in
+            guard let _ = self else { return }
+            
+            switch result {
+            case .success(let articles):
+                completion(.success((articles,
+                                     currentAllArticlesCount)))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
@@ -51,5 +65,13 @@ extension HomeService: IHomeService
         article.author      = author
         
         stack.saveContext()
+    }
+    
+    private func currentAllArticlesCount() -> Int
+    {
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        let count = try! stack.managedContext.count(for: fetchRequest)
+        
+        return count
     }
 }

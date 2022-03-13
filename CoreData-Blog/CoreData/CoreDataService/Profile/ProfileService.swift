@@ -9,71 +9,57 @@ import CoreData
 
 final class ProfileService: BaseService
 {
-    private var storedArticles: [Article]
-    
-    init(stack: CoreDataStack,
-         storedArticles: [Article] = []
+    override init(
+        stack: CoreDataStack,
+        storedArticles: [Article] = []
     ) {
-        self.storedArticles = storedArticles
-        super.init(stack: stack)
+        super.init(stack: stack,
+                   storedArticles: storedArticles)
     }
 }
 
 extension ProfileService: IProfileService
-{
+{    
     func getFavoriteArticles(with category: String,
                              _ fetchOffset: Int,
                              completion: @escaping (Result<([Article], Int)>) -> Void)
     {
-        let articlesCount = self.currentFavoriteArticlesCount(category: category)
-        
         let categoryPredicate: NSPredicate = NSPredicate(format: "category = %@", category)
         let favoritePredicate = NSPredicate(format: "isFavorite == YES")
         
         let dateSort = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
         let reversedSort = dateSort.reversedSortDescriptor as! NSSortDescriptor
         
-        let baseRequest: NSFetchRequest<Article> = Article.fetchRequest()
-        baseRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, favoritePredicate])
-        baseRequest.sortDescriptors = [reversedSort]
-        baseRequest.fetchLimit = 5
-        baseRequest.fetchOffset = fetchOffset
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate,
+                                                                                    favoritePredicate])
+        fetchRequest.sortDescriptors = [reversedSort]
+        fetchRequest.fetchLimit = 5
+        fetchRequest.fetchOffset = fetchOffset
         
-        do {
-            var baseArticles = try stack.managedContext.fetch(baseRequest)
+        let articlesCount = self.currentFavoriteArticlesCount(category: categoryPredicate,
+                                                              favirote: favoritePredicate)
+        self.pagination(articlesCount: articlesCount,
+                        fetch: fetchRequest) { [weak self] (result) in
+            guard let _ = self else { return }
             
-            if baseArticles.count > 0 &&
-               baseArticles.count != articlesCount
-            {
-                for i in 0..<baseArticles.count {
-                    storedArticles.append(baseArticles[i])
-                }
-                
-                baseArticles = storedArticles
-            } else {
-                storedArticles = []
+            switch result {
+            case .success(let articles):
+                print("profileS. \(articles.count)")
+                completion(.success((articles, articlesCount)))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            completion(.success((baseArticles, articlesCount)))
-        } catch {
-            completion(.failure(error))
         }
     }
     
-    func removeStoreArticles()
+    private func currentFavoriteArticlesCount(category: NSPredicate,
+                                              favirote: NSPredicate) -> Int
     {
-        storedArticles.removeAll()
-    }
-    
-    private func currentFavoriteArticlesCount(category: String) -> Int
-    {
-        let categoryPredicate = NSPredicate(format: "category = %@", category)
-        let favoritePredicate = NSPredicate(format: "isFavorite == YES")
-        
-        let articlesCount: NSFetchRequest<Article> = Article.fetchRequest()
-        articlesCount.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate,
-                                                                                      favoritePredicate])
-        let count = try! stack.managedContext.count(for: articlesCount)
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [category,
+                                                                                      favirote])
+        let count = try! stack.managedContext.count(for: fetchRequest)
         return count
     }
 }

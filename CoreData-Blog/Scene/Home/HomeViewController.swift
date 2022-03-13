@@ -15,7 +15,9 @@ final class HomeViewController: BaseViewController
     
     // MARK: - Properties
     var viewModel: HomeViewModelProtocol!
-    var articles: [Article] = []
+    private var articles: [Article] = []
+    private var fetchOffset = 0
+    private var currentArticlesCount: Int?
     
     // MARK: - Lifecycles
     override func viewDidLoad()
@@ -29,7 +31,7 @@ final class HomeViewController: BaseViewController
     {
         super.viewWillAppear(animated)
         
-        viewModel.load()
+        viewModel.load(with: fetchOffset)
     }
 }
 
@@ -70,8 +72,9 @@ extension HomeViewController: HomeViewModelDelegate
     func handleOutput(_ output: HomeViewModelOutput)
     {
         switch output {
-        case .showArticlesVia(let articles):
+        case .showArticlesVia((let articles, let currentArticlesCount)):
             self.articles = articles
+            self.currentArticlesCount = currentArticlesCount
             tableView.reloadData()
         case .showError(let error):
             self.showError(title: "Error", message: error.localizedDescription)
@@ -136,5 +139,25 @@ extension HomeViewController: IHomeTableViewCell
                                    with id: UUID)
     {
         viewModel.addFavorites(with: id)
+    }
+}
+
+// MARK: - UIScrollView
+extension HomeViewController
+{
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView,
+                                  willDecelerate decelerate: Bool)
+    {
+        let currentOffset: CGFloat = scrollView.contentOffset.y
+        let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+     
+        if maximumOffset - currentOffset <= 50
+        {
+            if (articles.count >= 5 && articles.count != currentArticlesCount)
+            {
+                fetchOffset += 5
+                viewModel.load(with: fetchOffset)
+            }
+        }
     }
 }

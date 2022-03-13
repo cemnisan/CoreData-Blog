@@ -10,7 +10,7 @@ import Foundation
 protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
-    func load()
+    func load(with fetchOffset: Int)
     func selectAddButton()
     func addFavorites(with id: UUID)
     func selectedArticle(article: Article)
@@ -30,7 +30,7 @@ enum HomeViewModelRouter
 
 enum HomeViewModelOutput
 {
-    case showArticlesVia([Article])
+    case showArticlesVia(([Article], Int))
     case showError(Error)
     case isFavorited(Bool)
 }

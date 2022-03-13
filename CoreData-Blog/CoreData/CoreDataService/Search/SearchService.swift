@@ -9,48 +9,90 @@ import CoreData
 
 final class SearchService: BaseService
 {
-    override init(stack: CoreDataStack) {
-        super.init(stack: stack)
+    override init(
+        stack: CoreDataStack,
+        storedArticles: [Article] = []
+    ) {
+        super.init(stack: stack, storedArticles: storedArticles)
     }
 }
 
 extension SearchService: ISearchService
 {
     func getArticles(with category: String,
-                     completion: @escaping (Result<[Article]>) -> Void)
-    {
+                     fetchOffset: Int,
+                     completion: @escaping (Result<([Article], Int)>) -> Void)
+    {        
         let categoryPredicate = NSPredicate(format: "category = %@", category)
+        
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
         fetchRequest.predicate = categoryPredicate
+        fetchRequest.fetchLimit = 6
+        fetchRequest.fetchOffset = fetchOffset
         
-        do {
-            let articles = try stack.managedContext.fetch(fetchRequest)
-            completion(.success(articles))
-        } catch {
-            completion(.failure(error))
+        let currentArticlesCount = self.currentArticlesCountByCategory(category: categoryPredicate)
+        
+        self.pagination(articlesCount: currentArticlesCount,
+                        fetch: fetchRequest) { [weak self] (result) in
+            guard let _ = self else { return }
+            
+            switch result {
+            case .success(let articles):
+                completion(.success((articles, currentArticlesCount)))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
     func getArticles(with query: String,
                      _ selectedCategory: String,
-                     completion: @escaping (Result<[Article]>) -> Void)
+                     fetchOffset: Int,
+                     completion: @escaping (Result<([Article], Int)>) -> Void)
     {
         let queryPredicate = NSPredicate(format: "title CONTAINS[cd] %@", query)
         let categoryPredicate = NSPredicate(format: "category = %@", selectedCategory)
+        
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [queryPredicate, categoryPredicate])
+        fetchRequest.fetchLimit = 6
+        fetchRequest.fetchOffset = fetchOffset
         
-        fetchRequest.predicate = NSCompoundPredicate(
-            andPredicateWithSubpredicates: [
-                queryPredicate,
-                categoryPredicate
-            ]
-        )
-        
-        do {
-            let articles = try stack.managedContext.fetch(fetchRequest)
-            completion(.success(articles))
-        } catch let error {
-            completion(.failure(error))
+        let currentArticlesCount = self.currentArticlesCountBySearch(query: queryPredicate,
+                                                                     category: categoryPredicate)
+        self.pagination(articlesCount: currentArticlesCount,
+                        fetch: fetchRequest) { [weak self] (result) in
+            guard let _ = self else { return }
+            
+            switch result {
+            case .success(let articles):
+                print("servicee", articles.count)
+                completion(.success((articles,
+                                     currentArticlesCount)))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
+    }
+    
+    private func currentArticlesCountByCategory(category: NSPredicate) -> Int
+    {
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        fetchRequest.predicate = category
+        
+        let count = try! stack.managedContext.count(for: fetchRequest)
+        
+        return count
+    }
+    
+    private func currentArticlesCountBySearch(query: NSPredicate,
+                                              category: NSPredicate) -> Int
+    {
+        let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
+        fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [query,
+                                                                                     category])
+        let count = try! stack.managedContext.count(for: fetchRequest)
+        
+        return count
     }
 }

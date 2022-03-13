@@ -12,7 +12,8 @@ final class AppRouter
 {
     var window: UIWindow
     
-    init(){
+    init()
+    {
         window = UIWindow(frame: UIScreen.main.bounds)
     }
 }

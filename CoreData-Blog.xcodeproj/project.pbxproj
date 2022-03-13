@@ -58,7 +58,6 @@
 		F882975127D2C6640082B1CC /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F882974F27D2C6640082B1CC /* HomeTableViewCell.xib */; };
 		F8DCAECE27D804AF008A51A8 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */; };
 		F8DCAECF27D804AF008A51A8 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */; };
-		F8DF396727DD30A100C5FE67 /* Integer+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DF396627DD30A100C5FE67 /* Integer+Ex.swift */; };
 		F8E05A1827D8D9C100E1E022 /* ISearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A1727D8D9C100E1E022 /* ISearchService.swift */; };
 		F8E05A1A27D8D9C900E1E022 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A1927D8D9C900E1E022 /* SearchService.swift */; };
 		F8E05A2127D9336D00E1E022 /* Author+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A1D27D9336D00E1E022 /* Author+CoreDataClass.swift */; };
@@ -125,7 +124,6 @@
 		F882974F27D2C6640082B1CC /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
 		F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
-		F8DF396627DD30A100C5FE67 /* Integer+Ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Integer+Ex.swift"; sourceTree = "<group>"; };
 		F8E05A1727D8D9C100E1E022 /* ISearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchService.swift; sourceTree = "<group>"; };
 		F8E05A1927D8D9C900E1E022 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		F8E05A1D27D9336D00E1E022 /* Author+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Author+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				F84DF60C27D63F7800FAE031 /* DataFormatter+Ex.swift */,
 				F84DF62427D7985000FAE031 /* UIButton+Ex.swift */,
 				F8FB335127DA2C2F00528BEB /* UISearchController+Ex.swift */,
-				F8DF396627DD30A100C5FE67 /* Integer+Ex.swift */,
 			);
 			path = Extenstion;
 			sourceTree = "<group>";
@@ -515,7 +512,6 @@
 				F882972E27D2BFC80082B1CC /* CoreDataStack.swift in Sources */,
 				F84DF61B27D6AB4200FAE031 /* SelectBookMark.swift in Sources */,
 				F807054927D50A2F00755C82 /* Result.swift in Sources */,
-				F8DF396727DD30A100C5FE67 /* Integer+Ex.swift in Sources */,
 				F882975027D2C6640082B1CC /* HomeTableViewCell.swift in Sources */,
 				F86B95BA27DA5E18000512B1 /* IProfileService.swift in Sources */,
 				F84DF61527D67FD400FAE031 /* DetailViewModel.swift in Sources */,

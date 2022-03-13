@@ -10,17 +10,21 @@ import CoreData
 class BaseService
 {
     var stack: CoreDataStack
+    var storedArticles: [Article]
     
-    init(stack: CoreDataStack)
-    {
+    init(
+        stack: CoreDataStack,
+        storedArticles: [Article]
+    ) {
         self.stack = stack
+        self.storedArticles = storedArticles
     }
 }
 
 extension BaseService: IBaseService
 {
     func removeOrAddFavorites(with id: UUID,
-                      completion: @escaping (Result<Bool>) -> Void)
+                              completion: @escaping (Result<Bool>) -> Void)
     {
         let idPredicate = NSPredicate(
             format: "%K = %@",
@@ -41,5 +45,34 @@ extension BaseService: IBaseService
         } catch {
             completion(.failure(error))
         }
+    }
+    
+    func pagination(articlesCount: Int,
+                    fetch: NSFetchRequest<Article>,
+                    completion: @escaping (Result<[Article]>) -> Void)
+    {
+        do {
+            var articles = try stack.managedContext.fetch(fetch)
+   
+            if articles.count > 0 &&
+               articles.count != articlesCount
+            {
+                for i in 0..<articles.count {
+                    storedArticles.append(articles[i])
+                }
+                
+                articles = storedArticles
+            } else {
+                storedArticles = []
+            }
+            
+            completion(.success(articles))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func removeStoredArticles() {
+        storedArticles.removeAll()
     }
 }

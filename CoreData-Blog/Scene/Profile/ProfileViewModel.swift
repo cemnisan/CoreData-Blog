@@ -59,7 +59,7 @@ extension ProfileViewModel: ProfileViewModelProtocol
     
     func removeStoreArticles()
     {
-        service.removeStoreArticles()
+        service.removeStoredArticles()
     }
     
     func selectedArticle(article: Article)

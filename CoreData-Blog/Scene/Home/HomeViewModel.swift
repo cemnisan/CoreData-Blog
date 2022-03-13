@@ -24,15 +24,17 @@ final class HomeViewModel: HomeViewModelProtocol
 // MARK: - ViewModel's Protocol
 extension HomeViewModel
 {
-    func load()
+    func load(with fetchOffset: Int)
     {
-        service.fetchArticles { [weak self] result in
+        service.fetchArticles(fetchOffet: fetchOffset) { [weak self] result in
             guard let self = self else { return }
            
             switch result {
-            case .success(let articles):
+            case .success((let articles,
+                           let currentArticlesCount)):
                 self.articles = articles
-                self.notify(.showArticlesVia(self.articles))
+                self.notify(.showArticlesVia((self.articles,
+                                              currentArticlesCount)))
             case .failure(let error):
                 self.notify(.showError(error))
             }

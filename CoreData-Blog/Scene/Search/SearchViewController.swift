@@ -19,6 +19,8 @@ final class SearchViewController: UIViewController
     private var foundArticles: [Article] = []
     private var foundArticlesWithCategory: [Article] = []
     private var category = "Software"
+    private var fetchOffset = 0
+    private var currentArticlesCount = 0
 
     // MARK: - Lifecycles
     override func viewDidLoad()
@@ -31,13 +33,12 @@ final class SearchViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
- 
-        viewModel.getArticles(with: category)
+
+        viewModel.getArticles(with: category, fetchOffset: fetchOffset)
     }
     
-    override func viewDidDisappear(_ animated: Bool)
-    {
-        super.viewDidDisappear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         configureSearch()
     }
@@ -92,7 +93,7 @@ extension SearchViewController
             foundArticlesWithCategory = []
             tableView.reloadData()
         } else {
-            viewModel.getArticles(with: category)
+            viewModel.getArticles(with: category, fetchOffset: fetchOffset)
         }
     }
 }
@@ -103,11 +104,15 @@ extension SearchViewController: SearchViewModelDelegate
     func handleOutput(_ output: SearchViewModelOutput)
     {
         switch output {
-        case .foundArticles(let articles):
+        case .foundArticles((let articles,
+                             let currentArticlesCount)):
             self.foundArticles = articles
+            self.currentArticlesCount = currentArticlesCount
             tableView.reloadData()
-        case .foundArticlesWithCategory(let articles):
+        case .foundArticlesWithCategory((let articles,
+                                         let currentArticlesCount)):
             self.foundArticlesWithCategory = articles
+            self.currentArticlesCount = currentArticlesCount
             tableView.reloadData()
         case .showError(let error):
             print(error)
@@ -119,8 +124,10 @@ extension SearchViewController: SearchViewModelDelegate
     func navigate(to router: SearchViewModelRouter)
     {
         switch router {
-        case .detail(let article, let viewModel):
+        case .detail(let article,
+                     let viewModel):
             let detailViewController = DetailBuilder.make(with: article, viewModel)
+            
             show(detailViewController, sender: nil)
         }
     }
@@ -174,13 +181,44 @@ extension SearchViewController: ISearchTableViewCell
     }
 }
 
+// MARK: - UIScrollView
+extension SearchViewController
+{
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView,
+                                  willDecelerate decelerate: Bool)
+    {
+        let currentOffset: CGFloat = scrollView.contentOffset.y
+        let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
+     
+        if maximumOffset - currentOffset <= 50
+        {
+            if searchController.isActive
+            {
+                if foundArticles.count >= 6 &&
+                   foundArticles.count != currentArticlesCount
+                {
+                    fetchOffset += 6
+                    viewModel.getArticles(with: "s", category, fetchOffset: fetchOffset)
+                }
+            } else {
+                if foundArticlesWithCategory.count >= 6 &&
+                   foundArticlesWithCategory.count != currentArticlesCount
+                {
+                    fetchOffset += 6
+                    viewModel.getArticles(with: category, fetchOffset: fetchOffset)
+                }
+            }
+        }
+    }
+}
+
 // MARK: - SearchController Result Update
 extension SearchViewController: UISearchResultsUpdating
 {
     func updateSearchResults(for searchController: UISearchController)
     {
-        viewModel.getArticles(with: searchController.searchBar.text!, category)
-        configureResult()
+        print("hi")
+        print("..")
     }
 }
 

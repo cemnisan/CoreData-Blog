@@ -25,28 +25,38 @@ final class SearchViewModel
 extension SearchViewModel: SearchViewModelProtocol
 {
     func getArticles(with query: String,
-                     _ category: String) {
-        service.getArticles(with: query, category) { [weak self] (result) in
+                     _ category: String,
+                     fetchOffset: Int) {
+        service.getArticles(with: query,
+                            category,
+                            fetchOffset: fetchOffset) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
-            case .success(let articles):
+            case .success((let articles,
+                           let currentArticlesCount)):
+                
                 self.foundArticles = articles
-                self.notify(.foundArticles(self.foundArticles))
+                self.notify(.foundArticles((self.foundArticles,
+                                            currentArticlesCount)))
             case .failure(let error):
                 self.notify(.showError(error))
             }
         }
     }
     
-    func getArticles(with category: String) {
-        service.getArticles(with: category) { [weak self] (result) in
+    func getArticles(with category: String,
+                     fetchOffset: Int) {
+        service.getArticles(with: category,
+                            fetchOffset: fetchOffset) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
-            case .success(let articles):
+            case .success((let articles,
+                           let currentArticlesCount)):
                 self.foundArticlesWithCategory = articles
-                self.notify(.foundArticlesWithCategory(self.foundArticlesWithCategory))
+                self.notify(.foundArticlesWithCategory((self.foundArticlesWithCategory,
+                                                        currentArticlesCount)))
             case .failure(let error):
                 print(error)
             }
@@ -65,6 +75,11 @@ extension SearchViewModel: SearchViewModelProtocol
                 self.notify(.showError(error))
             }
         }
+    }
+    
+    func removeStoredArticles()
+    {
+        service.removeStoredArticles()
     }
     
     func selectedArticle(article: Article) {
