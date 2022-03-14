@@ -14,6 +14,7 @@ protocol HomeViewModelProtocol
     func selectAddButton()
     func addFavorites(with id: UUID)
     func selectedArticle(article: Article)
+    func removeStoredArticles()
 }
 
 protocol HomeViewModelDelegate: AnyObject

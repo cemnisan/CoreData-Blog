@@ -31,13 +31,15 @@ extension SearchService: ISearchService
         fetchRequest.fetchOffset = fetchOffset
         
         let currentArticlesCount = self.currentArticlesCountByCategory(category: categoryPredicate)
-        
-        self.pagination(articlesCount: currentArticlesCount,
-                        fetch: fetchRequest) { [weak self] (result) in
+        print("category: \(category)")
+        print("currentArticlesCountByCategory: \(currentArticlesCount)")
+        self.pagination(currentArticlesCount: currentArticlesCount,
+                        fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
+                print("getArticlesWithCategory", articles.count)
                 completion(.success((articles, currentArticlesCount)))
             case .failure(let error):
                 completion(.failure(error))
@@ -59,14 +61,15 @@ extension SearchService: ISearchService
         fetchRequest.fetchOffset = fetchOffset
         
         let currentArticlesCount = self.currentArticlesCountBySearch(query: queryPredicate,
-                                                                     category: categoryPredicate)
-        self.pagination(articlesCount: currentArticlesCount,
-                        fetch: fetchRequest) { [weak self] (result) in
+                                                                    category: categoryPredicate)
+        print("currentArticlesCountByQuery: \(currentArticlesCount)")
+        self.pagination(currentArticlesCount: currentArticlesCount,
+                        fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                print("servicee", articles.count)
+                print("getArticlesWithQuery", articles.count)
                 completion(.success((articles,
                                      currentArticlesCount)))
             case .failure(let error):

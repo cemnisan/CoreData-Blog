@@ -17,4 +17,5 @@ protocol IHomeService
     func addArticle(with title: String,
                     _ content: String,
                     _ category: String) throws
+    func removeStoredArticles()
 }

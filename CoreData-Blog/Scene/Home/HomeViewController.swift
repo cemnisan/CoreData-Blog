@@ -31,6 +31,8 @@ final class HomeViewController: BaseViewController
     {
         super.viewWillAppear(animated)
         
+        fetchOffset = 0
+        viewModel.removeStoredArticles()
         viewModel.load(with: fetchOffset)
     }
 }
@@ -88,9 +90,11 @@ extension HomeViewController: HomeViewModelDelegate
         switch route {
         case .add(let addViewModel):
             let viewController = AddArticleBuilder.make(viewModel: addViewModel)
+            
             show(viewController, sender: nil)
         case .detail(let article, let viewModel):
             let viewController = DetailBuilder.make(with: article, viewModel)
+            
             show(viewController, sender: nil)
         }
     }

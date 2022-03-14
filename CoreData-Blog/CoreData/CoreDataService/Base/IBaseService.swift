@@ -12,7 +12,7 @@ protocol IBaseService
     func removeOrAddFavorites(with id: UUID,
                       completion: @escaping (Result<Bool>) -> Void)
     func removeStoredArticles()
-    func pagination(articlesCount: Int,
-                    fetch: NSFetchRequest<Article>,
+    func pagination(currentArticlesCount: Int,
+                    fetchRequest: NSFetchRequest<Article>,
                     completion: @escaping (Result<[Article]>) -> Void)
 }

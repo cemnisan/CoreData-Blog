@@ -12,6 +12,7 @@ final class SearchViewController: UIViewController
 {
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var recommendOrResultLabel: UILabel!
     
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
@@ -20,8 +21,9 @@ final class SearchViewController: UIViewController
     private var foundArticlesWithCategory: [Article] = []
     private var category = "Software"
     private var fetchOffset = 0
-    private var currentArticlesCount = 0
-
+    private var currentArticlesCountByCategory = 0
+    private var currentArticlesCountByQuery = 0
+    
     // MARK: - Lifecycles
     override func viewDidLoad()
     {
@@ -33,14 +35,10 @@ final class SearchViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(animated)
-
-        viewModel.getArticles(with: category, fetchOffset: fetchOffset)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         
-        configureSearch()
+        fetchOffset = 0
+        viewModel.removeStoredArticles()
+        configureSearchBar()
     }
 }
 
@@ -81,18 +79,34 @@ extension SearchViewController
         searchController.searchBar.scopeButtonTitles = SelectCategory.allCases.map { $0.rawValue }
     }
     
-    private func configureSearch()
+    private func configureSearchBar()
     {
-        searchController.searchBar.text = ""
-        foundArticles = []
+        searchController.isActive = false
     }
     
     private func configureResult()
     {
-        if searchController.isSearching {
-            foundArticlesWithCategory = []
+        if searchController.isSearching
+        {
+            fetchOffset = 0
+            viewModel.removeStoredArticles()
+            viewModel.getArticles(with: searchController.searchBar.text!, category, fetchOffset: fetchOffset)
+        }
+        else if searchController.isSearchBarEmpty &&
+                searchController.isActive
+        {
+            viewModel.removeStoredArticles()
+            foundArticlesWithCategory.removeAll()
+            currentArticlesCountByCategory = 0
+            recommendOrResultLabel.text = ""
             tableView.reloadData()
-        } else {
+        }
+        else
+        {
+            fetchOffset = 0
+            viewModel.removeStoredArticles()
+            foundArticles.removeAll()
+            currentArticlesCountByQuery = 0
             viewModel.getArticles(with: category, fetchOffset: fetchOffset)
         }
     }
@@ -104,16 +118,21 @@ extension SearchViewController: SearchViewModelDelegate
     func handleOutput(_ output: SearchViewModelOutput)
     {
         switch output {
-        case .foundArticles((let articles,
-                             let currentArticlesCount)):
+        case .foundArticles((let articles, let currentArticlesCount)):
             self.foundArticles = articles
-            self.currentArticlesCount = currentArticlesCount
-            tableView.reloadData()
-        case .foundArticlesWithCategory((let articles,
-                                         let currentArticlesCount)):
+            self.currentArticlesCountByQuery = currentArticlesCount
+            
+            let resultText = "\(self.currentArticlesCountByQuery) Results for `\(searchController.searchBar.text!)` in \(category) Category"
+            self.recommendOrResultLabel.text = resultText
+            self.tableView.reloadData()
+            
+        case .foundArticlesWithCategory((let articles, let currentArticlesCount)):
             self.foundArticlesWithCategory = articles
-            self.currentArticlesCount = currentArticlesCount
+            self.currentArticlesCountByCategory = currentArticlesCount
+            
+            self.recommendOrResultLabel.text = "Recommend for you"
             tableView.reloadData()
+            
         case .showError(let error):
             print(error)
         case .isFavorited(let isFavorite):
@@ -143,12 +162,12 @@ extension SearchViewController: UITableViewDataSource
         
         return foundArticlesWithCategory.count
     }
-
+    
     func tableView(_ tableView: UITableView,
                    cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.searchCell,
-                                                    for: indexPath) as! SearchTableViewCell
+                                                 for: indexPath) as! SearchTableViewCell
         let article = selectedArticle(at: indexPath)
         cell.configureCell(with: article)
         cell.delegate = self
@@ -189,20 +208,18 @@ extension SearchViewController
     {
         let currentOffset: CGFloat = scrollView.contentOffset.y
         let maximumOffset: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
-     
-        if maximumOffset - currentOffset <= 50
+        
+        if maximumOffset - currentOffset <= 0
         {
-            if searchController.isActive
+            if searchController.isSearching,
+               foundArticles.count >= 6 &&
+               foundArticles.count != currentArticlesCountByQuery
             {
-                if foundArticles.count >= 6 &&
-                   foundArticles.count != currentArticlesCount
-                {
-                    fetchOffset += 6
-                    viewModel.getArticles(with: "s", category, fetchOffset: fetchOffset)
-                }
+                fetchOffset += 6
+                viewModel.getArticles(with: searchController.searchBar.text!, category, fetchOffset: fetchOffset)
             } else {
                 if foundArticlesWithCategory.count >= 6 &&
-                   foundArticlesWithCategory.count != currentArticlesCount
+                   foundArticlesWithCategory.count != currentArticlesCountByCategory
                 {
                     fetchOffset += 6
                     viewModel.getArticles(with: category, fetchOffset: fetchOffset)
@@ -217,8 +234,7 @@ extension SearchViewController: UISearchResultsUpdating
 {
     func updateSearchResults(for searchController: UISearchController)
     {
-        print("hi")
-        print("..")
+        configureResult()
     }
 }
 
@@ -240,7 +256,8 @@ extension SearchViewController
     {
         let article: Article
         
-        if foundArticles.count > 0 {
+        if foundArticles.count > 0
+        {
             article = foundArticles[indexPath.row]
         } else {
             article = foundArticlesWithCategory[indexPath.row]

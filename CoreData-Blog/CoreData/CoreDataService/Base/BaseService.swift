@@ -47,32 +47,31 @@ extension BaseService: IBaseService
         }
     }
     
-    func pagination(articlesCount: Int,
-                    fetch: NSFetchRequest<Article>,
+    func pagination(currentArticlesCount: Int,
+                    fetchRequest: NSFetchRequest<Article>,
                     completion: @escaping (Result<[Article]>) -> Void)
     {
         do {
-            var articles = try stack.managedContext.fetch(fetch)
+            var fetchedArticles = try stack.managedContext.fetch(fetchRequest)
    
-            if articles.count > 0 &&
-               articles.count != articlesCount
+            if fetchedArticles.count != currentArticlesCount
             {
-                for i in 0..<articles.count {
-                    storedArticles.append(articles[i])
+                for i in 0..<fetchedArticles.count
+                {
+                    storedArticles.append(fetchedArticles[i])
                 }
-                
-                articles = storedArticles
+                fetchedArticles = storedArticles
             } else {
                 storedArticles = []
             }
-            
-            completion(.success(articles))
+            completion(.success(fetchedArticles))
         } catch {
             completion(.failure(error))
         }
     }
     
-    func removeStoredArticles() {
+    func removeStoredArticles()
+    {
         storedArticles.removeAll()
     }
 }

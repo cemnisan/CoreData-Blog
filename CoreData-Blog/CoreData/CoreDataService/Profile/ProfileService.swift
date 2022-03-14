@@ -13,8 +13,7 @@ final class ProfileService: BaseService
         stack: CoreDataStack,
         storedArticles: [Article] = []
     ) {
-        super.init(stack: stack,
-                   storedArticles: storedArticles)
+        super.init(stack: stack, storedArticles: storedArticles)
     }
 }
 
@@ -39,13 +38,12 @@ extension ProfileService: IProfileService
         
         let articlesCount = self.currentFavoriteArticlesCount(category: categoryPredicate,
                                                               favirote: favoritePredicate)
-        self.pagination(articlesCount: articlesCount,
-                        fetch: fetchRequest) { [weak self] (result) in
+        self.pagination(currentArticlesCount: articlesCount,
+                        fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                print("profileS. \(articles.count)")
                 completion(.success((articles, articlesCount)))
             case .failure(let error):
                 completion(.failure(error))

@@ -33,8 +33,8 @@ extension HomeService: IHomeService
         fetchRequest.fetchLimit = 5
         fetchRequest.fetchOffset = fetchOffet
         
-        self.pagination(articlesCount: currentAllArticlesCount,
-                        fetch: fetchRequest) { [weak self] (result) in
+        self.pagination(currentArticlesCount: currentAllArticlesCount,
+                        fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {

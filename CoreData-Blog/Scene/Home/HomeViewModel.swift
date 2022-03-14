@@ -54,6 +54,11 @@ extension HomeViewModel
         }
     }
     
+    func removeStoredArticles()
+    {
+        service.removeStoredArticles()
+    }
+    
     func selectAddButton() {
         let addViewModel = AddArticleViewModel(service: service)
         delegate?.navigate(to: .add(addViewModel))
