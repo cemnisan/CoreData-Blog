@@ -10,10 +10,11 @@ import Foundation
 // MARK: - Initialize
 final class AddArticleViewModel
 {
-    let service: IHomeService
     weak var delegate: AddArticleViewModelDelegate?
-    
-    init(service: IHomeService) {
+    private let service: IHomeService
+
+    init(service: IHomeService)
+    {
         self.service = service
     }
 }

@@ -10,11 +10,12 @@ import Foundation
 protocol HomeViewModelProtocol
 {
     var delegate: HomeViewModelDelegate? { get set }
-    func load(with fetchOffset: Int)
-    func selectAddButton()
-    func addFavorites(with id: UUID)
+    
+    func loadPaginatedArticles(with fetchOffset: Int)
     func selectedArticle(article: Article)
+    func addFavorites(with id: UUID)
     func removeStoredArticles()
+    func selectAddButton()
 }
 
 protocol HomeViewModelDelegate: AnyObject
@@ -31,7 +32,7 @@ enum HomeViewModelRouter
 
 enum HomeViewModelOutput
 {
-    case showArticlesVia(([Article], Int))
+    case paginatedArticles(([Article], Int))
     case showError(Error)
     case isFavorited(Bool)
 }

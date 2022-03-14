@@ -20,7 +20,7 @@ final class ProfileViewController: UIViewController
     private var category = "Software"
     private var dataSource: UITableViewDiffableDataSource<String, Article>!
     private var fetchOffset = 0
-    private var currentArticleCount: Int?
+    private var currentArticlesCount: Int?
     
     // MARK: - Lifecycles
     override func viewDidLoad()
@@ -36,8 +36,8 @@ final class ProfileViewController: UIViewController
         
         categorySegmentControl.selectedSegmentIndex = 0
         
-        viewModel.removeStoreArticles()
-        viewModel.getFavoriteArticles(with: category, fetchOffset)
+        viewModel.removeStoredArticles()
+        viewModel.loadFavoriteArticles(with: category, fetchOffset)
     }
 }
 
@@ -52,8 +52,7 @@ extension ProfileViewController
     
     private func configureTableView()
     {
-        tableView.register(nibName: K.TableView.homeNibName,
-                           cell: K.TableView.homeCell)
+        tableView.register(nibName: K.TableView.homeNibName, cell: K.TableView.homeCell)
         dataSource = setupDataSource()
         tableView.delegate = self
         tableView.tableFooterView = UIView()
@@ -75,8 +74,8 @@ extension ProfileViewController
         self.category = category
         self.fetchOffset = 0
         
-        viewModel.removeStoreArticles()
-        viewModel.getFavoriteArticles(with: category, fetchOffset)
+        viewModel.removeStoredArticles()
+        viewModel.loadFavoriteArticles(with: category, fetchOffset)
     }
 }
 
@@ -86,12 +85,11 @@ extension ProfileViewController: ProfileViewModelDelegate
     func handleOutput(_ output: ProfileViewModelOutput)
     {
         switch output {
-        case .favoriteArticles(let articles,
-                               let currentArticlesCount):
+        case .favoriteArticles(let articles, let count):
             self.articles = articles
-            self.currentArticleCount = currentArticlesCount
+            self.currentArticlesCount = count
             updateDataSource()
-        case .error(let error):
+        case .showError(let error):
             print(error)
         case .removeFavorite(_):
             articles = articles.filter { $0.isFavorite == true }
@@ -105,6 +103,7 @@ extension ProfileViewController: ProfileViewModelDelegate
         switch router {
         case .detail(let detailViewModel, let article):
             let viewController = DetailBuilder.make(with: article, detailViewModel)
+            
             show(viewController, sender: nil)
         }
     }
@@ -174,10 +173,11 @@ extension ProfileViewController
      
         if maximumOffset - currentOffset <= 50
         {
-            if (articles.count >= 5 && articles.count != currentArticleCount)
+            if articles.count >= 5 &&
+               articles.count != currentArticlesCount
             {
                 fetchOffset += 5
-                viewModel.getFavoriteArticles(with: category, fetchOffset)
+                viewModel.loadFavoriteArticles(with: category, fetchOffset)
             }
         }
     }
@@ -188,9 +188,11 @@ extension ProfileViewController
 {
     private func checkEmptyView()
     {
+        // if user removes favorite,
+        // pull articles ('cause of pagination)
         if articles.count == 0
         {
-            viewModel.getFavoriteArticles(with: category, fetchOffset)
+            viewModel.loadFavoriteArticles(with: category, fetchOffset)
         }
     }
 }

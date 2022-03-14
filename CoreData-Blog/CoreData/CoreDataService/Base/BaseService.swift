@@ -47,9 +47,9 @@ extension BaseService: IBaseService
         }
     }
     
-    func pagination(currentArticlesCount: Int,
-                    fetchRequest: NSFetchRequest<Article>,
-                    completion: @escaping (Result<[Article]>) -> Void)
+    func makePagination(currentArticlesCount: Int,
+                        fetchRequest: NSFetchRequest<Article>,
+                        completion: @escaping (Result<[Article]>) -> Void)
     {
         do {
             var fetchedArticles = try stack.managedContext.fetch(fetchRequest)

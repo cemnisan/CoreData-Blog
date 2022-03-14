@@ -10,11 +10,11 @@ import Foundation
 protocol SearchViewModelProtocol
 {
     var delegate: SearchViewModelDelegate? { get set }
-    func getArticles(with query: String,
-                     _ category: String,
-                     fetchOffset: Int)
-    func getArticles(with category: String,
-                     fetchOffset: Int)
+    
+    func loadFoundArticles(with query: String,
+                           category: String,
+                           fetchOffset: Int)
+    func loadRecommendArticles(with category: String, fetchOffset: Int)
     func addFavorites(with id: UUID)
     func selectedArticle(article: Article)
     func removeStoredArticles()
@@ -35,6 +35,6 @@ enum SearchViewModelOutput
 {
     case foundArticles(([Article], Int))
     case isFavorited(Bool)
-    case foundArticlesWithCategory(([Article], Int))
+    case recommendArtciles(([Article], Int))
     case showError(Error)
 }

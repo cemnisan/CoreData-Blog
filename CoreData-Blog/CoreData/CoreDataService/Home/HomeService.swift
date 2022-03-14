@@ -20,11 +20,9 @@ final class HomeService: BaseService
 
 extension HomeService: IHomeService
 {
-    func fetchArticles(fetchOffet: Int,
+    func getArticles(fetchOffet: Int,
                        completion: @escaping (Result<([Article], Int)>) -> Void)
     {
-        let currentAllArticlesCount = self.currentAllArticlesCount()
-    
         let dateSort: NSSortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
         let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor
         
@@ -33,14 +31,15 @@ extension HomeService: IHomeService
         fetchRequest.fetchLimit = 5
         fetchRequest.fetchOffset = fetchOffet
         
-        self.pagination(currentArticlesCount: currentAllArticlesCount,
-                        fetchRequest: fetchRequest) { [weak self] (result) in
+        let count = self.currentAllArticlesCount()
+        
+        self.makePagination(currentArticlesCount: count,
+                            fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                completion(.success((articles,
-                                     currentAllArticlesCount)))
+                completion(.success((articles, count)))
             case .failure(let error):
                 completion(.failure(error))
             }

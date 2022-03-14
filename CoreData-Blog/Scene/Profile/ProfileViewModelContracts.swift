@@ -10,12 +10,11 @@ import CoreData
 protocol ProfileViewModelProtocol
 {
     var delegate: ProfileViewModelDelegate? { get set }
-    func getFavoriteArticles(with category: String,
-                             _ fetchOffset: Int)
-    func removeFavorites(with id: UUID,
-                         on category: String)
+    
+    func loadFavoriteArticles(with category: String, _ fetchOffset: Int)
+    func removeFavorites(with id: UUID, on category: String)
+    func removeStoredArticles()
     func selectedArticle(article: Article)
-    func removeStoreArticles()
 }
 
 protocol ProfileViewModelDelegate: AnyObject
@@ -33,5 +32,5 @@ enum ProfileViewModelOutput
 {
     case favoriteArticles([Article], Int)
     case removeFavorite(Bool)
-    case error(Error)
+    case showError(Error)
 }

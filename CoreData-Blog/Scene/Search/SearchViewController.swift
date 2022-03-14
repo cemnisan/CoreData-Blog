@@ -16,13 +16,17 @@ final class SearchViewController: UIViewController
     
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
-    private lazy var searchController = UISearchController(searchResultsController: nil)
+    
+    private var searchController = UISearchController(searchResultsController: nil)
+    
     private var foundArticles: [Article] = []
-    private var foundArticlesWithCategory: [Article] = []
+    private var recommendArticles: [Article] = []
+    
     private var category = "Software"
+    
     private var fetchOffset = 0
-    private var currentArticlesCountByCategory = 0
-    private var currentArticlesCountByQuery = 0
+    private var currentRecommendArticlesCount: Int?
+    private var currentFoundArticlesCount: Int?
     
     // MARK: - Lifecycles
     override func viewDidLoad()
@@ -88,26 +92,26 @@ extension SearchViewController
     {
         if searchController.isSearching
         {
-            fetchOffset = 0
             viewModel.removeStoredArticles()
-            viewModel.getArticles(with: searchController.searchBar.text!, category, fetchOffset: fetchOffset)
+            fetchOffset = 0
+            viewModel.loadFoundArticles(with: searchController.searchBar.text!, category: category, fetchOffset: fetchOffset)
         }
         else if searchController.isSearchBarEmpty &&
                 searchController.isActive
         {
             viewModel.removeStoredArticles()
-            foundArticlesWithCategory.removeAll()
-            currentArticlesCountByCategory = 0
+            recommendArticles.removeAll()
+            currentRecommendArticlesCount = nil
             recommendOrResultLabel.text = ""
             tableView.reloadData()
         }
         else
         {
-            fetchOffset = 0
             viewModel.removeStoredArticles()
             foundArticles.removeAll()
-            currentArticlesCountByQuery = 0
-            viewModel.getArticles(with: category, fetchOffset: fetchOffset)
+            currentFoundArticlesCount = nil
+            fetchOffset = 0
+            viewModel.loadRecommendArticles(with: category, fetchOffset: fetchOffset)
         }
     }
 }
@@ -118,17 +122,19 @@ extension SearchViewController: SearchViewModelDelegate
     func handleOutput(_ output: SearchViewModelOutput)
     {
         switch output {
-        case .foundArticles((let articles, let currentArticlesCount)):
+        case .foundArticles((let articles,
+                             let count)):
             self.foundArticles = articles
-            self.currentArticlesCountByQuery = currentArticlesCount
+            self.currentFoundArticlesCount = count
             
-            let resultText = "\(self.currentArticlesCountByQuery) Results for `\(searchController.searchBar.text!)` in \(category) Category"
+            let resultText = "\(self.currentFoundArticlesCount!) Results for `\(searchController.searchBar.text!)` in \(category) Category"
             self.recommendOrResultLabel.text = resultText
             self.tableView.reloadData()
             
-        case .foundArticlesWithCategory((let articles, let currentArticlesCount)):
-            self.foundArticlesWithCategory = articles
-            self.currentArticlesCountByCategory = currentArticlesCount
+        case .recommendArtciles((let articles,
+                                 let count)):
+            self.recommendArticles = articles
+            self.currentRecommendArticlesCount = count
             
             self.recommendOrResultLabel.text = "Recommend for you"
             tableView.reloadData()
@@ -160,7 +166,7 @@ extension SearchViewController: UITableViewDataSource
     {
         if searchController.isSearching { return foundArticles.count }
         
-        return foundArticlesWithCategory.count
+        return recommendArticles.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -213,16 +219,18 @@ extension SearchViewController
         {
             if searchController.isSearching,
                foundArticles.count >= 6 &&
-               foundArticles.count != currentArticlesCountByQuery
+               foundArticles.count != currentFoundArticlesCount
             {
                 fetchOffset += 6
-                viewModel.getArticles(with: searchController.searchBar.text!, category, fetchOffset: fetchOffset)
+                viewModel.loadFoundArticles(with: searchController.searchBar.text!,
+                                      category: category,
+                                      fetchOffset: fetchOffset)
             } else {
-                if foundArticlesWithCategory.count >= 6 &&
-                   foundArticlesWithCategory.count != currentArticlesCountByCategory
+                if recommendArticles.count >= 6 &&
+                   recommendArticles.count != currentRecommendArticlesCount
                 {
                     fetchOffset += 6
-                    viewModel.getArticles(with: category, fetchOffset: fetchOffset)
+                    viewModel.loadRecommendArticles(with: category, fetchOffset: fetchOffset)
                 }
             }
         }
@@ -260,7 +268,7 @@ extension SearchViewController
         {
             article = foundArticles[indexPath.row]
         } else {
-            article = foundArticlesWithCategory[indexPath.row]
+            article = recommendArticles[indexPath.row]
         }
         
         return article

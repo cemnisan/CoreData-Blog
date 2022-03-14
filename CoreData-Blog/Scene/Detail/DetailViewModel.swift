@@ -11,7 +11,7 @@ import Foundation
 final class DetailViewModel
 {
     weak var delegate: DetailViewModelDelegate?
-    private var service: IHomeService
+    private let service: IHomeService
     
     init(service: IHomeService)
     {
@@ -22,7 +22,8 @@ final class DetailViewModel
 // MARK: - View Model Protocol
 extension DetailViewModel: DetailViewModelProtocol
 {
-    func addFavorites(with id: UUID) {
+    func addFavorites(with id: UUID)
+    {
         service.removeOrAddFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             

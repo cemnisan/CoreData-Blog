@@ -24,24 +24,23 @@ final class HomeViewModel: HomeViewModelProtocol
 // MARK: - ViewModel's Protocol
 extension HomeViewModel
 {
-    func load(with fetchOffset: Int)
+    func loadPaginatedArticles(with fetchOffset: Int)
     {
-        service.fetchArticles(fetchOffet: fetchOffset) { [weak self] result in
+        service.getArticles(fetchOffet: fetchOffset) { [weak self] result in
             guard let self = self else { return }
            
             switch result {
-            case .success((let articles,
-                           let currentArticlesCount)):
+            case .success((let articles, let count)):
                 self.articles = articles
-                self.notify(.showArticlesVia((self.articles,
-                                              currentArticlesCount)))
+                self.notify(.paginatedArticles((self.articles, count)))
             case .failure(let error):
                 self.notify(.showError(error))
             }
         }
     }
     
-    func addFavorites(with id: UUID) {
+    func addFavorites(with id: UUID)
+    {
         service.removeOrAddFavorites(with: id) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -59,14 +58,17 @@ extension HomeViewModel
         service.removeStoredArticles()
     }
     
-    func selectAddButton() {
+    func selectAddButton()
+    {
         let addViewModel = AddArticleViewModel(service: service)
+        
         delegate?.navigate(to: .add(addViewModel))
     }
     
     func selectedArticle(article: Article)
     {
         let detailViewModel = DetailViewModel(service: service)
+        
         delegate?.navigate(to: .detail(article, detailViewModel))
     }
 }

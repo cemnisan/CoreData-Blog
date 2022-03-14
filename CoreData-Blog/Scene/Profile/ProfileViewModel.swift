@@ -23,7 +23,7 @@ final class ProfileViewModel
 // MARK: - ViewModel Protocol
 extension ProfileViewModel: ProfileViewModelProtocol
 {
-    func getFavoriteArticles(with category: String,
+    func loadFavoriteArticles(with category: String,
                              _ fetchOffset: Int)
     {
         service.getFavoriteArticles(with: category,
@@ -31,13 +31,11 @@ extension ProfileViewModel: ProfileViewModelProtocol
             guard let self = self else { return }
             
             switch result {
-            case .success((let articles,
-                           let currentArticlesCount)):
+            case .success((let articles, let count)):
                 self.articles = articles
-                self.notify(.favoriteArticles(self.articles,
-                                              currentArticlesCount))
+                self.notify(.favoriteArticles(self.articles, count))
             case .failure(let error):
-                self.notify(.error(error))
+                self.notify(.showError(error))
             }
         }
     }
@@ -52,12 +50,12 @@ extension ProfileViewModel: ProfileViewModelProtocol
             case .success(let isFavorite):
                 self.notify(.removeFavorite(isFavorite))
             case .failure(let error):
-                self.notify(.error(error))
+                self.notify(.showError(error))
             }
         }
     }
     
-    func removeStoreArticles()
+    func removeStoredArticles()
     {
         service.removeStoredArticles()
     }
@@ -65,6 +63,7 @@ extension ProfileViewModel: ProfileViewModelProtocol
     func selectedArticle(article: Article)
     {
         let viewModel = DetailViewModel(service: HomeService(stack: app.stack))
+        
         delegate?.navigate(to: .detail(viewModel, article))
     }
 }

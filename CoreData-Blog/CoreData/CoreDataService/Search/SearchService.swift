@@ -19,7 +19,7 @@ final class SearchService: BaseService
 
 extension SearchService: ISearchService
 {
-    func getArticles(with category: String,
+    func getRecommendArticles(with category: String,
                      fetchOffset: Int,
                      completion: @escaping (Result<([Article], Int)>) -> Void)
     {        
@@ -30,16 +30,14 @@ extension SearchService: ISearchService
         fetchRequest.fetchLimit = 6
         fetchRequest.fetchOffset = fetchOffset
         
-        let currentArticlesCount = self.currentArticlesCountByCategory(category: categoryPredicate)
-        print("category: \(category)")
-        print("currentArticlesCountByCategory: \(currentArticlesCount)")
-        self.pagination(currentArticlesCount: currentArticlesCount,
+        let currentArticlesCount = self.currentRecommendArticlesCount(category: categoryPredicate)
+
+        self.makePagination(currentArticlesCount: currentArticlesCount,
                         fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                print("getArticlesWithCategory", articles.count)
                 completion(.success((articles, currentArticlesCount)))
             case .failure(let error):
                 completion(.failure(error))
@@ -48,7 +46,7 @@ extension SearchService: ISearchService
     }
     
     func getArticles(with query: String,
-                     _ selectedCategory: String,
+                     selectedCategory: String,
                      fetchOffset: Int,
                      completion: @escaping (Result<([Article], Int)>) -> Void)
     {
@@ -60,25 +58,22 @@ extension SearchService: ISearchService
         fetchRequest.fetchLimit = 6
         fetchRequest.fetchOffset = fetchOffset
         
-        let currentArticlesCount = self.currentArticlesCountBySearch(query: queryPredicate,
-                                                                    category: categoryPredicate)
-        print("currentArticlesCountByQuery: \(currentArticlesCount)")
-        self.pagination(currentArticlesCount: currentArticlesCount,
-                        fetchRequest: fetchRequest) { [weak self] (result) in
+        let count = self.currentArticlesCountBySearch(query: queryPredicate,
+                                                                     category: categoryPredicate)
+        self.makePagination(currentArticlesCount: count,
+                            fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                print("getArticlesWithQuery", articles.count)
-                completion(.success((articles,
-                                     currentArticlesCount)))
+                completion(.success((articles, count)))
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
     
-    private func currentArticlesCountByCategory(category: NSPredicate) -> Int
+    private func currentRecommendArticlesCount(category: NSPredicate) -> Int
     {
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
         fetchRequest.predicate = category

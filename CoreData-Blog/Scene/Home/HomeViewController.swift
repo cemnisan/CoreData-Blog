@@ -15,7 +15,7 @@ final class HomeViewController: BaseViewController
     
     // MARK: - Properties
     var viewModel: HomeViewModelProtocol!
-    private var articles: [Article] = []
+    private var paginatedArticles: [Article] = []
     private var fetchOffset = 0
     private var currentArticlesCount: Int?
     
@@ -33,7 +33,7 @@ final class HomeViewController: BaseViewController
         
         fetchOffset = 0
         viewModel.removeStoredArticles()
-        viewModel.load(with: fetchOffset)
+        viewModel.loadPaginatedArticles(with: fetchOffset)
     }
 }
 
@@ -74,9 +74,9 @@ extension HomeViewController: HomeViewModelDelegate
     func handleOutput(_ output: HomeViewModelOutput)
     {
         switch output {
-        case .showArticlesVia((let articles, let currentArticlesCount)):
-            self.articles = articles
-            self.currentArticlesCount = currentArticlesCount
+        case .paginatedArticles((let articles, let count)):
+            self.paginatedArticles = articles
+            self.currentArticlesCount = count
             tableView.reloadData()
         case .showError(let error):
             self.showError(title: "Error", message: error.localizedDescription)
@@ -106,7 +106,7 @@ extension HomeViewController: UITableViewDataSource
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int
     {
-        return articles.count
+        return paginatedArticles.count
     }
     
     func tableView(_ tableView: UITableView,
@@ -114,7 +114,7 @@ extension HomeViewController: UITableViewDataSource
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.TableView.homeCell,
                                                  for: indexPath) as! HomeTableViewCell
-        let article = articles[indexPath.row]
+        let article = paginatedArticles[indexPath.row]
         cell.configureCell(with: article)
         cell.delegate = self
         cell.id = article.id
@@ -130,7 +130,7 @@ extension HomeViewController: UITableViewDelegate
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath)
     {
-        let article = articles[indexPath.row]
+        let article = paginatedArticles[indexPath.row]
         
         viewModel.selectedArticle(article: article)
     }
@@ -157,10 +157,10 @@ extension HomeViewController
      
         if maximumOffset - currentOffset <= 50
         {
-            if (articles.count >= 5 && articles.count != currentArticlesCount)
+            if (paginatedArticles.count >= 5 && paginatedArticles.count != currentArticlesCount)
             {
                 fetchOffset += 5
-                viewModel.load(with: fetchOffset)
+                viewModel.loadPaginatedArticles(with: fetchOffset)
             }
         }
     }

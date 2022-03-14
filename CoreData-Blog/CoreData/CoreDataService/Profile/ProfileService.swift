@@ -36,15 +36,15 @@ extension ProfileService: IProfileService
         fetchRequest.fetchLimit = 5
         fetchRequest.fetchOffset = fetchOffset
         
-        let articlesCount = self.currentFavoriteArticlesCount(category: categoryPredicate,
+        let count = self.currentFavoriteArticlesCount(category: categoryPredicate,
                                                               favirote: favoritePredicate)
-        self.pagination(currentArticlesCount: articlesCount,
-                        fetchRequest: fetchRequest) { [weak self] (result) in
+        self.makePagination(currentArticlesCount: count,
+                            fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                completion(.success((articles, articlesCount)))
+                completion(.success((articles, count)))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -56,7 +56,7 @@ extension ProfileService: IProfileService
     {
         let fetchRequest: NSFetchRequest<Article> = Article.fetchRequest()
         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [category,
-                                                                                      favirote])
+                                                                                    favirote])
         let count = try! stack.managedContext.count(for: fetchRequest)
         return count
     }

@@ -13,7 +13,7 @@ final class SearchViewModel
     weak var delegate: SearchViewModelDelegate?
     private var service: ISearchService
     private var foundArticles: [Article] = []
-    private var foundArticlesWithCategory: [Article] = []
+    private var recommendArticles: [Article] = []
     
     init(service: ISearchService)
     {
@@ -24,11 +24,12 @@ final class SearchViewModel
 // MARK: - ViewModel Protocol
 extension SearchViewModel: SearchViewModelProtocol
 {
-    func getArticles(with query: String,
-                     _ category: String,
-                     fetchOffset: Int) {
+    func loadFoundArticles(with query: String,
+                     category: String,
+                     fetchOffset: Int)
+    {
         service.getArticles(with: query,
-                            category,
+                            selectedCategory: category,
                             fetchOffset: fetchOffset) { [weak self] (result) in
             guard let self = self else { return }
             
@@ -45,20 +46,21 @@ extension SearchViewModel: SearchViewModelProtocol
         }
     }
     
-    func getArticles(with category: String,
-                     fetchOffset: Int) {
-        service.getArticles(with: category,
-                            fetchOffset: fetchOffset) { [weak self] (result) in
+    func loadRecommendArticles(with category: String,
+                               fetchOffset: Int)
+    {
+        service.getRecommendArticles(with: category,
+                                     fetchOffset: fetchOffset) { [weak self] (result) in
             guard let self = self else { return }
             
             switch result {
             case .success((let articles,
                            let currentArticlesCount)):
-                self.foundArticlesWithCategory = articles
-                self.notify(.foundArticlesWithCategory((self.foundArticlesWithCategory,
-                                                        currentArticlesCount)))
+                self.recommendArticles = articles
+                self.notify(.recommendArtciles((self.recommendArticles,
+                                                currentArticlesCount)))
             case .failure(let error):
-                print(error)
+                self.notify(.showError(error))
             }
         }
     }
@@ -84,6 +86,7 @@ extension SearchViewModel: SearchViewModelProtocol
     
     func selectedArticle(article: Article) {
         let viewModel = DetailViewModel(service: HomeService(stack: app.stack))
+        
         delegate?.navigate(to: .detail(article, viewModel))
     }
 }
