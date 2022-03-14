@@ -31,8 +31,8 @@ final class HomeViewController: BaseViewController
     {
         super.viewWillAppear(animated)
         
-        fetchOffset = 0
         viewModel.removeStoredArticles()
+        fetchOffset = 0
         viewModel.loadPaginatedArticles(with: fetchOffset)
     }
 }
@@ -80,8 +80,10 @@ extension HomeViewController: HomeViewModelDelegate
             tableView.reloadData()
         case .showError(let error):
             self.showError(title: "Error", message: error.localizedDescription)
-        case .isFavorited(let isFavorited):
-            print(isFavorited)
+        case .isFavorited((let article, let isFavorite)):
+            NotificationBannerManager
+                .shared
+                .createNotification(with: isFavorite, selectedArticle: article)
         }
     }
     
@@ -92,8 +94,9 @@ extension HomeViewController: HomeViewModelDelegate
             let viewController = AddArticleBuilder.make(viewModel: addViewModel)
             
             show(viewController, sender: nil)
-        case .detail(let article, let viewModel):
-            let viewController = DetailBuilder.make(with: article, viewModel)
+        case .detail(let article,
+                     let detailViewModel):
+            let viewController = DetailBuilder.make(with: article, detailViewModel)
             
             show(viewController, sender: nil)
         }
@@ -157,7 +160,8 @@ extension HomeViewController
      
         if maximumOffset - currentOffset <= 50
         {
-            if (paginatedArticles.count >= 5 && paginatedArticles.count != currentArticlesCount)
+            if paginatedArticles.count >= 5 &&
+               paginatedArticles.count != currentArticlesCount
             {
                 fetchOffset += 5
                 viewModel.loadPaginatedArticles(with: fetchOffset)

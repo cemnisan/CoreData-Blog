@@ -28,8 +28,8 @@ extension DetailViewModel: DetailViewModelProtocol
             guard let self = self else { return }
             
             switch result {
-            case .success(let isFavorited):
-                self.notify(with: .isFavorited(.success(isFavorited)))
+            case .success((let article, let isFavorited)):
+                self.notify(with: .isFavorited(.success((article, isFavorited))))
             case .failure(let error):
                 self.notify(with: .isFavorited(.failure(error)))
             }

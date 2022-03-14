@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 // MARK: - Initialize
-final class DetailViewController: UIViewController
+final class DetailViewController: BaseViewController
 {
     // MARK: - IBOutlets
     @IBOutlet private weak var userPhotoView: UIImageView!
@@ -87,10 +87,12 @@ extension DetailViewController: DetailViewModelDelegate
     func handleOutput(_ output: DetailViewModelOutput)
     {
         switch output {
-        case .isFavorited(.success(let isFavorited)):
-            print(isFavorited)
+        case .isFavorited(.success((let article, let isFavorite))):
+            NotificationBannerManager
+                .shared
+                .createNotification(with: isFavorite, selectedArticle: article)
         case .isFavorited(.failure(let error)):
-            print(error)
+            self.showError(title: "Error", message: error.localizedDescription)
         }
     }
 }

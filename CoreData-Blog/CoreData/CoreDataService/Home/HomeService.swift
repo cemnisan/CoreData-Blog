@@ -21,7 +21,7 @@ final class HomeService: BaseService
 extension HomeService: IHomeService
 {
     func getArticles(fetchOffet: Int,
-                       completion: @escaping (Result<([Article], Int)>) -> Void)
+                     completion: @escaping (Result<([Article], Int)>) -> Void)
     {
         let dateSort: NSSortDescriptor = NSSortDescriptor(key: #keyPath(Article.createdDate), ascending: true)
         let reversedDate = dateSort.reversedSortDescriptor as! NSSortDescriptor

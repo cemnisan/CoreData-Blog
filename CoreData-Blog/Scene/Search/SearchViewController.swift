@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Initialize
-final class SearchViewController: UIViewController
+final class SearchViewController: BaseViewController
 {
     // MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
@@ -16,18 +16,14 @@ final class SearchViewController: UIViewController
     
     // MARK: - Properties
     var viewModel: SearchViewModelProtocol!
-    
     private var searchController = UISearchController(searchResultsController: nil)
-    
     private var foundArticles: [Article] = []
     private var recommendArticles: [Article] = []
-    
-    private var category = "Software"
-    
-    private var fetchOffset = 0
     private var currentRecommendArticlesCount: Int?
     private var currentFoundArticlesCount: Int?
-    
+    private var fetchOffset = 0
+    private var category = "Software"
+
     // MARK: - Lifecycles
     override func viewDidLoad()
     {
@@ -130,7 +126,6 @@ extension SearchViewController: SearchViewModelDelegate
             let resultText = "\(self.currentFoundArticlesCount!) Results for `\(searchController.searchBar.text!)` in \(category) Category"
             self.recommendOrResultLabel.text = resultText
             self.tableView.reloadData()
-            
         case .recommendArtciles((let articles,
                                  let count)):
             self.recommendArticles = articles
@@ -138,11 +133,12 @@ extension SearchViewController: SearchViewModelDelegate
             
             self.recommendOrResultLabel.text = "Recommend for you"
             tableView.reloadData()
-            
         case .showError(let error):
-            print(error)
-        case .isFavorited(let isFavorite):
-            print(isFavorite)
+            self.showError(title: "Error", message: error.localizedDescription)
+        case .isFavorited((let article, let isFavorite)):
+            NotificationBannerManager
+                .shared
+                .createNotification(with: isFavorite, selectedArticle: article)
         }
     }
     
@@ -223,8 +219,8 @@ extension SearchViewController
             {
                 fetchOffset += 6
                 viewModel.loadFoundArticles(with: searchController.searchBar.text!,
-                                      category: category,
-                                      fetchOffset: fetchOffset)
+                                            category: category,
+                                            fetchOffset: fetchOffset)
             } else {
                 if recommendArticles.count >= 6 &&
                    recommendArticles.count != currentRecommendArticlesCount

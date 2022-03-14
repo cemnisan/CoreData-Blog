@@ -10,6 +10,7 @@ import Foundation
 protocol DetailViewModelProtocol
 {
     var delegate: DetailViewModelDelegate? { get set }
+    
     func addFavorites(with id: UUID)
 }
 
@@ -20,5 +21,5 @@ protocol DetailViewModelDelegate: AnyObject
 
 enum DetailViewModelOutput
 {
-    case isFavorited(Result<Bool>)
+    case isFavorited(Result<(Article, Bool)>)
 }

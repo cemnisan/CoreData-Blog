@@ -20,8 +20,8 @@ final class SearchService: BaseService
 extension SearchService: ISearchService
 {
     func getRecommendArticles(with category: String,
-                     fetchOffset: Int,
-                     completion: @escaping (Result<([Article], Int)>) -> Void)
+                              fetchOffset: Int,
+                              completion: @escaping (Result<([Article], Int)>) -> Void)
     {        
         let categoryPredicate = NSPredicate(format: "category = %@", category)
         
@@ -30,15 +30,15 @@ extension SearchService: ISearchService
         fetchRequest.fetchLimit = 6
         fetchRequest.fetchOffset = fetchOffset
         
-        let currentArticlesCount = self.currentRecommendArticlesCount(category: categoryPredicate)
+        let count = self.currentRecommendArticlesCount(category: categoryPredicate)
 
-        self.makePagination(currentArticlesCount: currentArticlesCount,
-                        fetchRequest: fetchRequest) { [weak self] (result) in
+        self.makePagination(currentArticlesCount: count,
+                            fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }
             
             switch result {
             case .success(let articles):
-                completion(.success((articles, currentArticlesCount)))
+                completion(.success((articles, count)))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -59,7 +59,7 @@ extension SearchService: ISearchService
         fetchRequest.fetchOffset = fetchOffset
         
         let count = self.currentArticlesCountBySearch(query: queryPredicate,
-                                                                     category: categoryPredicate)
+                                                      category: categoryPredicate)
         self.makePagination(currentArticlesCount: count,
                             fetchRequest: fetchRequest) { [weak self] (result) in
             guard let _ = self else { return }

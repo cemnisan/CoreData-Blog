@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -56,6 +56,9 @@
 		F882973427D2C2550082B1CC /* Blog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F882973227D2C2550082B1CC /* Blog.xcdatamodeld */; };
 		F882975027D2C6640082B1CC /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F882974E27D2C6640082B1CC /* HomeTableViewCell.swift */; };
 		F882975127D2C6640082B1CC /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F882974F27D2C6640082B1CC /* HomeTableViewCell.xib */; };
+		F89A3F5427DFE99900D66054 /* NotificationBannerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F89A3F5327DFE99900D66054 /* NotificationBannerSwift */; };
+		F89A3F5727DFE9D600D66054 /* NotificationBannerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A3F5627DFE9D600D66054 /* NotificationBannerManager.swift */; };
+		F89A3F5927DFF1FA00D66054 /* FavoriteStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A3F5827DFF1FA00D66054 /* FavoriteStatus.swift */; };
 		F8DCAECE27D804AF008A51A8 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */; };
 		F8DCAECF27D804AF008A51A8 /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */; };
 		F8E05A1827D8D9C100E1E022 /* ISearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E05A1727D8D9C100E1E022 /* ISearchService.swift */; };
@@ -122,6 +125,8 @@
 		F882973327D2C2550082B1CC /* Blog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Blog.xcdatamodel; sourceTree = "<group>"; };
 		F882974E27D2C6640082B1CC /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		F882974F27D2C6640082B1CC /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		F89A3F5627DFE9D600D66054 /* NotificationBannerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationBannerManager.swift; sourceTree = "<group>"; };
+		F89A3F5827DFF1FA00D66054 /* FavoriteStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteStatus.swift; sourceTree = "<group>"; };
 		F8DCAECC27D804AF008A51A8 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		F8DCAECD27D804AF008A51A8 /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		F8E05A1727D8D9C100E1E022 /* ISearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISearchService.swift; sourceTree = "<group>"; };
@@ -141,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F89A3F5427DFE99900D66054 /* NotificationBannerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +213,7 @@
 				F84DF60827D63C9D00FAE031 /* ValidateError.swift */,
 				F84DF61A27D6AB4200FAE031 /* SelectBookMark.swift */,
 				F8E05A2727D9697400E1E022 /* SelectCategory.swift */,
+				F89A3F5827DFF1FA00D66054 /* FavoriteStatus.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -299,6 +306,7 @@
 		F882970627D2BC9B0082B1CC /* CoreData-Blog */ = {
 			isa = PBXGroup;
 			children = (
+				F89A3F5527DFE9C300D66054 /* Manager */,
 				F882972027D2BCD20082B1CC /* App */,
 				F882971F27D2BCC70082B1CC /* Supporting Files */,
 				F80704D327D4D0DF00755C82 /* Extenstion */,
@@ -380,6 +388,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		F89A3F5527DFE9C300D66054 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F89A3F5627DFE9D600D66054 /* NotificationBannerManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		F8DCAECB27D8049B008A51A8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,6 +448,9 @@
 			dependencies = (
 			);
 			name = "CoreData-Blog";
+			packageProductDependencies = (
+				F89A3F5327DFE99900D66054 /* NotificationBannerSwift */,
+			);
 			productName = "CoreData-Blog";
 			productReference = F882970427D2BC9B0082B1CC /* CoreData-Blog.app */;
 			productType = "com.apple.product-type.application";
@@ -459,6 +478,9 @@
 				Base,
 			);
 			mainGroup = F88296FB27D2BC9B0082B1CC;
+			packageReferences = (
+				F89A3F5227DFE99900D66054 /* XCRemoteSwiftPackageReference "NotificationBanner" */,
+			);
 			productRefGroup = F882970527D2BC9B0082B1CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -523,6 +545,7 @@
 				F84DF62527D7985000FAE031 /* UIButton+Ex.swift in Sources */,
 				F84DF63727D7A2C300FAE031 /* ProfileViewController.swift in Sources */,
 				F807054E27D5320600755C82 /* AddArticleViewController.swift in Sources */,
+				F89A3F5927DFF1FA00D66054 /* FavoriteStatus.swift in Sources */,
 				F8E05A2627D9644200E1E022 /* Article+CoreDataProperties.swift in Sources */,
 				F807055027D53A2C00755C82 /* AddArticleViewModel.swift in Sources */,
 				F882970C27D2BC9B0082B1CC /* HomeViewController.swift in Sources */,
@@ -531,6 +554,7 @@
 				F807055227D53A3600755C82 /* AddArticleContracts.swift in Sources */,
 				F882972427D2BD820082B1CC /* AppContainer.swift in Sources */,
 				F80704DA27D4DCA700755C82 /* Constant.swift in Sources */,
+				F89A3F5727DFE9D600D66054 /* NotificationBannerManager.swift in Sources */,
 				F80704D727D4DBC800755C82 /* UITableView+Ex.swift in Sources */,
 				F882972C27D2BF7E0082B1CC /* HomeViewModelContracts.swift in Sources */,
 				F84DF62A27D7A12D00FAE031 /* SearchViewController.swift in Sources */,
@@ -739,6 +763,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F89A3F5227DFE99900D66054 /* XCRemoteSwiftPackageReference "NotificationBanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Daltron/NotificationBanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F89A3F5327DFE99900D66054 /* NotificationBannerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F89A3F5227DFE99900D66054 /* XCRemoteSwiftPackageReference "NotificationBanner" */;
+			productName = NotificationBannerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		F882973227D2C2550082B1CC /* Blog.xcdatamodeld */ = {

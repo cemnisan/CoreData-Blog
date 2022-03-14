@@ -45,8 +45,8 @@ extension HomeViewModel
             guard let self = self else { return }
             
             switch result {
-            case .success(let isFavorited):
-                self.notify(.isFavorited(isFavorited))
+            case .success((let article, let isFavorite)):
+                self.notify(.isFavorited((article, isFavorite)))
             case .failure(let error):
                 self.notify(.showError(error))
             }

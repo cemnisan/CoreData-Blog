@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - Initialize
-final class ProfileViewController: UIViewController
+final class ProfileViewController: BaseViewController
 {
     // MARK: - IBOutlets
     @IBOutlet private weak var categorySegmentControl: UISegmentedControl!
@@ -35,7 +35,8 @@ final class ProfileViewController: UIViewController
         super.viewWillAppear(animated)
         
         categorySegmentControl.selectedSegmentIndex = 0
-        
+        category = "Software"
+        fetchOffset = 0
         viewModel.removeStoredArticles()
         viewModel.loadFavoriteArticles(with: category, fetchOffset)
     }
@@ -90,9 +91,12 @@ extension ProfileViewController: ProfileViewModelDelegate
             self.currentArticlesCount = count
             updateDataSource()
         case .showError(let error):
-            print(error)
-        case .removeFavorite(_):
+            self.showError(title: "Error", message: error.localizedDescription)
+        case .removeFavorite((let article, let isFavorite)):
             articles = articles.filter { $0.isFavorite == true }
+            NotificationBannerManager
+                .shared
+                .createNotification(with: isFavorite, selectedArticle: article)
             updateDataSource()
             checkEmptyView()
         }
@@ -188,8 +192,6 @@ extension ProfileViewController
 {
     private func checkEmptyView()
     {
-        // if user removes favorite,
-        // pull articles ('cause of pagination)
         if articles.count == 0
         {
             viewModel.loadFavoriteArticles(with: category, fetchOffset)

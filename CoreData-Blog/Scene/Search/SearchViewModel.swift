@@ -36,7 +36,6 @@ extension SearchViewModel: SearchViewModelProtocol
             switch result {
             case .success((let articles,
                            let currentArticlesCount)):
-                
                 self.foundArticles = articles
                 self.notify(.foundArticles((self.foundArticles,
                                             currentArticlesCount)))
@@ -71,8 +70,8 @@ extension SearchViewModel: SearchViewModelProtocol
             guard let self = self else { return }
             
             switch result {
-            case .success(let isFavorited):
-                self.notify(.isFavorited(isFavorited))
+            case .success((let article, let isFavorited)):
+                self.notify(.isFavorited((article, isFavorited)))
             case .failure(let error):
                 self.notify(.showError(error))
             }

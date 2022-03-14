@@ -47,8 +47,8 @@ extension ProfileViewModel: ProfileViewModelProtocol
             guard let self = self else { return }
             
             switch result {
-            case .success(let isFavorite):
-                self.notify(.removeFavorite(isFavorite))
+            case .success((let article, let isFavorite)):
+                self.notify(.removeFavorite((article, isFavorite)))
             case .failure(let error):
                 self.notify(.showError(error))
             }

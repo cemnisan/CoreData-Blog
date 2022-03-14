@@ -31,6 +31,6 @@ enum ProfileViewModelRouter
 enum ProfileViewModelOutput
 {
     case favoriteArticles([Article], Int)
-    case removeFavorite(Bool)
+    case removeFavorite((Article, Bool))
     case showError(Error)
 }

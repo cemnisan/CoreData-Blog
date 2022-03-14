@@ -24,7 +24,7 @@ class BaseService
 extension BaseService: IBaseService
 {
     func removeOrAddFavorites(with id: UUID,
-                              completion: @escaping (Result<Bool>) -> Void)
+                              completion: @escaping (Result<(Article, Bool)>) -> Void)
     {
         let idPredicate = NSPredicate(
             format: "%K = %@",
@@ -41,7 +41,9 @@ extension BaseService: IBaseService
       
             stack.saveContext()
             
-            foundArticle[0].isFavorite ? completion(.success(true)) : completion(.success(false))
+            foundArticle[0].isFavorite ?
+                completion(.success((foundArticle[0], true))) :
+                completion(.success((foundArticle[0], false)))
         } catch {
             completion(.failure(error))
         }

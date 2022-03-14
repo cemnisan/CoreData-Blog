@@ -34,7 +34,7 @@ enum SearchViewModelRouter
 enum SearchViewModelOutput
 {
     case foundArticles(([Article], Int))
-    case isFavorited(Bool)
+    case isFavorited((Article, Bool))
     case recommendArtciles(([Article], Int))
     case showError(Error)
 }

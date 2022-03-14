@@ -34,5 +34,5 @@ enum HomeViewModelOutput
 {
     case paginatedArticles(([Article], Int))
     case showError(Error)
-    case isFavorited(Bool)
+    case isFavorited((Article, Bool))
 }
