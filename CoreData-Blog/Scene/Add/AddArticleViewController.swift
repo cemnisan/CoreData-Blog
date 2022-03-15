@@ -16,17 +16,23 @@ final class AddArticleViewController: BaseViewController
     @IBOutlet private weak var contentTextView: UITextView!
     @IBOutlet private weak var articleImageView: UIImageView!
     @IBOutlet private weak var categoryTextField: UITextField!
+    @IBOutlet private weak var addArticleButton: UIButton!
+    @IBOutlet private weak var nowDateTextField: UITextField!
     
     // MARK: - Properties
     var viewModel: AddArticleViewModelProtocol! { didSet { viewModel.delegate = self } }
     private lazy var pickerView = UIPickerView()
     private var category: [String] = ["Swift", "Kotlin", "Javascript", "Go"]
+    private var date = Date()
     
     // MARK: - LifeCycles
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        nowDateTextField.isEnabled = false
+        nowDateTextField.text = "\(date.getFormattedDate(format: "MMM d, yyyy"))"
+        articleImageView.makeRounded()
         configureToolBar()
     }
 }
@@ -41,7 +47,6 @@ extension AddArticleViewController
               let content  = contentTextView.text,
               let category = categoryTextField.text,
               let image    = articleImageView.image else { return }
-        
         viewModel.addArticle(with: title,
                              content: content,
                              image: image,
@@ -50,14 +55,15 @@ extension AddArticleViewController
     
     @IBAction private func choosePhotoButtonPressed(_ sender: Any)
     {
-        let vc = UIImagePickerController()
-        vc.sourceType = .photoLibrary
-        vc.delegate = self
-        vc.allowsEditing = true
-        present(vc, animated: true, completion: nil)
+        let pickerController = UIImagePickerController()
+        pickerController.sourceType = .photoLibrary
+        pickerController.delegate = self
+        pickerController.allowsEditing = true
+        
+        present(pickerController, animated: true, completion: nil)
     }
 
-    @objc private func doneButtonPressed()
+    @objc private func pickerViewDoneButtonPressed()
     {
         let selectedValue = category[pickerView.selectedRow(inComponent: 0)]
         categoryTextField.text = selectedValue
@@ -71,7 +77,8 @@ extension AddArticleViewController
 {
     private func configureIndicatorView(with isAdded: Bool)
     {
-        if isAdded {
+        if isAdded
+        {
             self.showLoadingView()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.navigationController?.popToRootViewController(animated: true)
@@ -88,7 +95,7 @@ extension AddArticleViewController
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done,
                                          target: nil,
-                                         action: #selector(doneButtonPressed))
+                                         action: #selector(pickerViewDoneButtonPressed))
         toolbar.setItems([doneButton], animated: true)
         
         categoryTextField.inputAccessoryView = toolbar
@@ -97,6 +104,20 @@ extension AddArticleViewController
         pickerView.dataSource = self
    
         categoryTextField.inputView = pickerView
+    }
+}
+
+// MARK: - AddViewModelDelegate
+extension AddArticleViewController: AddArticleViewModelDelegate
+{
+    func handleOutput(_ output: AddArticleViewModelOutput)
+    {
+        switch output {
+        case .isAdded(.success(let isAdded)):
+            configureIndicatorView(with: isAdded)
+        case .isAdded(.failure(let error)):
+            self.showError(title: "Error", message: error.localizedDescription)
+        }
     }
 }
 
@@ -126,30 +147,18 @@ extension AddArticleViewController: UIPickerViewDelegate
     }
 }
 
-
-// MARK: - AddViewModelDelegate
-extension AddArticleViewController: AddArticleViewModelDelegate
-{
-    func handleOutput(_ output: AddArticleViewModelOutput)
-    {
-        switch output {
-        case .isAdded(.success(let isAdded)):
-            configureIndicatorView(with: isAdded)
-        case .isAdded(.failure(let error)):
-            self.showError(title: "Error", message: error.localizedDescription)
-        }
-    }
-}
-
 extension AddArticleViewController: UIImagePickerControllerDelegate
 {
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
-        guard let image = info[UIImagePickerController
-                                .InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage else { return }
-        articleImageView.image = image
-        
+        if let image = info[UIImagePickerController
+                            .InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage
+        {
+            articleImageView.image = image
+            addArticleButton.setTitle("+ Change article's photo",
+                                      for: .normal)
+        }
         picker.dismiss(animated: true, completion: nil)
     }
     

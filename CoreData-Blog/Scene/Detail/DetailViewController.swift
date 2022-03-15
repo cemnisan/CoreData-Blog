@@ -54,12 +54,13 @@ extension DetailViewController
         userPhotoView.makeRoundedCircle()
         articleContentPhoto.makeRounded()
         
-        title                    = article?.title
-        userNameLabel.text       = article?.author?.userName
-        articleDateLabel.text    = article?.createdDate?.getFormattedDate(format: "MMM d, yyyy")
-        articleTitleLabel.text   = article?.title
-        articleContentLabel.text = article?.content
-        isFavorite               = article?.isFavorite ?? false
+        title                     = article?.title
+        userNameLabel.text        = article?.author?.userName
+        articleDateLabel.text     = article?.createdDate?.getFormattedDate(format: "MMM d, yyyy")
+        articleTitleLabel.text    = article?.title
+        articleContentLabel.text  = article?.content
+        articleContentPhoto.image = article?.articleImage
+        isFavorite                = article?.isFavorite ?? false
     }
     
     private func configureBookMark(with isFavorited: Bool)
