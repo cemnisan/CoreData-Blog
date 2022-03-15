@@ -27,10 +27,11 @@ open CoreData-Blog.xcodeproj/
  
 ## Screens
 
-Home Screen |  Add Screen | Search Screen
-:-------------------------: | :-------------------------: | :-------------------------:
-![](https://media.giphy.com/media/LPtQzjIhasLKy3ObaZ/giphy.gif) |  ![](https://media.giphy.com/media/2OHB1i7WswJfn421Tb/giphy.gif) | ![](https://media.giphy.com/media/39oTWppIcdEjFVKQNt/giphy.gif)
+Add Screen | Search Screen
+:-------------------------: | :-------------------------:
+![](https://media.giphy.com/media/2OHB1i7WswJfn421Tb/giphy.gif) | ![](https://media.giphy.com/media/39oTWppIcdEjFVKQNt/giphy.gif)
 
-### Profile Screen 
-![](https://media.giphy.com/media/SudwgxL6JBtEQAEJnc/giphy.gif)
+Home Screen | Profile Screen
+:-------------------------: | :-------------------------:
+![](https://media.giphy.com/media/zkd5Tanoeogr3KlZTd/giphy.gif) | ![](https://media.giphy.com/media/SudwgxL6JBtEQAEJnc/giphy.gif)
 
