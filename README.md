@@ -24,12 +24,12 @@ open CoreData-Blog.xcodeproj/
 - [ ]  User interface will be improved
 - [ ]  Service layer will be refactored
  
-#### Gameplay
+## Screens
 
-Home Screen          |  Add Screen
+Home Screen |  Add Screen
 :-------------------------:|:-------------------------:
-![](https://media.giphy.com/media/LPtQzjIhasLKy3ObaZ/giphy.gif)  |  ![](https://media.giphy.com/media/2OHB1i7WswJfn421Tb/giphy.gif)
+![](https://media.giphy.com/media/3e5I2KeAhel71IQ1Bk/giphy.gif) |  ![](https://media.giphy.com/media/2OHB1i7WswJfn421Tb/giphy.gif)
 
-Search Screen          | Profile Screen
+Search Screen | Profile Screen
 :-------------------------:|:-------------------------:
 ![](https://media.giphy.com/media/39oTWppIcdEjFVKQNt/giphy.gif) |  ![](https://media.giphy.com/media/SudwgxL6JBtEQAEJnc/giphy.gif)
