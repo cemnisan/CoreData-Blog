@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Article" representedClassName="Article" syncable="YES">
+        <attribute name="articleImage" optional="YES" attributeType="Transformable" valueTransformerName="ImageAttributeTransformer" customClassName="UIImage"/>
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -11,11 +12,12 @@
     </entity>
     <entity name="Author" representedClassName="Author" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="profileImage" optional="YES" attributeType="String" valueTransformerName="ImageAttributeTransformer" customClassName="UIImage"/>
         <attribute name="userName" optional="YES" attributeType="String"/>
         <relationship name="article" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Article" inverseName="author" inverseEntity="Article"/>
     </entity>
     <elements>
-        <element name="Article" positionX="-45" positionY="0" width="128" height="134"/>
-        <element name="Author" positionX="-18" positionY="27" width="128" height="74"/>
+        <element name="Article" positionX="-45" positionY="0" width="128" height="149"/>
+        <element name="Author" positionX="-18" positionY="27" width="128" height="89"/>
     </elements>
 </model>

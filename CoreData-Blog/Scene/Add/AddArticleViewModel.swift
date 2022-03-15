@@ -5,7 +5,7 @@
 //  Created by Cem Nisan on 6.03.2022.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - Initialize
 final class AddArticleViewModel
@@ -24,11 +24,12 @@ extension AddArticleViewModel: AddArticleViewModelProtocol
 {
     func addArticle(with title: String,
                     content: String,
+                    image: UIImage,
                     category: String)
     {
         do {
             try validateArticle(title: title, content: content)
-            try service.addArticle(with: title, content, category)
+            try service.addArticle(with: title, content, image, category)
             notify(.isAdded(.success(true)))
         } catch {
             notify(.isAdded(.failure(error)))

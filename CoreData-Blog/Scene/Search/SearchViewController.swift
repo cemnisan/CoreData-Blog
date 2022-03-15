@@ -22,7 +22,7 @@ final class SearchViewController: BaseViewController
     private var currentRecommendArticlesCount: Int?
     private var currentFoundArticlesCount: Int?
     private var fetchOffset = 0
-    private var category = "Software"
+    private var category = "Swift"
 
     // MARK: - Lifecycles
     override func viewDidLoad()

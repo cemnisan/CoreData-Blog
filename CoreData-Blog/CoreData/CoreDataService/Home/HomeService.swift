@@ -5,7 +5,7 @@
 //  Created by Cem Nisan on 6.03.2022.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 final class HomeService: BaseService
@@ -48,6 +48,7 @@ extension HomeService: IHomeService
     
     func addArticle(with title: String,
                     _ content:  String,
+                    _ image: UIImage,
                     _ category: String) throws
     {
         let article = Article(context: stack.managedContext)
@@ -61,6 +62,7 @@ extension HomeService: IHomeService
         article.isFavorite  = false
         article.id          = UUID()
         article.createdDate = Date()
+        article.articleImage = image
         article.author      = author
         
         stack.saveContext()

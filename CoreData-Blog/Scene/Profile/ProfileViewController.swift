@@ -17,7 +17,7 @@ final class ProfileViewController: BaseViewController
     // MARK: - Properties
     var viewModel: ProfileViewModelProtocol!
     private var articles: [Article] = []
-    private var category = "Software"
+    private var category = "Swift"
     private var dataSource: UITableViewDiffableDataSource<String, Article>!
     private var fetchOffset = 0
     private var currentArticlesCount: Int?
@@ -35,7 +35,7 @@ final class ProfileViewController: BaseViewController
         super.viewWillAppear(animated)
         
         categorySegmentControl.selectedSegmentIndex = 0
-        category = "Software"
+        category = "Swift"
         fetchOffset = 0
         viewModel.removeStoredArticles()
         viewModel.loadFavoriteArticles(with: category, fetchOffset)

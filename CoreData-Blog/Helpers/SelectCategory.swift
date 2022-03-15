@@ -9,10 +9,10 @@ import Foundation
 
 enum SelectCategory
 {
-    case software
-    case hardware
     case swift
     case kotlin
+    case go
+    case javascript
 }
 
 extension SelectCategory: CaseIterable { }
@@ -24,20 +24,20 @@ extension SelectCategory: RawRepresentable
     init?(rawValue: RawValue)
     {
         switch rawValue {
-        case "Software": self = .software
-        case "Hardware": self = .hardware
         case "Swift": self = .swift
         case "Kotlin": self = .kotlin
+        case "Go": self = .go
+        case "Javascript": self = .javascript
         default : return nil
         }
     }
     
     var rawValue: RawValue {
         switch self {
-        case .hardware: return "Hardware"
-        case .software: return "Software"
         case .swift: return "Swift"
         case .kotlin: return "Kotlin"
+        case .javascript: return "Javascript"
+        case .go: return "Go"
         }
     }
 }

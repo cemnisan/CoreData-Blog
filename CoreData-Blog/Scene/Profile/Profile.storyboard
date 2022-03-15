@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -26,10 +25,10 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3yj-S5-5DG">
                                 <rect key="frame" x="18" y="62" width="378" height="32"/>
                                 <segments>
-                                    <segment title="Software"/>
-                                    <segment title="Hardware"/>
                                     <segment title="Swift"/>
                                     <segment title="Kotlin"/>
+                                    <segment title="Javascript"/>
+                                    <segment title="Go"/>
                                 </segments>
                                 <connections>
                                     <action selector="segmentControlPressed:" destination="Y6W-OH-hqX" eventType="valueChanged" id="NhY-Y5-1df"/>

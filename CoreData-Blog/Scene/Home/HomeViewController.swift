@@ -51,6 +51,7 @@ extension HomeViewController
         tableView.register(nibName: K.TableView.homeNibName, cell: K.TableView.homeCell)
         tableView.delegate   = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
     }
     
     private func configureViewModel()
@@ -122,7 +123,7 @@ extension HomeViewController: UITableViewDataSource
         cell.delegate = self
         cell.id = article.id
         cell.isFavorite = article.isFavorite
-        
+
         return cell
     }
 }
