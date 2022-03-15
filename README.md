@@ -28,7 +28,7 @@ open CoreData-Blog.xcodeproj/
 
 Home Screen          |  Add Screen
 :-------------------------:|:-------------------------:
-![](https://media.giphy.com/media/LPtQzjIhasLKy3ObaZ/giphy.gif) |  ![](https://media.giphy.com/media/2OHB1i7WswJfn421Tb/giphy.gif)
+![](https://media.giphy.com/media/LPtQzjIhasLKy3ObaZ/giphy.gif)  |  ![](https://media.giphy.com/media/2OHB1i7WswJfn421Tb/giphy.gif)
 
 Search Screen          | Profile Screen
 :-------------------------:|:-------------------------:
